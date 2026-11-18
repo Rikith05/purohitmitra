@@ -16,7 +16,25 @@
     <a class="btn s mo" href="CustomerModule/dashboard.html">Login</a>
     <a class="btn s m" href="CustomerModule/my-profile.html">Sign Up</a>
   </div>
-</header><section class="hero"><div class="wrap"><div><h1>Book Trusted Purohits<em>for All Your Pujas &amp; Rituals</em></h1><p><b>Verified Purohits • Easy Booking • Transparent Pricing</b><br>Experience peace of mind with authentic rituals.</p><div class="search"><label>Puja / Ritual<span>Search for Pujas</span></label><label>Location<span>Use my location</span></label><label>Date<span>Select Date 📅</span></label><a class="btn p" href="purohits.html" style="padding:13px 22px">Search Purohits</a></div></div><div class="ph" style="border:none;background:none"><img src="images/hero_banner.jpg" alt="Purohits performing authentic ritual" style="width:100%;height:100%;object-fit:cover;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12)"></div></div></section><section class="sec wrap"><h2>Popular Pujas &amp; Rituals</h2><div class="circ">
+</header><section class="hero"><div class="wrap"><div><h1>Book Trusted Purohits<em>for All Your Pujas &amp; Rituals</em></h1><p><b>Verified Purohits • Easy Booking • Transparent Pricing</b><br>Experience peace of mind with authentic rituals.</p><form class="search" id="homeSearchForm" onsubmit="event.preventDefault(); handleHomeSearch();">
+  <label style="flex:1.4">Puja / Ritual
+    <input type="text" id="homePujaInput" placeholder="e.g. Satyanarayana, Griha Pravesh, Ganesh..." style="border:1px solid var(--bd);border-radius:7px;padding:9px 10px;width:100%;font-size:13px;margin-top:4px;outline:none" autocomplete="off" />
+  </label>
+  <label style="flex:1">Location
+    <select id="homeLocSelect" style="border:1px solid var(--bd);border-radius:7px;padding:9px 10px;width:100%;font-size:13px;margin-top:4px;outline:none;background:#fff;cursor:pointer">
+      <option value="Hyderabad" selected>📍 Hyderabad</option>
+      <option value="Bengaluru">📍 Bengaluru</option>
+      <option value="Chennai">📍 Chennai</option>
+      <option value="Mumbai">📍 Mumbai</option>
+      <option value="Delhi NCR">📍 Delhi NCR</option>
+      <option value="Pune">📍 Pune</option>
+    </select>
+  </label>
+  <label style="flex:1">Date
+    <input type="date" id="homeDateInput" style="border:1px solid var(--bd);border-radius:7px;padding:9px 10px;width:100%;font-size:13px;margin-top:4px;outline:none;background:#fff;cursor:pointer" />
+  </label>
+  <button type="submit" class="btn p" style="padding:11px 22px;border:none;cursor:pointer;font-size:13px;white-space:nowrap">Search Pujas</button>
+</form></div><div class="ph" style="border:none;background:none"><img src="images/hero_banner.jpg" alt="Purohits performing authentic ritual" style="width:100%;height:100%;object-fit:cover;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12)"></div></div></section><section class="sec wrap"><h2>Popular Pujas &amp; Rituals</h2><div class="circ">
   <a href="puja-details.html"><i><img src="images/cat_griha_pravesh.png" alt="Griha Pravesh"></i>Griha Pravesh</a>
   <a href="pujas.html"><i><img src="images/cat_satyanarayana.png" alt="Satyanarayana Puja"></i>Satyanarayana</a>
   <a href="pujas.html"><i><img src="images/cat_marriage.png" alt="Marriage Ceremony"></i>Marriage</a>

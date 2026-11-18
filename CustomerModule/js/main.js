@@ -1,4 +1,4 @@
-// PurohitMitra Main Interactive JS (Navigation, Modals, Location, Quick Actions)
+// PurohitMitra Main Interactive JS (Navigation, Search, Pagination, Modals, Location)
 
 function closeModal() {
   const overlay = document.getElementById('modal-overlay');
@@ -117,7 +117,7 @@ function openPurohitModal(type) {
               <option value="Bengaluru">Bengaluru</option>
               <option value="Chennai">Chennai</option>
               <option value="Mumbai">Mumbai</option>
-              <option value="Delhi">Delhi NCR</option>
+              <option value="Delhi NCR">Delhi NCR</option>
               <option value="Pune">Pune</option>
             </select>
           </div>
@@ -259,8 +259,362 @@ function selectCity(cityName) {
   }
 }
 
+
+// ===== 1. Home Search Handler =====
+
+function handleHomeSearch() {
+  const pujaInput = document.getElementById('homePujaInput');
+  const locSelect = document.getElementById('homeLocSelect');
+  const dateInput = document.getElementById('homeDateInput');
+  
+  const query = pujaInput ? pujaInput.value.trim() : '';
+  const loc = locSelect ? locSelect.value : '';
+  const date = dateInput ? dateInput.value : '';
+  
+  const params = new URLSearchParams();
+  if (query) params.set('q', query);
+  if (loc) params.set('loc', loc);
+  if (date) params.set('date', date);
+  
+  const target = 'pujas.html';
+  window.location.href = params.toString() ? `${target}?${params.toString()}` : target;
+}
+
+
+// ===== 2. Puja Interactive Search, Filter & Dynamic Pagination =====
+
+function initPujaSearchAndPagination() {
+  const grid = document.querySelector('.grid.g3');
+  const searchInput = document.getElementById('pujaSearchInput');
+  const catSelect = document.getElementById('heroPujaCat');
+  const countEl = document.querySelector('.head .mu:first-child');
+  const paginationContainer = document.getElementById('pujaPagination');
+  const sideCats = document.querySelectorAll('.filter-panel li, aside.side ul:first-of-type li');
+  
+  if (!grid) return;
+  const cards = Array.from(grid.querySelectorAll('.card.pc'));
+  if (!cards.length) return;
+
+  const pageSize = 6;
+  let currentPage = 1;
+  let activeCategory = '';
+  let activeQuery = '';
+
+  // Read URL parameters if present
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('q')) {
+    activeQuery = urlParams.get('q').toLowerCase();
+    if (searchInput) searchInput.value = urlParams.get('q');
+  }
+  if (urlParams.has('cat')) {
+    activeCategory = urlParams.get('cat').toLowerCase();
+    if (catSelect) catSelect.value = activeCategory;
+  }
+
+  function getMatchingCards() {
+    return cards.filter(card => {
+      const title = (card.querySelector('h3') || {}).innerText?.toLowerCase() || '';
+      const desc = (card.querySelector('p') || {}).innerText?.toLowerCase() || '';
+      const cardCat = (card.dataset.category || '').toLowerCase();
+      
+      const matchesQuery = !activeQuery || title.includes(activeQuery) || desc.includes(activeQuery);
+      const matchesCat = !activeCategory || cardCat.includes(activeCategory);
+      return matchesQuery && matchesCat;
+    });
+  }
+
+  function renderPage() {
+    const matching = getMatchingCards();
+    const totalMatching = matching.length;
+    const totalPages = Math.max(1, Math.ceil(totalMatching / pageSize));
+
+    if (currentPage > totalPages) currentPage = 1;
+
+    // Hide all cards first
+    cards.forEach(c => c.style.display = 'none');
+
+    // Show slice for current page
+    const startIdx = (currentPage - 1) * pageSize;
+    const endIdx = Math.min(startIdx + pageSize, totalMatching);
+    const visibleCards = matching.slice(startIdx, endIdx);
+    visibleCards.forEach(c => c.style.display = 'block');
+
+    // Update Showing text
+    if (countEl) {
+      if (totalMatching === 0) {
+        countEl.textContent = 'Showing 0 Pujas';
+      } else {
+        countEl.textContent = `Showing ${startIdx + 1} - ${endIdx} of ${totalMatching} Pujas`;
+      }
+    }
+
+    // Handle empty state notice
+    let noMatchEl = document.getElementById('noPujaMatchNotice');
+    if (totalMatching === 0) {
+      if (!noMatchEl) {
+        noMatchEl = document.createElement('div');
+        noMatchEl.id = 'noPujaMatchNotice';
+        noMatchEl.style.cssText = 'text-align:center;padding:40px 20px;grid-column:1/-1;color:var(--mu);background:#fff;border-radius:12px;border:1px dashed var(--bd)';
+        noMatchEl.innerHTML = `
+          <h3 style="color:var(--m);font-size:18px;margin-bottom:8px">No Pujas Found</h3>
+          <p style="font-size:13px;margin-bottom:14px">We couldn't find any pujas matching your criteria.</p>
+          <button type="button" class="btn p s" onclick="resetPujaFilters()">Show All Pujas</button>
+        `;
+        grid.appendChild(noMatchEl);
+      }
+      noMatchEl.style.display = 'block';
+    } else if (noMatchEl) {
+      noMatchEl.style.display = 'none';
+    }
+
+    // Render pagination buttons
+    if (paginationContainer) {
+      if (totalPages <= 1) {
+        paginationContainer.style.display = totalMatching > 0 ? 'block' : 'none';
+        paginationContainer.innerHTML = `<span class="btn s p">1</span>`;
+      } else {
+        paginationContainer.style.display = 'block';
+        let html = '';
+        for (let i = 1; i <= totalPages; i++) {
+          html += `<span class="btn s ${i === currentPage ? 'p' : ''}" style="cursor:pointer;margin:0 3px" onclick="setPujaPage(${i})">${i}</span> `;
+        }
+        if (currentPage < totalPages) {
+          html += `<span class="btn s" style="cursor:pointer;margin:0 3px" onclick="setPujaPage(${currentPage + 1})" title="Next Page">›</span>`;
+        }
+        paginationContainer.innerHTML = html;
+      }
+    }
+  }
+
+  window.setPujaPage = function(page) {
+    currentPage = page;
+    renderPage();
+    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  window.resetPujaFilters = function() {
+    activeQuery = '';
+    activeCategory = '';
+    if (searchInput) searchInput.value = '';
+    if (catSelect) catSelect.value = '';
+    sideCats.forEach(el => el.classList.remove('on'));
+    if (sideCats[0]) sideCats[0].classList.add('on');
+    currentPage = 1;
+    renderPage();
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      activeQuery = e.target.value.trim().toLowerCase();
+      currentPage = 1;
+      renderPage();
+    });
+  }
+
+  if (catSelect) {
+    catSelect.addEventListener('change', function(e) {
+      activeCategory = e.target.value.toLowerCase();
+      sideCats.forEach(el => {
+        const cat = el.dataset.cat || '';
+        el.classList.toggle('on', cat === activeCategory || (!activeCategory && cat === ''));
+      });
+      currentPage = 1;
+      renderPage();
+    });
+  }
+
+  // Sidebar category clicks
+  sideCats.forEach(li => {
+    li.style.cursor = 'pointer';
+    li.addEventListener('click', function() {
+      sideCats.forEach(el => el.classList.remove('on'));
+      this.classList.add('on');
+      activeCategory = (this.dataset.cat || '').toLowerCase();
+      if (catSelect) catSelect.value = activeCategory;
+      currentPage = 1;
+      renderPage();
+    });
+  });
+
+  renderPage();
+}
+
+
+// ===== 3. Purohit Interactive Search, Filter & Dynamic Pagination =====
+
+function initPurohitSearchAndPagination() {
+  const grid = document.querySelector('.grid.g3');
+  const searchInput = document.getElementById('purohitSearchInput');
+  const specSelect = document.getElementById('heroPurohitSpec');
+  const countEl = document.querySelector('.head span:first-child');
+  const paginationContainer = document.getElementById('purohitPagination');
+  const specItems = document.querySelectorAll('#purohitSpecList li');
+  const langItems = document.querySelectorAll('#purohitLangList li');
+
+  if (!grid) return;
+  const cards = Array.from(grid.querySelectorAll('.card.prc'));
+  if (!cards.length) return;
+
+  const pageSize = 6;
+  let currentPage = 1;
+  let activeSpec = '';
+  let activeLang = '';
+  let activeQuery = '';
+
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('q')) {
+    activeQuery = urlParams.get('q').toLowerCase();
+    if (searchInput) searchInput.value = urlParams.get('q');
+  }
+  if (urlParams.has('spec')) {
+    activeSpec = urlParams.get('spec').toLowerCase();
+    if (specSelect) specSelect.value = activeSpec;
+  }
+
+  function getMatchingCards() {
+    return cards.filter(card => {
+      const name = (card.querySelector('h3') || {}).innerText?.toLowerCase() || '';
+      const text = card.innerText?.toLowerCase() || '';
+      const spec = (card.dataset.spec || '').toLowerCase();
+      const lang = (card.dataset.lang || '').toLowerCase();
+
+      const matchesQuery = !activeQuery || name.includes(activeQuery) || text.includes(activeQuery);
+      const matchesSpec = !activeSpec || spec.includes(activeSpec);
+      const matchesLang = !activeLang || lang.includes(activeLang);
+
+      return matchesQuery && matchesSpec && matchesLang;
+    });
+  }
+
+  function renderPage() {
+    const matching = getMatchingCards();
+    const totalMatching = matching.length;
+    const totalPages = Math.max(1, Math.ceil(totalMatching / pageSize));
+
+    if (currentPage > totalPages) currentPage = 1;
+
+    cards.forEach(c => c.style.display = 'none');
+
+    const startIdx = (currentPage - 1) * pageSize;
+    const endIdx = Math.min(startIdx + pageSize, totalMatching);
+    const visibleCards = matching.slice(startIdx, endIdx);
+    visibleCards.forEach(c => c.style.display = 'block');
+
+    if (countEl) {
+      if (totalMatching === 0) {
+        countEl.textContent = 'Showing 0 Purohits';
+      } else {
+        countEl.textContent = `Showing ${startIdx + 1} - ${endIdx} of ${totalMatching} Purohits`;
+      }
+    }
+
+    let noMatchEl = document.getElementById('noPurohitMatchNotice');
+    if (totalMatching === 0) {
+      if (!noMatchEl) {
+        noMatchEl = document.createElement('div');
+        noMatchEl.id = 'noPurohitMatchNotice';
+        noMatchEl.style.cssText = 'text-align:center;padding:40px 20px;grid-column:1/-1;color:var(--mu);background:#fff;border-radius:12px;border:1px dashed var(--bd)';
+        noMatchEl.innerHTML = `
+          <h3 style="color:var(--m);font-size:18px;margin-bottom:8px">No Purohits Found</h3>
+          <p style="font-size:13px;margin-bottom:14px">We couldn't find any purohits matching your search criteria.</p>
+          <button type="button" class="btn p s" onclick="resetPurohitFilters()">Show All Purohits</button>
+        `;
+        grid.appendChild(noMatchEl);
+      }
+      noMatchEl.style.display = 'block';
+    } else if (noMatchEl) {
+      noMatchEl.style.display = 'none';
+    }
+
+    if (paginationContainer) {
+      if (totalPages <= 1) {
+        paginationContainer.style.display = totalMatching > 0 ? 'block' : 'none';
+        paginationContainer.innerHTML = `<span class="btn s p">1</span>`;
+      } else {
+        paginationContainer.style.display = 'block';
+        let html = '';
+        for (let i = 1; i <= totalPages; i++) {
+          html += `<span class="btn s ${i === currentPage ? 'p' : ''}" style="cursor:pointer;margin:0 3px" onclick="setPurohitPage(${i})">${i}</span> `;
+        }
+        if (currentPage < totalPages) {
+          html += `<span class="btn s" style="cursor:pointer;margin:0 3px" onclick="setPurohitPage(${currentPage + 1})" title="Next Page">›</span>`;
+        }
+        paginationContainer.innerHTML = html;
+      }
+    }
+  }
+
+  window.setPurohitPage = function(page) {
+    currentPage = page;
+    renderPage();
+    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  window.resetPurohitFilters = function() {
+    activeQuery = '';
+    activeSpec = '';
+    activeLang = '';
+    if (searchInput) searchInput.value = '';
+    if (specSelect) specSelect.value = '';
+    specItems.forEach(el => el.classList.remove('on'));
+    if (specItems[0]) specItems[0].classList.add('on');
+    langItems.forEach(el => el.classList.remove('on'));
+    if (langItems[0]) langItems[0].classList.add('on');
+    currentPage = 1;
+    renderPage();
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      activeQuery = e.target.value.trim().toLowerCase();
+      currentPage = 1;
+      renderPage();
+    });
+  }
+
+  if (specSelect) {
+    specSelect.addEventListener('change', function(e) {
+      activeSpec = e.target.value.toLowerCase();
+      specItems.forEach(el => {
+        const s = el.dataset.spec || '';
+        el.classList.toggle('on', s === activeSpec || (!activeSpec && s === ''));
+      });
+      currentPage = 1;
+      renderPage();
+    });
+  }
+
+  specItems.forEach(li => {
+    li.style.cursor = 'pointer';
+    li.addEventListener('click', function() {
+      specItems.forEach(el => el.classList.remove('on'));
+      this.classList.add('on');
+      activeSpec = (this.dataset.spec || '').toLowerCase();
+      if (specSelect) specSelect.value = activeSpec;
+      currentPage = 1;
+      renderPage();
+    });
+  });
+
+  langItems.forEach(li => {
+    li.style.cursor = 'pointer';
+    li.addEventListener('click', function() {
+      langItems.forEach(el => el.classList.remove('on'));
+      this.classList.add('on');
+      activeLang = (this.dataset.lang || '').toLowerCase();
+      currentPage = 1;
+      renderPage();
+    });
+  });
+
+  renderPage();
+}
+
+
+// ===== DOM Ready Initializations =====
+
 document.addEventListener('DOMContentLoaded', function() {
-  // 1. Restore saved location if any
+  // 1. Restore saved location
   const savedLoc = localStorage.getItem('pm_location');
   if (savedLoc) {
     document.querySelectorAll('.loc').forEach(el => {
@@ -278,7 +632,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // 3. Payment breakdown view details toggle
+  // 3. Initialize Pujas search and pagination if on pujas page
+  if (document.getElementById('pujaSearchInput') || document.getElementById('pujaPagination')) {
+    initPujaSearchAndPagination();
+  }
+
+  // 4. Initialize Purohits search and pagination if on purohits page
+  if (document.getElementById('purohitSearchInput') || document.getElementById('purohitPagination')) {
+    initPurohitSearchAndPagination();
+  }
+
+  // 5. Payment breakdown toggle
   const togglePayDetails = document.getElementById('togglePaymentDetails');
   const payBreakdown = document.getElementById('paymentBreakdownBox');
   if (togglePayDetails && payBreakdown) {
@@ -294,7 +658,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // 4. Sort Pujas handler
+  // 6. Sort Pujas handler
   const sortPujas = document.getElementById('sortPujas');
   if (sortPujas) {
     sortPujas.addEventListener('change', function() {
@@ -316,10 +680,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
       cards.forEach(c => grid.appendChild(c));
+      if (typeof window.setPujaPage === 'function') {
+        window.setPujaPage(1);
+      }
     });
   }
 
-  // 5. Sort Purohits handler
+  // 7. Sort Purohits handler
   const sortPurohits = document.getElementById('sortPurohits');
   if (sortPurohits) {
     sortPurohits.addEventListener('change', function() {
@@ -341,38 +708,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
       cards.forEach(c => grid.appendChild(c));
+      if (typeof window.setPurohitPage === 'function') {
+        window.setPurohitPage(1);
+      }
     });
   }
 
-  // 6. Choose Purohit filter pills handlers
-  const filterLang = document.getElementById('filterLang');
-  const filterExp = document.getElementById('filterExp');
-  const filterSort = document.getElementById('filterSort');
-  if (filterLang || filterExp || filterSort) {
-    const purohitItems = Array.from(document.querySelectorAll('.sel'));
-    
-    function applyPurohitFilters() {
-      const lVal = filterLang ? filterLang.value.toLowerCase() : '';
-      const eVal = filterExp ? parseInt(filterExp.value || 0) : 0;
-      
-      purohitItems.forEach(item => {
-        const text = item.innerText.toLowerCase();
-        let match = true;
-        if (lVal && !text.includes(lVal)) match = false;
-        if (eVal) {
-          const expMatch = item.innerText.match(/(\d+)\s*years/i);
-          const exp = expMatch ? parseInt(expMatch[1]) : 0;
-          if (exp < eVal) match = false;
-        }
-        item.style.display = match ? 'flex' : 'none';
-      });
-    }
-
-    if (filterLang) filterLang.addEventListener('change', applyPurohitFilters);
-    if (filterExp) filterExp.addEventListener('change', applyPurohitFilters);
-  }
-
-  // 7. Family member count increment/decrement
+  // 8. Family counter
   const cntBox = document.querySelector('.in-counter');
   if (cntBox) {
     const decBtn = cntBox.querySelector('.btn-dec');
