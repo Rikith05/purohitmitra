@@ -97,3 +97,76 @@ footer a:hover { color: var(--o); text-decoration: underline; }
 .form-group label { display: block; font-weight: 600; font-size: 12.5px; margin-bottom: 4px; color: var(--tx); }
 .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--bd); border-radius: 8px; font-size: 13px; font-family: inherit; }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--o); ring: 2px rgba(232,89,12,0.2); }
+
+
+/* ===== Interactive Dropdowns, Selects & Counters ===== */
+.has-drop { position: relative; }
+.has-drop:hover .nav-drop, .has-drop:focus-within .nav-drop { display: block; }
+.nav-drop {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 250px;
+  background: #fff;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 8px 0;
+  z-index: 1000;
+}
+.nav-drop a {
+  display: block;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: var(--tx);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-drop a:hover {
+  background: var(--ol);
+  color: var(--o);
+}
+select.in {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236f6560'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+  padding-right: 32px;
+  cursor: pointer;
+  width: 100%;
+  font-family: inherit;
+}
+.in-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--bd);
+  border-radius: 7px;
+  padding: 6px 14px;
+  background: #fff;
+  font-size: 14px;
+}
+.in-counter button {
+  background: var(--ol);
+  border: 1px solid var(--o);
+  color: var(--o);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+.in-counter button:hover {
+  background: var(--o);
+  color: #fff;
+}

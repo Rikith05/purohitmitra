@@ -223,3 +223,172 @@ function showModal(title, bodyHtml) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeModal();
 });
+
+
+// ===== Interactive Location Modal & Dropdown Handlers =====
+
+function openLocationModal() {
+  const currentLoc = (localStorage.getItem('pm_location') || 'Hyderabad').trim();
+  const cities = ['Hyderabad', 'Bengaluru', 'Chennai', 'Mumbai', 'Delhi NCR', 'Pune', 'Visakhapatnam', 'Vijayawada'];
+  
+  const content = `
+    <p style="color:var(--mu);margin-bottom:14px">Select your primary city for authentic local Purohit booking & Muhurtham calculations:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+      ${cities.map(c => `
+        <button type="button" class="btn ${c === currentLoc ? 'p' : 'w'}" style="text-align:left;padding:10px 14px;border-radius:8px;font-weight:600;display:flex;justify-content:space-between;align-items:center" onclick="selectCity('${c}')">
+          <span>📍 ${c}</span>
+          ${c === currentLoc ? '<span>✓</span>' : ''}
+        </button>
+      `).join('')}
+    </div>
+    <div style="background:#fff3ea;border:1px solid #ffd8a8;border-radius:8px;padding:10px 14px;font-size:12px;color:#d9480f">
+      ✨ <b>Tip:</b> Changing your location updates travel distances and nearby verified Purohits instantly.
+    </div>
+  `;
+  showModal('Select Ceremony Location', content);
+}
+
+function selectCity(cityName) {
+  localStorage.setItem('pm_location', cityName);
+  document.querySelectorAll('.loc').forEach(el => {
+    el.innerHTML = `📍 ${cityName} ⌄`;
+  });
+  closeModal();
+  if (typeof toast === 'function') {
+    toast(`Location changed to ${cityName}`);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. Restore saved location if any
+  const savedLoc = localStorage.getItem('pm_location');
+  if (savedLoc) {
+    document.querySelectorAll('.loc').forEach(el => {
+      el.innerHTML = `📍 ${savedLoc} ⌄`;
+    });
+  }
+
+  // 2. Click on .loc opens location picker modal
+  document.querySelectorAll('.loc').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.title = 'Click to change location';
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      openLocationModal();
+    });
+  });
+
+  // 3. Payment breakdown view details toggle
+  const togglePayDetails = document.getElementById('togglePaymentDetails');
+  const payBreakdown = document.getElementById('paymentBreakdownBox');
+  if (togglePayDetails && payBreakdown) {
+    togglePayDetails.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (payBreakdown.style.display === 'none' || !payBreakdown.style.display) {
+        payBreakdown.style.display = 'block';
+        togglePayDetails.innerHTML = 'Hide Details ⌃';
+      } else {
+        payBreakdown.style.display = 'none';
+        togglePayDetails.innerHTML = 'View Details ⌄';
+      }
+    });
+  }
+
+  // 4. Sort Pujas handler
+  const sortPujas = document.getElementById('sortPujas');
+  if (sortPujas) {
+    sortPujas.addEventListener('change', function() {
+      const val = this.value;
+      const grid = document.querySelector('.grid.g3');
+      if (!grid) return;
+      const cards = Array.from(grid.querySelectorAll('.card.pc'));
+      if (val === 'price-asc') {
+        cards.sort((a, b) => {
+          const pa = parseInt((a.querySelector('.pr') || {}).innerText?.replace(/[^\d]/g, '') || 0);
+          const pb = parseInt((b.querySelector('.pr') || {}).innerText?.replace(/[^\d]/g, '') || 0);
+          return pa - pb;
+        });
+      } else if (val === 'price-desc') {
+        cards.sort((a, b) => {
+          const pa = parseInt((a.querySelector('.pr') || {}).innerText?.replace(/[^\d]/g, '') || 0);
+          const pb = parseInt((b.querySelector('.pr') || {}).innerText?.replace(/[^\d]/g, '') || 0);
+          return pb - pa;
+        });
+      }
+      cards.forEach(c => grid.appendChild(c));
+    });
+  }
+
+  // 5. Sort Purohits handler
+  const sortPurohits = document.getElementById('sortPurohits');
+  if (sortPurohits) {
+    sortPurohits.addEventListener('change', function() {
+      const val = this.value;
+      const grid = document.querySelector('.grid.g3');
+      if (!grid) return;
+      const cards = Array.from(grid.querySelectorAll('.card.prc'));
+      if (val === 'exp') {
+        cards.sort((a, b) => {
+          const ea = parseInt(a.innerText.match(/(\d+)\s*years/i)?.[1] || 0);
+          const eb = parseInt(b.innerText.match(/(\d+)\s*years/i)?.[1] || 0);
+          return eb - ea;
+        });
+      } else if (val === 'reviews') {
+        cards.sort((a, b) => {
+          const ra = parseInt(a.innerText.match(/(\d+)\s*reviews/i)?.[1] || 0);
+          const rb = parseInt(b.innerText.match(/(\d+)\s*reviews/i)?.[1] || 0);
+          return rb - ra;
+        });
+      }
+      cards.forEach(c => grid.appendChild(c));
+    });
+  }
+
+  // 6. Choose Purohit filter pills handlers
+  const filterLang = document.getElementById('filterLang');
+  const filterExp = document.getElementById('filterExp');
+  const filterSort = document.getElementById('filterSort');
+  if (filterLang || filterExp || filterSort) {
+    const purohitItems = Array.from(document.querySelectorAll('.sel'));
+    
+    function applyPurohitFilters() {
+      const lVal = filterLang ? filterLang.value.toLowerCase() : '';
+      const eVal = filterExp ? parseInt(filterExp.value || 0) : 0;
+      
+      purohitItems.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        let match = true;
+        if (lVal && !text.includes(lVal)) match = false;
+        if (eVal) {
+          const expMatch = item.innerText.match(/(\d+)\s*years/i);
+          const exp = expMatch ? parseInt(expMatch[1]) : 0;
+          if (exp < eVal) match = false;
+        }
+        item.style.display = match ? 'flex' : 'none';
+      });
+    }
+
+    if (filterLang) filterLang.addEventListener('change', applyPurohitFilters);
+    if (filterExp) filterExp.addEventListener('change', applyPurohitFilters);
+  }
+
+  // 7. Family member count increment/decrement
+  const cntBox = document.querySelector('.in-counter');
+  if (cntBox) {
+    const decBtn = cntBox.querySelector('.btn-dec');
+    const incBtn = cntBox.querySelector('.btn-inc');
+    const numEl = cntBox.querySelector('.count-val');
+    if (decBtn && incBtn && numEl) {
+      decBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        let val = parseInt(numEl.textContent.trim()) || 5;
+        if (val > 1) { numEl.textContent = val - 1; }
+      });
+      incBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        let val = parseInt(numEl.textContent.trim()) || 5;
+        numEl.textContent = val + 1;
+      });
+    }
+  }
+});
