@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pujas & Rituals — PurohitMitra</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <style>
+      .layout { display: block; }
+      .filter-panel {
+        background: #fff;
+        border: 1px solid var(--bd);
+        border-radius: 12px;
+        padding: 18px;
+        height: fit-content;
+      }
+      .filter-panel ul { list-style: none; padding: 0; }
+      .filter-panel li { padding: 6px 0; font-size: 13px; cursor: pointer; }
+      .filter-panel li.on { background: #fff3ea; color: var(--o); font-weight: 600; padding: 6px 8px; border-radius: 6px; }
+      .filter-panel li:hover:not(.on) { color: var(--o); }
+      .main { padding: 0 0 40px 0; max-width: 100%; }
+      .hero2 { margin-top: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- Clean Logged-in Devotee Header with Menu Button -->
+    <header class="top">
+      <div class="top-left">
+        <button class="menu-btn" aria-label="Toggle menu" title="Open Sidebar Menu">
+          <span style="font-size:20px;line-height:1">☰</span>
+          <span class="menu-txt">Menu</span>
+        </button>
+        <a class="logo" href="dashboard.html">
+          <img src="images/logo.svg" alt="PurohitMitra Logo" width="34" height="34" />
+          <span><b>PurohitMitra</b><small>Your Trusted Purohit Companion</small></span>
+        </a>
+      </div>
+      <div class="sp">
+        <span class="loc" title="Current Location">📍 Hyderabad</span>
+        <a href="notifications.html" class="bell" aria-label="Notifications">🔔<i>3</i></a>
+        <a href="my-profile.html" class="user">
+          <span class="av"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti"></span>
+          <b>Srinivas Somisetti</b>
+        </a>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Slide-Out Sidebar Drawer -->
+      <aside class="side">
+        <div class="side-head">
+          <a class="logo" href="dashboard.html" style="gap:8px">
+            <img src="images/logo.svg" alt="PurohitMitra" width="30" height="30" />
+            <span><b>PurohitMitra</b></span>
+          </a>
+          <button class="side-close" aria-label="Close menu" title="Close Menu">✕</button>
+        </div>
+        <div class="side-user">
+          <div class="av" style="overflow:hidden;width:40px;height:40px;border-radius:50%;padding:0;flex-shrink:0"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti" style="width:100%;height:100%;object-fit:cover"></div>
+          <div>
+            <b style="display:block;font-size:14px;line-height:1.2">Srinivas Somisetti</b>
+            <small style="color:var(--mu);font-size:12px">📍 Hyderabad · Devotee</small>
+          </div>
+        </div>
+        <nav>
+          <div class="side-section-label">Devotee Portal</div>
+          <a href="dashboard.html" data-page="dashboard"><span>🏠</span>Dashboard</a>
+          <a href="my-bookings.html" data-page="my-bookings"><span>📅</span>My Bookings</a>
+          <a href="payments.html" data-page="payments"><span>💳</span>Payments</a>
+          <a href="offers.html" data-page="offers"><span>🏷️</span>Offers</a>
+          <a href="favorites.html" data-page="favorites"><span>♡</span>Favorites</a>
+          <a href="notifications.html" data-page="notifications"><span>🔔</span>Notifications <em>3</em></a>
+          <a href="my-profile.html" data-page="my-profile"><span>👤</span>My Profile</a>
+          <a href="saved-addresses.html" data-page="saved-addresses"><span>📍</span>Saved Addresses</a>
+          <a href="my-reviews.html" data-page="my-reviews"><span>⭐</span>My Reviews</a>
+          <a href="messages.html" data-page="messages"><span>✉️</span>Messages</a>
+          <a href="help-support.html" data-page="help-support"><span>❓</span>Help & Support</a>
+          <a href="settings.html" data-page="settings"><span>⚙️</span>Settings</a>
+          <div class="side-section-label" style="margin-top:14px">Explore Services</div>
+          <a href="pujas.html" data-page="pujas"><span>🪔</span>Pujas &amp; Rituals</a>
+          <a href="purohits.html" data-page="purohits"><span>🧔</span>Verified Purohits</a>
+          <a href="how-it-works.html" data-page="how-it-works"><span>ℹ️</span>How It Works</a>
+          <a href="about.html" data-page="about"><span>📖</span>About Us</a>
+          <div style="border-top:1px solid var(--bd);margin:10px 0"></div>
+          <a href="../index.html" id="logout"><span>⎋</span>Logout</a>
+        </nav>
+      </aside>
+
+      <!-- Main Page Content -->
+      <main class="main">
+        <section class="hero2"><div class="wrap"><h1 style="color:var(--m)">Pujas &amp; Rituals</h1><p>Find the right Pujas for every occasion in your life.<br>Book experienced Purohits near you with ease.</p><div class="search" style="max-width:780px"><label>Select Category<span>All Categories ⌄</span></label><label>Search Puja / Ritual<span>e.g. Griha Pravesh</span></label><label>Your Location<span>Use my location</span></label><a class="btn p" href="pujas.html" style="padding:13px 22px">Search Pujas</a></div></div></section><div class="wrap"><div class="trust"><div><i>🛡</i><b>Verified Purohits</b>Background verified</div><div><i>₹</i><b>Transparent Pricing</b>No hidden charges</div><div><i>📅</i><b>Easy Booking</b>Book in few clicks</div><div><i>🎧</i><b>24/7 Support</b>We are here to help</div></div></div><div class="wrap" style="display:grid;grid-template-columns:230px 1fr;gap:20px"><aside class="filter-panel"><h3>Filter Pujas</h3><p class="mu" style="margin:10px 0 4px"><b>Categories</b></p><ul><li class="on">All Pujas</li><li>Griha Pujas</li><li>Homa / Havan</li><li>Vratas &amp; Upvas</li><li>Samskara Pujas</li><li>Shanti Pujas</li><li>Temple Pujas</li><li>Others</li></ul><p class="mu" style="margin:12px 0 4px"><b>Price Range</b></p><div class="bar"><span style="background:var(--o)"></span></div><p class="mu">₹0 — ₹50,000+</p><p style="margin-top:12px"><b>Duration</b></p><ul><li>☐ Under 1 Hour</li><li>☐ 1 - 2 Hours</li><li>☐ 2 - 4 Hours</li><li>☐ 4+ Hours</li></ul><p><b>Conducted At</b></p><ul><li>☐ At Home</li><li>☐ At Temple</li><li>☐ Online Puja</li></ul><p><b>Language</b></p><ul><li>☐ Sanskrit</li><li>☐ Telugu</li><li>☐ Hindi</li><li>☐ English</li></ul><a class="btn w" href="pujas.html" style="margin:10px 0">Clear Filters</a><a class="btn p w" href="pujas.html">Apply Filters</a></aside><div><div class="head"><span class="mu">Showing 1 - 12 of 42 Pujas</span><span class="mu">Sort by: Popularity ⌄</span></div><div class="grid g3"><div class="card pad0 pc"><div class="ph g" style="height:130px"><img src="images/puja_satyanarayana.jpg" alt="Satyanarayana Puja"></div><div class="b"><h3>Satyanarayana Puja</h3><p>Brings peace, prosperity and happiness to the family.</p><p class="mu">🕐 1.5 - 2 Hours &nbsp; 👤 At Home / Temple</p><p class="pr">₹1,500 <span class="mu">onwards</span></p><a class="btn w s" href="puja-details.html">View Details</a></div></div><div class="card pad0 pc"><div class="ph r" style="height:130px"><img src="images/puja_ganesh.jpg" alt="Ganesh Puja"></div><div class="b"><h3>Ganesh Puja</h3><p>Invokes blessings of Lord Ganesha for new beginnings.</p><p class="mu">🕐 1 - 1.5 Hours &nbsp; 👤 At Home / Temple</p><p class="pr">₹1,200 <span class="mu">onwards</span></p><a class="btn w s" href="puja-details.html">View Details</a></div></div><div class="card pad0 pc"><div class="ph g" style="height:130px"><img src="images/puja_griha_pravesh.jpg" alt="Griha Pravesh Puja"></div><div class="b"><h3>Griha Pravesh Puja</h3><p>Purifies your new home and brings positive energy.</p><p class="mu">🕐 2 - 3 Hours &nbsp; 👤 At Home</p><p class="pr">₹2,500 <span class="mu">onwards</span></p><a class="btn w s" href="puja-details.html">View Details</a></div></div><div class="card pad0 pc"><div class="ph f" style="height:130px"><img src="images/puja_wedding.jpg" alt="Vivaha Puja"></div><div class="b"><h3>Vivaha (Wedding) Puja</h3><p>Complete Vedic rituals for a blessed marriage.</p><p class="mu">🕐 3 - 6 Hours &nbsp; 👤 At Home / Venue</p><p class="pr">₹8,000 <span class="mu">onwards</span></p><a class="btn w s" href="puja-details.html">View Details</a></div></div><div class="card pad0 pc"><div class="ph r" style="height:130px"><img src="images/puja_navagraha.jpg" alt="Navagraha Shanti Puja"></div><div class="b"><h3>Navagraha Shanti Puja</h3><p>Reduces planetary doshas and brings balance in life.</p><p class="mu">🕐 3 - 6 Hours &nbsp; 👤 At Home / Temple</p><p class="pr">₹2,100 <span class="mu">onwards</span></p><a class="btn w s" href="puja-details.html">View Details</a></div></div><div class="card pad0 pc"><div class="ph p" style="height:130px"><img src="images/puja_naming.jpg" alt="Namakarana Puja"></div><div class="b"><h3>Namakarana (Naming) Puja</h3><p>Sacred ceremony for naming the newborn baby.</p><p class="mu">🕐 1 - 1.5 Hours &nbsp; 👤 At Home</p><p class="pr">₹1,100 <span class="mu">onwards</span></p><a class="btn w s" href="puja-details.html">View Details</a></div></div><div class="card pad0 pc"><div class="ph g" style="height:130px"><img src="images/puja_rudrabhishek.jpg" alt="Rudrabhishek Puja"></div><div class="b"><h3>Rudrabhishek Puja</h3><p>Dedicated to Lord Shiva for health, peace and prosperity.</p><p class="mu">🕐 2 - 3 Hours &nbsp; 👤 At Temple</p><p class="pr">₹2,300 <span class="mu">onwards</span></p><a class="btn w s" href="puja-details.html">View Details</a></div></div><div class="card pad0 pc"><div class="ph k" style="height:130px"><img src="images/puja_pitrupaksha.jpg" alt="Pitru Paksha Puja"></div><div class="b"><h3>Pitru Paksha Puja</h3><p>Performed for peace and blessings of ancestors.</p><p class="mu">🕐 1.5 - 2 Hours &nbsp; 👤 At Home / Ghat</p><p class="pr">₹1,800 <span class="mu">onwards</span></p><a class="btn w s" href="puja-details.html">View Details</a></div></div><div class="card pad0 pc"><div class="ph r" style="height:130px"><img src="images/puja_devi.jpg" alt="Devi Puja"></div><div class="b"><h3>Devi Puja</h3><p>Invokes blessings of Goddess for protection and prosperity.</p><p class="mu">🕐 1 - 2 Hours &nbsp; 👤 At Home / Temple</p><p class="pr">₹1,500 <span class="mu">onwards</span></p><a class="btn w s" href="puja-details.html">View Details</a></div></div></div><p style="text-align:center;margin:18px 0"><span class="btn s p">1</span> <span class="btn s">2</span> <span class="btn s">3</span> <span class="btn s">4</span> <span class="btn s">›</span></p></div></div><div class="wrap"><div class="offer"><div><h3>Can't find the Puja you are looking for?</h3>Contact us, our expert team will help you.</div><a class="btn" href="help-support.html">Contact Support</a></div></div><div class="wrap"><div class="news"><span style="font-size:24px">🔔</span><div><b>Stay Updated</b><br><span class="mu">Subscribe to get updates on offers, new services and more.</span></div><input placeholder="Enter your email"><a class="btn m" href="javascript:void(0)" onclick="alert('Thank you for subscribing to PurohitMitra updates!')">Subscribe</a></div></div>
+        
+        <!-- Devotee Portal Footer -->
+        <footer class="foot" style="margin-top:40px;border-top:1px solid var(--bd);background:#fff;padding:24px 20px">
+          <div class="wrap foot-in" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--mu)">
+            <span>© 2026 PurohitMitra. Logged in as <b>Srinivas Somisetti</b>.</span>
+            <span>
+              <a href="dashboard.html" style="color:inherit">Dashboard</a> · 
+              <a href="my-bookings.html" style="color:inherit">My Bookings</a> · 
+              <a href="help-support.html" style="color:inherit">Help &amp; Support</a> · 
+              <a href="javascript:void(0)" onclick="openPolicyModal('privacy')" style="color:inherit">Privacy Policy</a> · 
+              <a href="javascript:void(0)" onclick="openPolicyModal('terms')" style="color:inherit">Terms of Service</a>
+            </span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/common.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

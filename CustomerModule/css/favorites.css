@@ -1,0 +1,72 @@
+/* ===== Favorites page styles ===== */
+.bar2 {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bar2 .tabs {
+  border: 0;
+}
+
+.fg {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.fc {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+}
+
+.fc .thumb {
+  width: 90px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.fc .thumb.round {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.fc .heart {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: 0;
+  background: none;
+  color: #d32f2f;
+  font-size: var(--fs-xl);
+  cursor: pointer;
+}
+
+.fc .acts {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.fc p {
+  font-size: var(--fs-sm);
+  color: var(--mu);
+}
+
+@media (max-width: 1200px) {
+  .fg {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .fg {
+    grid-template-columns: 1fr;
+  }
+}

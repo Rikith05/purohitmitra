@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dashboard | PurohitMitra</title>
+    <link rel="icon" href="images/logo.svg" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body data-page="dashboard">
+        <!-- Top header -->
+    <header class="top">
+      <div class="top-left">
+        <button class="menu-btn" aria-label="Toggle menu" title="Open Sidebar Menu">
+          <span style="font-size:20px;line-height:1">☰</span>
+          <span class="menu-txt">Menu</span>
+        </button>
+        <a class="logo" href="dashboard.html">
+          <img src="images/logo.svg" alt="PurohitMitra Logo" width="34" height="34" />
+          <span>
+            PurohitMitra
+            <small>Your Trusted Purohit Companion</small>
+          </span>
+        </a>
+      </div>
+      <div class="sp">
+        <span class="loc" title="Current Location">📍 Hyderabad</span>
+        <a href="notifications.html" class="bell" aria-label="Notifications">
+          🔔
+          <i>3</i>
+        </a>
+        <a href="my-profile.html" class="user">
+          <span class="av" style="padding:0;overflow:hidden;border-radius:50%"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></span>
+          <b>Srinivas Somisetti</b>
+        </a>
+      </div>
+    </header>
+    <!-- Page layout: sidebar + main content -->
+    <div class="layout">
+            <!-- Sidebar navigation drawer -->
+      <aside class="side">
+        <div class="side-head">
+          <a class="logo" href="dashboard.html" style="gap:8px">
+            <img src="images/logo.svg" alt="PurohitMitra" width="30" height="30" />
+            <span><b>PurohitMitra</b></span>
+          </a>
+          <button class="side-close" aria-label="Close menu" title="Close Menu">✕</button>
+        </div>
+        <div class="side-user">
+          <div class="av" style="overflow:hidden;width:40px;height:40px;border-radius:50%;padding:0;flex-shrink:0"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti" style="width:100%;height:100%;object-fit:cover"></div>
+          <div>
+            <b style="display:block;font-size:14px;line-height:1.2">Srinivas Somisetti</b>
+            <small style="color:var(--mu);font-size:12px">📍 Hyderabad · Devotee</small>
+          </div>
+        </div>
+        <nav>
+          <div class="side-section-label">Devotee Portal</div>
+          <a href="dashboard.html" data-page="dashboard" class="active">
+            <span>🏠</span>
+            Dashboard
+          </a>
+          <a href="my-bookings.html" data-page="my-bookings">
+            <span>📅</span>
+            My Bookings
+          </a>
+          <a href="payments.html" data-page="payments">
+            <span>💳</span>
+            Payments
+          </a>
+          <a href="offers.html" data-page="offers">
+            <span>🏷️</span>
+            Offers
+          </a>
+          <a href="favorites.html" data-page="favorites">
+            <span>♡</span>
+            Favorites
+          </a>
+          <a href="notifications.html" data-page="notifications">
+            <span>🔔</span>
+            Notifications
+            <em>3</em>
+          </a>
+          <a href="my-profile.html" data-page="my-profile">
+            <span>👤</span>
+            My Profile
+          </a>
+          <a href="saved-addresses.html" data-page="saved-addresses">
+            <span>📍</span>
+            Saved Addresses
+          </a>
+          <a href="my-reviews.html" data-page="my-reviews">
+            <span>⭐</span>
+            My Reviews
+          </a>
+          <a href="messages.html" data-page="messages">
+            <span>✉️</span>
+            Messages
+          </a>
+          <a href="help-support.html" data-page="help-support">
+            <span>❓</span>
+            Help & Support
+          </a>
+          <a href="settings.html" data-page="settings">
+            <span>⚙️</span>
+            Settings
+          </a>
+          <div class="side-section-label" style="margin-top:14px">Explore Services</div>
+          <a href="pujas.html" data-page="pujas"><span>🪔</span>Pujas &amp; Rituals</a>
+          <a href="purohits.html" data-page="purohits"><span>🧔</span>Verified Purohits</a>
+          <a href="how-it-works.html" data-page="how-it-works"><span>ℹ️</span>How It Works</a>
+          <a href="about.html" data-page="about"><span>📖</span>About Us</a>
+          <div style="border-top:1px solid var(--bd);margin:10px 0"></div>
+          <a href="../index.html" id="logout"><span>⎋</span>Logout</a>
+        </nav>
+      </aside>
+      <!-- Main content -->
+      <main class="main">
+        <section class="hero">
+          <h1>Welcome back, Srinivas! 🙏</h1>
+          <p>May your day be blessed with peace and prosperity.</p>
+        </section>
+        <div class="grid4" id="stats"></div>
+        <div class="g2">
+          <section class="card">
+            <div class="ch">
+              <h2>Upcoming Bookings</h2>
+              <a href="my-bookings.html">View All</a>
+            </div>
+            <div id="upList"></div>
+          </section>
+          <section class="card">
+            <div class="ch">
+              <h2>Recommended For You</h2>
+              <a href="favorites.html">View All</a>
+            </div>
+            <div class="recs" id="recList"></div>
+          </section>
+        </div>
+        <div class="g3">
+          <section class="card">
+            <div class="ch">
+              <h2>Exclusive Offers for You</h2>
+              <a href="offers.html">View All</a>
+            </div>
+            <div class="banner">
+              <div>
+                <h3>Flat 10% OFF</h3>
+                <p>On all Griha Pravesh Pujas</p>
+                <span class="code" id="dCode">Code: GRHP10</span>
+              </div>
+              <div class="big">🏡</div>
+            </div>
+          </section>
+          <section class="card">
+            <div class="ch">
+              <h2>Recent Notifications</h2>
+              <a href="notifications.html">View All</a>
+            </div>
+            <div id="dNotif"></div>
+          </section>
+          <section class="card">
+            <div class="ch"><h2>Quick Actions</h2></div>
+            <div class="qa">
+              <a href="pujas.html">
+                <span>📿</span>
+                Book a Puja
+              </a>
+              <a href="purohits.html">
+                <span>👤</span>
+                Find Purohit
+              </a>
+              <a href="my-bookings.html">
+                <span>📅</span>
+                My Bookings
+              </a>
+              <a href="offers.html">
+                <span>🏷️</span>
+                Offers
+              </a>
+              <a href="payments.html">
+                <span>💳</span>
+                Payments
+              </a>
+              <a href="help-support.html">
+                <span>🎧</span>
+                Help & Support
+              </a>
+            </div>
+          </section>
+        </div>
+              <footer class="customer-footer">
+          <div class="cf-wrap">
+            <div class="cf-brand">
+              <img src="images/logo.svg" alt="PurohitMitra" width="28" height="28" />
+              <span>PurohitMitra Devotee Portal</span>
+            </div>
+            <div class="cf-links">
+              <a href="../index.html">Main Website</a>
+              <a href="pujas.html">Browse Pujas</a>
+              <a href="purohits.html">Search Purohits</a>
+              <a href="how-it-works.html">How It Works</a>
+              <a href="help-support.html">Help &amp; FAQs</a>
+              <a href="about.html">About Us</a>
+              <a href="javascript:void(0)" onclick="openPolicyModal('cancellation')">Cancellation Policy</a>
+              <a href="javascript:void(0)" onclick="openPolicyModal('refund')">Refund Policy</a>
+            </div>
+            <div class="cf-contact">
+              <a href="tel:+919876543210">📞 +91 98765 43210</a>
+              <a href="mailto:support@purohitmitra.com">✉ support@purohitmitra.com</a>
+            </div>
+          </div>
+          <div class="cf-bottom">
+            <span>© 2026 PurohitMitra. All Rights Reserved. | <a href="javascript:void(0)" onclick="openPolicyModal('privacy')" style="color:inherit">Privacy Policy</a> | <a href="javascript:void(0)" onclick="openPolicyModal('terms')" style="color:inherit">Terms of Service</a></span>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <!-- Scripts: shared first, then page-specific -->
+    <script src="js/common.js"></script>
+    <script src="js/dashboard.js"></script>
+      <script src="js/main.js"></script>
+  </body>
+</html>

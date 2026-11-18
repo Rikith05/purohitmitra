@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="pGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9E43"/>
+      <stop offset="50%" stop-color="#E8590C"/>
+      <stop offset="100%" stop-color="#7A1631"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="100%" stop-color="#FFB300"/>
+    </linearGradient>
+  </defs>
+  <circle cx="24" cy="24" r="22" fill="#FFF4EA" stroke="url(#pGrad)" stroke-width="2.5"/>
+  <!-- Diya base -->
+  <path d="M12 28 C12 36 36 36 36 28 C36 28 30 30 24 30 C18 30 12 28 12 28 Z" fill="url(#pGrad)"/>
+  <!-- Sacred Flame / Trishul central prong -->
+  <path d="M24 10 C21 17 21 21 24 25 C27 21 27 17 24 10 Z" fill="url(#goldGrad)"/>
+  <!-- Side Trishul curves -->
+  <path d="M17 17 C16 22 20 24 23 25" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M31 17 C32 22 28 24 25 25" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Center bindu -->
+  <circle cx="24" cy="19" r="2" fill="#E8590C"/>
+  <circle cx="24" cy="33" r="1.5" fill="#FFE082"/>
+</svg>

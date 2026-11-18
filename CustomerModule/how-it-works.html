@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How It Works — PurohitMitra</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <style>
+      .layout { display: block; }
+      .filter-panel {
+        background: #fff;
+        border: 1px solid var(--bd);
+        border-radius: 12px;
+        padding: 18px;
+        height: fit-content;
+      }
+      .filter-panel ul { list-style: none; padding: 0; }
+      .filter-panel li { padding: 6px 0; font-size: 13px; cursor: pointer; }
+      .filter-panel li.on { background: #fff3ea; color: var(--o); font-weight: 600; padding: 6px 8px; border-radius: 6px; }
+      .filter-panel li:hover:not(.on) { color: var(--o); }
+      .main { padding: 0 0 40px 0; max-width: 100%; }
+      .hero2 { margin-top: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- Clean Logged-in Devotee Header with Menu Button -->
+    <header class="top">
+      <div class="top-left">
+        <button class="menu-btn" aria-label="Toggle menu" title="Open Sidebar Menu">
+          <span style="font-size:20px;line-height:1">☰</span>
+          <span class="menu-txt">Menu</span>
+        </button>
+        <a class="logo" href="dashboard.html">
+          <img src="images/logo.svg" alt="PurohitMitra Logo" width="34" height="34" />
+          <span><b>PurohitMitra</b><small>Your Trusted Purohit Companion</small></span>
+        </a>
+      </div>
+      <div class="sp">
+        <span class="loc" title="Current Location">📍 Hyderabad</span>
+        <a href="notifications.html" class="bell" aria-label="Notifications">🔔<i>3</i></a>
+        <a href="my-profile.html" class="user">
+          <span class="av"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti"></span>
+          <b>Srinivas Somisetti</b>
+        </a>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Slide-Out Sidebar Drawer -->
+      <aside class="side">
+        <div class="side-head">
+          <a class="logo" href="dashboard.html" style="gap:8px">
+            <img src="images/logo.svg" alt="PurohitMitra" width="30" height="30" />
+            <span><b>PurohitMitra</b></span>
+          </a>
+          <button class="side-close" aria-label="Close menu" title="Close Menu">✕</button>
+        </div>
+        <div class="side-user">
+          <div class="av" style="overflow:hidden;width:40px;height:40px;border-radius:50%;padding:0;flex-shrink:0"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti" style="width:100%;height:100%;object-fit:cover"></div>
+          <div>
+            <b style="display:block;font-size:14px;line-height:1.2">Srinivas Somisetti</b>
+            <small style="color:var(--mu);font-size:12px">📍 Hyderabad · Devotee</small>
+          </div>
+        </div>
+        <nav>
+          <div class="side-section-label">Devotee Portal</div>
+          <a href="dashboard.html" data-page="dashboard"><span>🏠</span>Dashboard</a>
+          <a href="my-bookings.html" data-page="my-bookings"><span>📅</span>My Bookings</a>
+          <a href="payments.html" data-page="payments"><span>💳</span>Payments</a>
+          <a href="offers.html" data-page="offers"><span>🏷️</span>Offers</a>
+          <a href="favorites.html" data-page="favorites"><span>♡</span>Favorites</a>
+          <a href="notifications.html" data-page="notifications"><span>🔔</span>Notifications <em>3</em></a>
+          <a href="my-profile.html" data-page="my-profile"><span>👤</span>My Profile</a>
+          <a href="saved-addresses.html" data-page="saved-addresses"><span>📍</span>Saved Addresses</a>
+          <a href="my-reviews.html" data-page="my-reviews"><span>⭐</span>My Reviews</a>
+          <a href="messages.html" data-page="messages"><span>✉️</span>Messages</a>
+          <a href="help-support.html" data-page="help-support"><span>❓</span>Help & Support</a>
+          <a href="settings.html" data-page="settings"><span>⚙️</span>Settings</a>
+          <div class="side-section-label" style="margin-top:14px">Explore Services</div>
+          <a href="pujas.html" data-page="pujas"><span>🪔</span>Pujas &amp; Rituals</a>
+          <a href="purohits.html" data-page="purohits"><span>🧔</span>Verified Purohits</a>
+          <a href="how-it-works.html" data-page="how-it-works"><span>ℹ️</span>How It Works</a>
+          <a href="about.html" data-page="about"><span>📖</span>About Us</a>
+          <div style="border-top:1px solid var(--bd);margin:10px 0"></div>
+          <a href="../index.html" id="logout"><span>⎋</span>Logout</a>
+        </nav>
+      </aside>
+
+      <!-- Main Page Content -->
+      <main class="main">
+        <section class="hero2"><div class="wrap"><h1>How It <em>Works</em></h1><h2 style="font-size:22px">Book, <span style="color:var(--m)">Pray &amp; Celebrate</span> – The Easy Way</h2><p style="max-width:430px;margin:8px 0 14px">PurohitMitra makes it simple to connect with trusted purohits and book authentic pujas, rituals and ceremonies.</p><p><span class="pill">🛡 Verified Purohits</span><span class="pill">₹ Transparent Pricing</span><span class="pill">🪷 Wide Range of Rituals</span><span class="pill">🎧 24/7 Dedicated Support</span></p></div></section><section class="sec wrap"><h2>Booking <span style="color:var(--m)">Process</span></h2><p class="mu" style="text-align:center;margin-bottom:20px">4 Simple Steps to Book Your Pooja</p><div class="grid g4"><div class="card" style="text-align:center"><span class="num">1</span><div style="font-size:32px;margin:8px">🏠</div><h3 style="font-size:16px">Search Pujas &amp; Purohits</h3><p class="mu">Search for Pujas based on your needs and browse verified purohits.</p></div><div class="card" style="text-align:center"><span class="num">2</span><div style="font-size:32px;margin:8px">📅</div><h3 style="font-size:16px">Choose Date &amp; Location</h3><p class="mu">Select the preferred date, time and place for your puja.</p></div><div class="card" style="text-align:center"><span class="num">3</span><div style="font-size:32px;margin:8px">👤</div><h3 style="font-size:16px">Add-ons &amp; Requirements</h3><p class="mu">Customize with additional ritual items and special instructions.</p></div><div class="card" style="text-align:center"><span class="num">4</span><div style="font-size:32px;margin:8px">💳</div><h3 style="font-size:16px">Book &amp; Pay Securely</h3><p class="mu">Review details, make secure payment and get instant confirmation.</p></div></div></section><section class="wrap"><div class="card" style="background:var(--cr)"><h2 class="serif" style="text-align:center;font-size:26px;margin-bottom:16px">Why Book with <span style="color:var(--m)">PurohitMitra?</span></h2><div class="grid g5"><div class="card" style="text-align:center"><div style="font-size:26px">🛡</div><b>Verified Purohits</b><p class="mu">Background verified and experienced</p></div><div class="card" style="text-align:center"><div style="font-size:26px">₹</div><b>Transparent Pricing</b><p class="mu">No hidden charges</p></div><div class="card" style="text-align:center"><div style="font-size:26px">🪷</div><b>Traditional Authenticity</b><p class="mu">Perform sacred rituals as per shastras</p></div><div class="card" style="text-align:center"><div style="font-size:26px">📅</div><b>Easy &amp; Flexible Booking</b><p class="mu">Book in few clicks</p></div><div class="card" style="text-align:center"><div style="font-size:26px">🎧</div><b>24/7 Customer Support</b><p class="mu">We are here to help</p></div></div></div></section><section class="sec wrap"><h2>Popular Ritual <span style="color:var(--m)">Categories</span></h2><div class="circ"><a href="puja-details.html"><i><img src="images/cat_griha_pravesh.png" alt="Griha Pravesh"></i>Griha Pravesh</a><div><i>🏡</i>Vastu Shanti</div><a href="pujas.html"><i><img src="images/cat_marriage.png" alt="Marriage"></i>Marriage</a><a href="pujas.html"><i><img src="images/cat_ganesh.png" alt="Ganesh Puja"></i>Ganesh Puja</a><a href="pujas.html"><i><img src="images/cat_satyanarayana.png" alt="Satyanarayana"></i>Satyanarayana</a><a href="pujas.html"><i><img src="images/cat_homam.png" alt="Homam / Havan"></i>Homam / Havan</a><a href="pujas.html"><i><img src="images/cat_naming.png" alt="Naming Ceremony"></i>Naming</a><div><i>•••</i>Other Pujas</div></div></section><div class="wrap"><div class="offer"><div class="ph" style="width:110px;height:80px;background:none;border-radius:8px;overflow:hidden"><img src="images/festive_banner.jpg" alt="Festive Offer"></div><div><h3>Let Us Handle Your Spiritual Needs</h3>Book your next Pooja with genuine purohits. Divine blessings, delivered.</div><a class="btn m" href="pujas.html">Get Started Now →</a></div></div>
+        
+        <!-- Devotee Portal Footer -->
+        <footer class="foot" style="margin-top:40px;border-top:1px solid var(--bd);background:#fff;padding:24px 20px">
+          <div class="wrap foot-in" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--mu)">
+            <span>© 2026 PurohitMitra. Logged in as <b>Srinivas Somisetti</b>.</span>
+            <span>
+              <a href="dashboard.html" style="color:inherit">Dashboard</a> · 
+              <a href="my-bookings.html" style="color:inherit">My Bookings</a> · 
+              <a href="help-support.html" style="color:inherit">Help &amp; Support</a> · 
+              <a href="javascript:void(0)" onclick="openPolicyModal('privacy')" style="color:inherit">Privacy Policy</a> · 
+              <a href="javascript:void(0)" onclick="openPolicyModal('terms')" style="color:inherit">Terms of Service</a>
+            </span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/common.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

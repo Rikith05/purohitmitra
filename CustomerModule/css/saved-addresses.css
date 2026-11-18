@@ -1,0 +1,62 @@
+/* ===== Saved Addresses page styles ===== */
+.ag {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.ac {
+  padding: 16px;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+}
+
+.ac.def {
+  border-color: var(--o);
+}
+
+.ac .top3 {
+  display: flex;
+  gap: 14px;
+}
+
+.ac .thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.ac .acts {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--bd);
+}
+
+.ac button {
+  border: 0;
+  background: none;
+  color: var(--o);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ac .del {
+  color: var(--r);
+}
+
+.tagd {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--sf);
+  font-size: var(--fs-xs);
+  color: var(--o);
+  font-weight: 700;
+}
+
+@media (max-width: 800px) {
+  .ag {
+    grid-template-columns: 1fr;
+  }
+}

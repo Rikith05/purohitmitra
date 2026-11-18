@@ -1,0 +1,41 @@
+/* ===== Offers page styles ===== */
+.off {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px;
+  margin-bottom: 10px;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+}
+
+.oi {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background: var(--sf);
+  font-size: var(--fs-4xl);
+}
+
+.cd {
+  min-width: 140px;
+  padding: 8px 14px;
+  border: 1px dashed var(--o);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--o);
+  cursor: pointer;
+}
+
+.cd small {
+  display: block;
+  color: var(--mu);
+  font-size: var(--fs-xs);
+}
+
+.cd:hover {
+  background: var(--sf);
+}

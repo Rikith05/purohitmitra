@@ -1,0 +1,55 @@
+/* ===== My Reviews page styles ===== */
+.bar2 {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bar2 .tabs {
+  border: 0;
+}
+
+.rv {
+  display: flex;
+  gap: 16px;
+  padding: 14px;
+  margin-bottom: 10px;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+}
+
+.rv .thumb {
+  width: 90px;
+  height: 90px;
+}
+
+.rv > div:nth-child(2) {
+  flex: 1;
+}
+
+.rv .id {
+  color: var(--mu);
+  font-size: var(--fs-sm);
+  text-align: right;
+}
+
+.rv .id .btn-o {
+  margin-top: 30px;
+}
+
+.starpick span {
+  font-size: var(--fs-4xl);
+  color: #ccc;
+  cursor: pointer;
+}
+
+.starpick span.on {
+  color: #f5a623;
+}
+
+@media (max-width: 700px) {
+  .rv {
+    flex-wrap: wrap;
+  }
+}

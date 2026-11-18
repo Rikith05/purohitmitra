@@ -1,0 +1,100 @@
+/* ===== Booking Details page styles ===== */
+#bdWrap {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+.full {
+  grid-column: 1/-1;
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: var(--fs-md);
+}
+
+.kv span {
+  color: var(--mu);
+}
+
+.top2 {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.top2 .thumb {
+  width: 120px;
+  height: 120px;
+}
+
+.tl {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  text-align: center;
+  font-size: var(--fs-sm);
+}
+
+.tl div {
+  flex: 1;
+}
+
+.tl i {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 6px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  font-style: normal;
+  color: #ccc;
+}
+
+.tl .done i {
+  border-color: var(--g);
+  color: var(--g);
+}
+
+.tl .now i {
+  border-color: var(--o);
+  color: var(--o);
+}
+
+.qa2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.qa2 button {
+  padding: 10px 4px;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  background: #fff;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.qa2 button:hover {
+  background: var(--sf);
+}
+
+.qa2 span {
+  display: block;
+  font-size: var(--fs-2xl);
+}
+
+@media (max-width: 1000px) {
+  #bdWrap {
+    grid-template-columns: 1fr;
+  }
+  .top2 {
+    flex-wrap: wrap;
+  }
+}

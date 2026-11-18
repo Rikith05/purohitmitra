@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book Purohit — PurohitMitra</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <style>
+      .layout { display: block; }
+      .filter-panel {
+        background: #fff;
+        border: 1px solid var(--bd);
+        border-radius: 12px;
+        padding: 18px;
+        height: fit-content;
+      }
+      .filter-panel ul { list-style: none; padding: 0; }
+      .filter-panel li { padding: 6px 0; font-size: 13px; cursor: pointer; }
+      .filter-panel li.on { background: #fff3ea; color: var(--o); font-weight: 600; padding: 6px 8px; border-radius: 6px; }
+      .filter-panel li:hover:not(.on) { color: var(--o); }
+      .main { padding: 0 0 40px 0; max-width: 100%; }
+      .hero2 { margin-top: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- Clean Logged-in Devotee Header with Menu Button -->
+    <header class="top">
+      <div class="top-left">
+        <button class="menu-btn" aria-label="Toggle menu" title="Open Sidebar Menu">
+          <span style="font-size:20px;line-height:1">☰</span>
+          <span class="menu-txt">Menu</span>
+        </button>
+        <a class="logo" href="dashboard.html">
+          <img src="images/logo.svg" alt="PurohitMitra Logo" width="34" height="34" />
+          <span><b>PurohitMitra</b><small>Your Trusted Purohit Companion</small></span>
+        </a>
+      </div>
+      <div class="sp">
+        <span class="loc" title="Current Location">📍 Hyderabad</span>
+        <a href="notifications.html" class="bell" aria-label="Notifications">🔔<i>3</i></a>
+        <a href="my-profile.html" class="user">
+          <span class="av"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti"></span>
+          <b>Srinivas Somisetti</b>
+        </a>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Slide-Out Sidebar Drawer -->
+      <aside class="side">
+        <div class="side-head">
+          <a class="logo" href="dashboard.html" style="gap:8px">
+            <img src="images/logo.svg" alt="PurohitMitra" width="30" height="30" />
+            <span><b>PurohitMitra</b></span>
+          </a>
+          <button class="side-close" aria-label="Close menu" title="Close Menu">✕</button>
+        </div>
+        <div class="side-user">
+          <div class="av" style="overflow:hidden;width:40px;height:40px;border-radius:50%;padding:0;flex-shrink:0"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti" style="width:100%;height:100%;object-fit:cover"></div>
+          <div>
+            <b style="display:block;font-size:14px;line-height:1.2">Srinivas Somisetti</b>
+            <small style="color:var(--mu);font-size:12px">📍 Hyderabad · Devotee</small>
+          </div>
+        </div>
+        <nav>
+          <div class="side-section-label">Devotee Portal</div>
+          <a href="dashboard.html" data-page="dashboard"><span>🏠</span>Dashboard</a>
+          <a href="my-bookings.html" data-page="my-bookings"><span>📅</span>My Bookings</a>
+          <a href="payments.html" data-page="payments"><span>💳</span>Payments</a>
+          <a href="offers.html" data-page="offers"><span>🏷️</span>Offers</a>
+          <a href="favorites.html" data-page="favorites"><span>♡</span>Favorites</a>
+          <a href="notifications.html" data-page="notifications"><span>🔔</span>Notifications <em>3</em></a>
+          <a href="my-profile.html" data-page="my-profile"><span>👤</span>My Profile</a>
+          <a href="saved-addresses.html" data-page="saved-addresses"><span>📍</span>Saved Addresses</a>
+          <a href="my-reviews.html" data-page="my-reviews"><span>⭐</span>My Reviews</a>
+          <a href="messages.html" data-page="messages"><span>✉️</span>Messages</a>
+          <a href="help-support.html" data-page="help-support"><span>❓</span>Help & Support</a>
+          <a href="settings.html" data-page="settings"><span>⚙️</span>Settings</a>
+          <div class="side-section-label" style="margin-top:14px">Explore Services</div>
+          <a href="pujas.html" data-page="pujas"><span>🪔</span>Pujas &amp; Rituals</a>
+          <a href="purohits.html" data-page="purohits"><span>🧔</span>Verified Purohits</a>
+          <a href="how-it-works.html" data-page="how-it-works"><span>ℹ️</span>How It Works</a>
+          <a href="about.html" data-page="about"><span>📖</span>About Us</a>
+          <div style="border-top:1px solid var(--bd);margin:10px 0"></div>
+          <a href="../index.html" id="logout"><span>⎋</span>Logout</a>
+        </nav>
+      </aside>
+
+      <!-- Main Page Content -->
+      <main class="main">
+        <div class="wrap"><p class="bc"><a href="purohit-details.html">← Back to Purohit Details</a></p><div class="stepper"><div class="on"><i>1</i><span><b>Book Puja</b><br>Date, Time & Details</span></div><div class=""><i>2</i><span><b>Review & Pay</b><br>Confirm & Make Payment</span></div><div class=""><i>3</i><span><b>Booking Confirmed</b><br>Get Confirmation</span></div></div><div class="layout"><div class="card"><h2 style="font-size:24px">Book Pandit Narayan Shastri</h2><p class="mu" style="margin-bottom:12px">Fill in the details to book your Puja</p><div style="display:flex;gap:16px"><div class="ph" style="width:190px;height:170px;overflow:hidden;border-radius:8px"><img src="images/puja_satyanarayana.jpg" alt="Satyanarayana Puja" style="width:100%;height:100%;object-fit:cover"></div><div><p class="mu">Puja / Ritual</p><b>Satyanarayana Puja</b><p class="mu">Experience</p><b>15+ Years</b><p class="mu">Languages</p><b>Telugu, Sanskrit, Hindi, English</b><p class="mu">Distance</p><b style="color:var(--g)">2.5 km away</b></div></div><hr style="border:0;border-top:1px solid var(--bd);margin:18px 0"><h3><span class="sn">1</span>Puja Date &amp; Time</h3><div class="fr c2" style="margin:12px 0"><div class="f"><label>Puja Date *</label><div class="in ">📅 25 May 2025, Sunday</div></div><div class="f"><label>Puja Time *</label><div class="in ">🕙 10:00 AM - 12:00 PM ⌄</div></div></div><div class="note g"><b style="color:var(--g)">Purohit is available on this date &amp; time</b><br>You can continue with the booking.</div><h3 style="margin-top:20px"><span class="sn">2</span>Location Details</h3><div class="f"><label>Address Line 1 *</label><div class="in ">Plot 123, Sai Residency</div></div><div class="f"><label>Address Line 2</label><div class="in ">Near Hitech City Main Road</div></div><div class="fr c3"><div class="f"><label>City *</label><div class="in ">Hyderabad</div></div><div class="f"><label>State *</label><div class="in ">Telangana</div></div><div class="f"><label>Pincode *</label><div class="in ">500081</div></div></div><div style="display:flex;justify-content:space-between"><label><input type="checkbox"> Use current location</label><a class="btn s" href="javascript:void(0)" onclick="alert('Current location selected: Hitech City, Hyderabad')">📍 Select on Map</a></div><h3 style="margin-top:20px"><span class="sn">3</span>Puja Details</h3><div class="fr c2" style="margin-top:12px"><div class="f"><label>Number of Participants *</label><div class="in ">8 ⌄</div></div><div class="f"><label>Is Samagri (Puja Items) Required? *</label><div class="in ">◉ Yes, Purohit to bring &nbsp; ○ No, I will arrange</div></div></div><div class="f"><label>Any Special Requirements / Instructions</label><div class="in t">e.g., Gotra, Special Sankalpa, Specific mantras, etc.</div></div><h3 style="margin-top:20px"><span class="sn">4</span>Contact Person <span class="mu" style="font-family:DM Sans;font-weight:400">(For this Booking)</span></h3><div class="fr c3" style="margin-top:12px"><div class="f"><label>Name *</label><div class="in ">Ramesh Kumar</div></div><div class="f"><label>Mobile Number *</label><div class="in ">🇮🇳 +91 98765 43210</div></div><div class="f"><label>Email</label><div class="in ">rameshkumar@gmail.com</div></div></div><div class="note" style="background:#fff7e0">Booking updates and reminders will be sent to this number</div></div><div class="grid"><div class="card"><h3 style="margin-bottom:8px">Booking Summary</h3><div style="display:flex;gap:12px;margin-bottom:10px"><div class="ph" style="width:70px;height:70px;overflow:hidden;border-radius:50%"><img src="images/purohit_narayan.jpg" alt="Pandit Narayan Shastri" style="width:100%;height:100%;object-fit:cover"></div><div><b>Pandit Narayan Shastri</b><br><span class="st">★</span> 4.9 (128 Reviews)<br><span class="mu">15+ Years Experience</span></div></div><div class="kv"><span>Puja / Ritual</span><span>Satyanarayana Puja</span></div><div class="kv"><span>Date</span><span>25 May 2025, Sunday</span></div><div class="kv"><span>Time</span><span>10:00 AM - 12:00 PM</span></div><div class="kv"><span>Participants</span><span>8</span></div><div class="kv"><span>Location</span><span>Sai Residency, Hitech City, Hyderabad</span></div></div><div class="card"><h3>Price Details</h3><div class="kv"><span>Puja Dakshina</span><span>₹ 2,100</span></div><div class="kv"><span>Puja Samagri (by Purohit)</span><span>₹ 700</span></div><div class="kv"><span>Travel Charges</span><span>₹ 200</span></div><div class="kv"><span>Sub Total</span><span>₹ 3,000</span></div><div class="kv"><span>Platform Service Fee</span><span>₹ 150</span></div><div class="kv"><span>GST (18%)</span><span>₹ 567</span></div><div class="tot"><span>Total Amount</span><b>₹ 3,717</b></div><div class="secure"><b>100% Secure Booking</b><br>Your payment is safe with us.</div></div><div class="card" style="background:var(--cr)"><h3>Cancellation Policy</h3><ul class="ck mu"><li>More than 48 hours before Puja: Full Refund</li><li>24 - 48 hours before Puja: 10% charges</li><li>Less than 24 hours before Puja: 30% charges</li><li>Same day cancellation: No Refund</li></ul></div><div class="card"><h3>Need Help?</h3><p class="mu">Our support team is here for you</p><p style="margin-top:8px">📞 +91 12345 67890<br>✉ support@purohitmitra.com<br>🕗 Mon - Sun: 8:00 AM - 9:00 PM</p></div></div></div><div class="note g"><b>Important Note</b><br>Please ensure the Puja place is clean and accessible. Kindly inform us in advance for any changes.</div><p><label><input type="checkbox"> I confirm that the above details are correct and agree to the <a style="color:var(--o)" href="javascript:void(0)" onclick="openPolicyModal('terms')">Terms &amp; Conditions</a> and <a style="color:var(--o)" href="javascript:void(0)" onclick="openPolicyModal('cancellation')">Cancellation Policy</a>.</label></p><div style="display:flex;justify-content:space-between;margin-top:14px"><a class="btn" href="purohit-details.html">← Back</a><a class="btn p" style="width:260px" href="review-booking.html">Review &amp; Proceed to Pay →</a></div></div>
+        
+        <!-- Devotee Portal Footer -->
+        <footer class="foot" style="margin-top:40px;border-top:1px solid var(--bd);background:#fff;padding:24px 20px">
+          <div class="wrap foot-in" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--mu)">
+            <span>© 2026 PurohitMitra. Logged in as <b>Srinivas Somisetti</b>.</span>
+            <span>
+              <a href="dashboard.html" style="color:inherit">Dashboard</a> · 
+              <a href="my-bookings.html" style="color:inherit">My Bookings</a> · 
+              <a href="help-support.html" style="color:inherit">Help &amp; Support</a> · 
+              <a href="javascript:void(0)" onclick="openPolicyModal('privacy')" style="color:inherit">Privacy Policy</a> · 
+              <a href="javascript:void(0)" onclick="openPolicyModal('terms')" style="color:inherit">Terms of Service</a>
+            </span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/common.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const purohit = params.get("purohit");
+        if (purohit) {
+          const h2 = document.querySelector(".main h2");
+          if (h2) h2.textContent = "Book " + purohit;
+          const bc = document.querySelector(".bc");
+          if (bc) bc.innerHTML = `Dashboard › Purohits › ${purohit} › Book`;
+          document.title = `Book ${purohit} — PurohitMitra`;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+/* ===== Help Support page styles ===== */
+.hg {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+.hg .row input {
+  flex: 1;
+}
+
+.imm {
+  background: var(--sf);
+}
+
+.tp {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.tc {
+  padding: 12px;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.tc:hover {
+  background: var(--sf);
+}
+
+.tc b {
+  display: block;
+  font-size: var(--fs-base);
+}
+
+.ar {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bd);
+  font-size: var(--fs-md);
+  cursor: pointer;
+}
+
+.ar:last-child {
+  border: 0;
+}
+
+.ans {
+  display: none;
+  padding: 6px 0 10px;
+  color: var(--mu);
+  font-size: var(--fs-md);
+}
+
+.ar.open + .ans {
+  display: block;
+}
+
+@media (max-width: 1000px) {
+  .hg {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .tp {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,40 @@
+/* ===== Settings page styles ===== */
+.sg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.pr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f6ede4;
+}
+
+.pr:last-child {
+  border: 0;
+}
+
+.sl {
+  display: block;
+  padding: 10px 0;
+  border-bottom: 1px solid #f6ede4;
+}
+
+.pr select {
+  width: auto;
+}
+
+.link {
+  cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .sg {
+    grid-template-columns: 1fr;
+  }
+}

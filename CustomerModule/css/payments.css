@@ -1,0 +1,48 @@
+/* ===== Payments page styles ===== */
+.bar2 {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bar2 .tabs {
+  border: 0;
+}
+
+.bar2 input {
+  width: 240px;
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--bd);
+  text-align: left;
+  font-size: var(--fs-sm);
+  color: var(--mu);
+}
+
+td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--bd);
+  font-size: var(--fs-md);
+}
+
+.dl {
+  padding: 4px 9px;
+  border: 1px solid var(--o);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--o);
+  cursor: pointer;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Us — PurohitMitra</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <style>
+      .layout { display: block; }
+      .filter-panel {
+        background: #fff;
+        border: 1px solid var(--bd);
+        border-radius: 12px;
+        padding: 18px;
+        height: fit-content;
+      }
+      .filter-panel ul { list-style: none; padding: 0; }
+      .filter-panel li { padding: 6px 0; font-size: 13px; cursor: pointer; }
+      .filter-panel li.on { background: #fff3ea; color: var(--o); font-weight: 600; padding: 6px 8px; border-radius: 6px; }
+      .filter-panel li:hover:not(.on) { color: var(--o); }
+      .main { padding: 0 0 40px 0; max-width: 100%; }
+      .hero2 { margin-top: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- Clean Logged-in Devotee Header with Menu Button -->
+    <header class="top">
+      <div class="top-left">
+        <button class="menu-btn" aria-label="Toggle menu" title="Open Sidebar Menu">
+          <span style="font-size:20px;line-height:1">☰</span>
+          <span class="menu-txt">Menu</span>
+        </button>
+        <a class="logo" href="dashboard.html">
+          <img src="images/logo.svg" alt="PurohitMitra Logo" width="34" height="34" />
+          <span><b>PurohitMitra</b><small>Your Trusted Purohit Companion</small></span>
+        </a>
+      </div>
+      <div class="sp">
+        <span class="loc" title="Current Location">📍 Hyderabad</span>
+        <a href="notifications.html" class="bell" aria-label="Notifications">🔔<i>3</i></a>
+        <a href="my-profile.html" class="user">
+          <span class="av"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti"></span>
+          <b>Srinivas Somisetti</b>
+        </a>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Slide-Out Sidebar Drawer -->
+      <aside class="side">
+        <div class="side-head">
+          <a class="logo" href="dashboard.html" style="gap:8px">
+            <img src="images/logo.svg" alt="PurohitMitra" width="30" height="30" />
+            <span><b>PurohitMitra</b></span>
+          </a>
+          <button class="side-close" aria-label="Close menu" title="Close Menu">✕</button>
+        </div>
+        <div class="side-user">
+          <div class="av" style="overflow:hidden;width:40px;height:40px;border-radius:50%;padding:0;flex-shrink:0"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti" style="width:100%;height:100%;object-fit:cover"></div>
+          <div>
+            <b style="display:block;font-size:14px;line-height:1.2">Srinivas Somisetti</b>
+            <small style="color:var(--mu);font-size:12px">📍 Hyderabad · Devotee</small>
+          </div>
+        </div>
+        <nav>
+          <div class="side-section-label">Devotee Portal</div>
+          <a href="dashboard.html" data-page="dashboard"><span>🏠</span>Dashboard</a>
+          <a href="my-bookings.html" data-page="my-bookings"><span>📅</span>My Bookings</a>
+          <a href="payments.html" data-page="payments"><span>💳</span>Payments</a>
+          <a href="offers.html" data-page="offers"><span>🏷️</span>Offers</a>
+          <a href="favorites.html" data-page="favorites"><span>♡</span>Favorites</a>
+          <a href="notifications.html" data-page="notifications"><span>🔔</span>Notifications <em>3</em></a>
+          <a href="my-profile.html" data-page="my-profile"><span>👤</span>My Profile</a>
+          <a href="saved-addresses.html" data-page="saved-addresses"><span>📍</span>Saved Addresses</a>
+          <a href="my-reviews.html" data-page="my-reviews"><span>⭐</span>My Reviews</a>
+          <a href="messages.html" data-page="messages"><span>✉️</span>Messages</a>
+          <a href="help-support.html" data-page="help-support"><span>❓</span>Help & Support</a>
+          <a href="settings.html" data-page="settings"><span>⚙️</span>Settings</a>
+          <div class="side-section-label" style="margin-top:14px">Explore Services</div>
+          <a href="pujas.html" data-page="pujas"><span>🪔</span>Pujas &amp; Rituals</a>
+          <a href="purohits.html" data-page="purohits"><span>🧔</span>Verified Purohits</a>
+          <a href="how-it-works.html" data-page="how-it-works"><span>ℹ️</span>How It Works</a>
+          <a href="about.html" data-page="about"><span>📖</span>About Us</a>
+          <div style="border-top:1px solid var(--bd);margin:10px 0"></div>
+          <a href="../index.html" id="logout"><span>⎋</span>Logout</a>
+        </nav>
+      </aside>
+
+      <!-- Main Page Content -->
+      <main class="main">
+        <section class="hero2"><div class="wrap" style="display:flex;justify-content:space-between;align-items:center"><div><h1>About <em>PurohitMitra</em></h1><h3 style="margin:6px 0">Bringing devotion and convenience <span style="color:var(--o)">together for every home.</span></h3><p style="max-width:480px;margin-bottom:12px">PurohitMitra is India's trusted platform that connects you with experienced and verified Purohits for all your pujas and rituals. We blend tradition with technology to make your spiritual journey simple, transparent and meaningful.</p><span class="pill">🛡 Verified &amp; Experienced Purohits</span><span class="pill">₹ Transparent Pricing</span><span class="pill">🎧 24/7 Customer Support</span></div><div class="ph" style="width:380px;height:220px;background:none;overflow:hidden;border-radius:12px"><img src="images/about_kalash_hero.jpg" alt="Vedic Heritage Kalash" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div></div></section><section class="wrap sec"><div class="layout" style="grid-template-columns:360px 1fr"><div class="ph" style="height:240px;background:none;overflow:hidden;border-radius:12px"><img src="images/about_story_ritual.jpg" alt="Sacred Ritual" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div><h2 style="font-size:26px;text-align:left">Our Story</h2><p style="margin:10px 0">In today's fast-paced world, finding the right Purohit for a puja can be a challenge. We started PurohitMitra with a simple thought – to make authentic rituals accessible to everyone, everywhere.</p><p>Our platform was created to bridge the gap between tradition and modern convenience, ensuring every puja is performed with devotion, correct rituals and complete peace of mind.</p><div class="grid g3" style="margin-top:14px"><div><b>Rooted in Tradition</b><p class="mu">We respect and preserve the ancient Vedic traditions.</p></div><div><b>Built for Devotees</b><p class="mu">Designed to make your puja journey effortless.</p></div><div><b>Driven by Trust</b><p class="mu">Your trust and satisfaction is our greatest strength.</p></div></div></div></div></section><section class="wrap"><h2 class="serif" style="text-align:center;font-size:23px;margin-bottom:16px">Why Choose PurohitMitra?</h2><div class="grid" style="grid-template-columns:repeat(6,1fr)"><div class="card" style="text-align:center;padding:12px"><div style="font-size:24px">🛡</div><b style="color:var(--m);font-size:12px">Verified Purohits</b><p class="mu" style="font-size:11px">All Purohits are thoroughly verified.</p></div><div class="card" style="text-align:center;padding:12px"><div style="font-size:24px">₹</div><b style="color:var(--m);font-size:12px">Transparent Pricing</b><p class="mu" style="font-size:11px">Clear Dakshina details with no hidden charges.</p></div><div class="card" style="text-align:center;padding:12px"><div style="font-size:24px">📅</div><b style="color:var(--m);font-size:12px">Easy Booking</b><p class="mu" style="font-size:11px">Book the right Purohit in just a few clicks.</p></div><div class="card" style="text-align:center;padding:12px"><div style="font-size:24px">🕐</div><b style="color:var(--m);font-size:12px">On-time Service</b><p class="mu" style="font-size:11px">Purohits reach your location on time.</p></div><div class="card" style="text-align:center;padding:12px"><div style="font-size:24px">⭐</div><b style="color:var(--m);font-size:12px">Puja as per Vedic Vidhi</b><p class="mu" style="font-size:11px">All rituals as per Vedic scriptures.</p></div><div class="card" style="text-align:center;padding:12px"><div style="font-size:24px">🎧</div><b style="color:var(--m);font-size:12px">24/7 Support</b><p class="mu" style="font-size:11px">Our team is always here to assist you.</p></div></div><div class="stat"><div><b>25,000+</b>Happy Families</div><div><b>1,00,000+</b>Pujas Performed</div><div><b>500+</b>Verified Purohits</div><div><b>100+</b>Cities Served</div><div><b>4.8/5</b>Average Rating</div></div></section><section class="wrap"><div class="grid g2"><div class="card"><h3>Meet the Founder</h3><div style="display:flex;gap:16px;margin-top:12px"><div class="ph" style="width:140px;height:170px;background:none;overflow:hidden;border-radius:10px;flex:none"><img src="images/founder_srinivas.jpg" alt="Srinivas Somisetti, Founder & CEO" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div><div><b class="serif" style="color:var(--m);font-size:18px">Srinivas Somisetti</b><br><span style="color:var(--o)">Founder &amp; CEO</span><ul class="ck mu" style="margin-top:8px"><li>A seasoned IT leader, product strategist, and AI innovator with 25+ years of experience building and scaling enterprise and SaaS platforms.</li><li>Successfully led design and delivery of HRMS, ERP, healthcare, and insurance solutions across India, the Middle East, and the USA.</li><li>Extensive experience in Agile and Waterfall methodologies, including contributions to CMMI Level 3 implementations.</li></ul><a style="color:#2563eb;font-size:12px" href="https://www.linkedin.com/in/srinivas-somisetti-8ab88385/">in linkedin.com/in/srinivas-somisetti</a></div></div></div><div class="card"><h3>Our Mission &amp; Values</h3><p style="margin-top:12px"><b>Our Mission</b><br><span class="mu">To make authentic Vedic rituals accessible to every home with trust, transparency and convenience.</span></p><p style="margin-top:10px"><b>Our Vision</b><br><span class="mu">To be India's most trusted spiritual platform, preserving traditions while embracing modern innovation.</span></p><p style="margin-top:10px"><b>Our Values</b><br><span class="mu">Trust, Devotion, Integrity, Respect for Tradition and Customer Delight.</span></p></div></div><div class="offer" style="margin-top:20px"><span style="font-size:36px">🙏</span><div><b class="serif" style="font-size:18px">At <span style="color:var(--m)">PurohitMitra,</span><br>we don't just book Purohits, <span style="color:var(--m)">we build relationships of trust.</span></b></div><a class="btn m" href="pujas.html">Book a Puja Now →</a></div></section><div class="wrap"><div class="trust five"><div><i>🛡</i><b>Verified Purohits</b>Background verified</div><div><i>₹</i><b>Transparent Pricing</b>No hidden charges</div><div><i>📅</i><b>Easy Booking</b>Book in few clicks</div><div><i>🔒</i><b>Secure & Safe</b>Your privacy is our priority</div><div><i>🎧</i><b>24/7 Support</b>We are here to help</div></div></div>
+        
+        <!-- Devotee Portal Footer -->
+        <footer class="foot" style="margin-top:40px;border-top:1px solid var(--bd);background:#fff;padding:24px 20px">
+          <div class="wrap foot-in" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--mu)">
+            <span>© 2026 PurohitMitra. Logged in as <b>Srinivas Somisetti</b>.</span>
+            <span>
+              <a href="dashboard.html" style="color:inherit">Dashboard</a> · 
+              <a href="my-bookings.html" style="color:inherit">My Bookings</a> · 
+              <a href="help-support.html" style="color:inherit">Help &amp; Support</a> · 
+              <a href="javascript:void(0)" onclick="openPolicyModal('privacy')" style="color:inherit">Privacy Policy</a> · 
+              <a href="javascript:void(0)" onclick="openPolicyModal('terms')" style="color:inherit">Terms of Service</a>
+            </span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/common.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
