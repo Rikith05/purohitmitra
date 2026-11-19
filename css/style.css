@@ -435,3 +435,85 @@ select.in {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* ==========================================================================
+   Unified Header & User Pill Styling matching Reference Screenshot
+   ========================================================================== */
+.pm-menu-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  height: 38px !important;
+  padding: 0 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid #f0d5c0 !important;
+  background: #fff3ea !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  color: #e8590c !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+  font-weight: 600 !important;
+}
+.pm-menu-btn:hover {
+  background: #e8590c !important;
+  color: #fff !important;
+  border-color: #e8590c !important;
+}
+.pm-menu-btn span {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.pm-user-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 4px 12px 4px 6px !important;
+  background: #fff !important;
+  border: 1px solid #efe3d6 !important;
+  border-radius: 999px !important;
+  color: #2b1b17 !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  white-space: nowrap !important;
+  transition: border-color 0.15s ease !important;
+}
+.pm-user-pill:hover {
+  border-color: var(--o, #e8590c) !important;
+}
+.pm-user-pill .av {
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+}
+.pm-user-pill .av img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+.pm-bell-link {
+  position: relative !important;
+  font-size: 20px !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 4px !important;
+}
+.pm-bell-link i {
+  position: absolute !important;
+  top: -4px !important;
+  right: -6px !important;
+  background: var(--o, #e8590c) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  font-size: 10px !important;
+  padding: 1px 5px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+}

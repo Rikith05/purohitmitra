@@ -1170,3 +1170,79 @@ label {
   color: #8c827a;
   font-size: 11px;
 }
+
+
+/* ==========================================================================
+   Unified Header & User Pill Styling matching Reference Screenshot
+   ========================================================================== */
+.menu-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  height: 38px !important;
+  padding: 0 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid #f0d5c0 !important;
+  background: #fff3ea !important;
+  cursor: pointer !important;
+  font-size: 16px !important;
+  color: #e8590c !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+  font-weight: 600 !important;
+}
+.menu-btn:hover {
+  background: #e8590c !important;
+  color: #fff !important;
+  border-color: #e8590c !important;
+}
+.menu-btn .menu-txt {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  font-family: inherit !important;
+  color: inherit !important;
+}
+
+.sp .user {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 4px 12px 4px 6px !important;
+  background: #fff !important;
+  border: 1px solid #efe3d6 !important;
+  border-radius: 999px !important;
+  color: #2b1b17 !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  white-space: nowrap !important;
+}
+.sp .user .av {
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+}
+.sp .loc, .loc {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  color: #2c1810 !important;
+  background: #fff8f3 !important;
+  border: 1px solid #ffd8a8 !important;
+  padding: 6px 12px !important;
+  border-radius: 20px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  user-select: none !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+.sp .loc:hover, .loc:hover {
+  border-color: #e8590c !important;
+  background: #fff3ea !important;
+  color: #e8590c !important;
+}

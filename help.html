@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Help &amp; Support | PurohitMitra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .faq-item {
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      background: #fff;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .faq-q {
+      padding: 14px 18px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #2c1810;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .faq-q:hover {
+      background: #fff8f3;
+      color: var(--o);
+    }
+    .faq-a {
+      padding: 0 18px 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #555;
+      display: none;
+      border-top: 1px solid #f5ede4;
+      padding-top: 12px;
+    }
+    .faq-item.open .faq-a {
+      display: block;
+    }
+    .faq-item.open .faq-q {
+      color: var(--o);
+      background: #fff8f3;
+    }
+    .faq-toggle {
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+    .faq-item.open .faq-toggle {
+      transform: rotate(45deg);
+    }
+    .help-cat {
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .help-cat:hover {
+      border-color: var(--o);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(232, 89, 12, 0.12);
+    }
+    .help-cat-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .help-cat b {
+      display: block;
+      font-size: 14px;
+      color: #2c1810;
+      margin-bottom: 4px;
+    }
+    .help-cat small {
+      font-size: 12px;
+      color: var(--mu);
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <img src="images/logo.svg" alt="PurohitMitra Logo" width="34" height="34" style="vertical-align:middle;margin-right:8px" />
+      <span><b>PurohitMitra</b><small>Your Trusted Purohit Companion</small></span>
+    </a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li class="has-drop"><a href="pujas.html">Pujas <span class="nav-caret">▾</span></a>
+        <div class="nav-drop">
+          <a href="pujas.html"><b>All Pujas &amp; Rituals</b><br><small style="color:var(--mu)">Explore complete 40+ Vedic ceremonies</small></a>
+          <a href="puja-details.html?puja=Griha%20Pravesh%20Puja">🏡 Griha Pravesh Puja</a>
+          <a href="puja-details.html?puja=Satyanarayana%20Puja">✨ Satyanarayana Vrata</a>
+          <a href="puja-details.html?puja=Ganesh%20Puja">🐘 Ganesh Puja &amp; Aarti</a>
+          <a href="puja-details.html?puja=Navagraha%20Shanti%20Puja">🪐 Navagraha Shanti Havan</a>
+          <a href="puja-details.html?puja=Vivaha%20(Wedding)%20Puja">💍 Vivaha (Wedding) Puja</a>
+        </div>
+      </li>
+      <li><a href="purohits.html">Purohits</a></li>
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="help.html" class="on">Help</a></li>
+    </ul>
+    <span class="loc" title="Select Location">📍 Hyderabad <span class="nav-caret">▾</span></span>
+    <a class="btn s mo" href="javascript:void(0)" onclick="window.pmOpenAuthModal('signin')">Login</a>
+    <a class="btn s m" href="javascript:void(0)" onclick="window.pmOpenAuthModal('register')">Sign Up</a>
+  </div>
+</header>
+
+<section class="hero2">
+  <div class="wrap">
+    <h1>Help &amp; <em>Support</em></h1>
+    <h2 style="font-size:22px">How Can We <span style="color:var(--m)">Assist You Today?</span></h2>
+    <p style="max-width:540px;margin:8px 0 14px">
+      Find quick answers about Vedic puja bookings, customized muhurtham scheduling, verified purohits, transparent dakshina, and secure online payments.
+    </p>
+    <div style="max-width:520px;position:relative;margin-top:16px">
+      <input type="text" id="faqSearchInput" placeholder="Search for answers (e.g. reschedule, samagri, muhurtham, refund)..." style="width:100%;padding:12px 16px;border:1px solid #ced4da;border-radius:24px;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,0.06);box-sizing:border-box">
+    </div>
+  </div>
+</section>
+
+<!-- Browse Categories -->
+<section class="sec wrap">
+  <h2>Browse Help <span style="color:var(--m)">Topics</span></h2>
+  <p class="mu" style="text-align:center;margin-bottom:24px">Select a category to find targeted solutions</p>
+  <div class="grid g3" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px">
+    <div class="help-cat" onclick="filterFaq('booking')">
+      <span class="help-cat-icon">📅</span>
+      <b>Bookings &amp; Dates</b>
+      <small>Booking flow, date selection, custom muhurtham</small>
+    </div>
+    <div class="help-cat" onclick="filterFaq('payment')">
+      <span class="help-cat-icon">💳</span>
+      <b>Payments &amp; Refunds</b>
+      <small>UPI, net banking, refund timelines &amp; policies</small>
+    </div>
+    <div class="help-cat" onclick="filterFaq('purohit')">
+      <span class="help-cat-icon">🧔</span>
+      <b>Verified Purohits</b>
+      <small>Council verification, credentials &amp; language</small>
+    </div>
+    <div class="help-cat" onclick="filterFaq('samagri')">
+      <span class="help-cat-icon">🪔</span>
+      <b>Vidhi &amp; Samagri</b>
+      <small>Ritual items, preparation guidance &amp; havan</small>
+    </div>
+    <div class="help-cat" onclick="filterFaq('offers')">
+      <span class="help-cat-icon">🏷️</span>
+      <b>Offers &amp; Coupons</b>
+      <small>Promo codes, festive discounts &amp; referrals</small>
+    </div>
+    <div class="help-cat" onclick="filterFaq('general')">
+      <span class="help-cat-icon">❓</span>
+      <b>General &amp; Safety</b>
+      <small>Platform policies, privacy &amp; security</small>
+    </div>
+  </div>
+</section>
+
+<!-- Main FAQs & Support Desk -->
+<section class="sec wrap" style="padding-top:0">
+  <div style="display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start">
+    <!-- Left: FAQ Accordion -->
+    <div>
+      <h3 style="font-size:20px;margin-bottom:16px">Frequently Asked Questions</h3>
+      <div id="faqAccordion">
+        <div class="faq-item open" data-cat="booking">
+          <div class="faq-q">
+            <span>How do I book a Purohit for a puja on PurohitMitra?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a">
+            Booking is simple and takes less than 2 minutes: 1) Browse our 40+ Vedic pujas or select a verified Purohit. 2) Pick your preferred date and time slot using our interactive calendar. 3) Choose your preferred Purohit based on reviews, languages, and dakshina. 4) Review your booking and complete payment via UPI or Cards to get instant confirmation.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="booking">
+          <div class="faq-q">
+            <span>Can I customize the Puja Date and Vedic Muhurtham timing?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a">
+            Yes! When booking any puja, click <b>"Other (Custom Time)"</b> in Step 1. You can choose from traditional Vedic Muhurtham presets (such as Brahma Muhurtham, Pratah Kala, Abhijit Muhurtham, Sayankala, Pradosha Kala) or type your exact custom start/end time and family astrologer notes.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="payment">
+          <div class="faq-q">
+            <span>What is your cancellation and reschedule policy?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a">
+            You receive a <b>100% full refund</b> if cancelled more than 48 hours prior to the puja. Cancellations between 24–48 hours incur a nominal 10% fee. You can also reschedule your booking once at zero penalty if requested at least 24 hours in advance.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="samagri">
+          <div class="faq-q">
+            <span>Will the Purohit bring all required Puja Samagri?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a">
+            You have full flexibility! During Step 2, you can choose <i>"Include Complete Puja Samagri Kit"</i> so that our certified Purohit brings pure, shastra-compliant items. Alternatively, you can arrange items yourself using the checklist provided on the puja details page.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="purohit">
+          <div class="faq-q">
+            <span>How are Purohits verified on PurohitMitra?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a">
+            Every scholar on PurohitMitra is thoroughly vetted by our Vedic Advisory Board. We verify their Veda Pathashala certifications, lineage (Gurukula tradition), ritual knowledge, background checks, and minimum 5+ years of verified practical experience.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="payment">
+          <div class="faq-q">
+            <span>What payment methods are supported?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a">
+            We support all major Indian payment methods powered by 256-bit SSL encryption: UPI (Google Pay, PhonePe, Paytm, BHIM, WhatsApp Pay), Credit/Debit Cards (Visa, MasterCard, RuPay), and Net Banking across 50+ major banks.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="general">
+          <div class="faq-q">
+            <span>Do I need an account to browse pujas and purohits?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a">
+            No! You can freely browse all pujas, verified purohit profiles, authentic mantras, and transparent pricing without logging in. You will only be prompted to enter your phone number and OTP when confirming a booking or viewing your private devotee portal.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Assistance Desk Card -->
+    <div>
+      <div class="card" style="border-top:4px solid var(--o);position:sticky;top:80px">
+        <h3 style="font-size:18px;margin-bottom:8px">Need Immediate Assistance?</h3>
+        <p class="mu" style="font-size:13px;line-height:1.5;margin-bottom:14px">
+          Our dedicated spiritual support desk is available to assist you with special muhurthams, custom pujas, or booking questions.
+        </p>
+        <div style="background:#fff8f3;border:1px solid #ffd8a8;border-radius:8px;padding:12px;margin-bottom:14px">
+          <div style="font-weight:700;color:#c92a2a;font-size:13px;margin-bottom:4px">📞 Phone Support</div>
+          <a href="tel:+919849012345" style="font-size:15px;font-weight:700;color:#2c1810;text-decoration:none">+91 98490 12345</a>
+          <small style="display:block;color:var(--mu);margin-top:2px">Available Mon – Sun: 7:00 AM – 10:00 PM IST</small>
+        </div>
+        <div style="background:#fff8f3;border:1px solid #ffd8a8;border-radius:8px;padding:12px;margin-bottom:16px">
+          <div style="font-weight:700;color:#c92a2a;font-size:13px;margin-bottom:4px">✉ Email Helpdesk</div>
+          <a href="mailto:support@purohitmitra.com" style="font-size:13px;font-weight:600;color:var(--o);text-decoration:none">support@purohitmitra.com</a>
+          <small style="display:block;color:var(--mu);margin-top:2px">Guaranteed response within 2 hours</small>
+        </div>
+        <button type="button" class="btn p w" onclick="alert('Connecting to live Vedic support executive...')" style="padding:10px">💬 Live WhatsApp Chat</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Banner -->
+<div class="wrap">
+  <div class="trust five">
+    <div><i>🛡</i><b>Verified Purohits</b>Background verified</div>
+    <div><i>₹</i><b>Transparent Pricing</b>No hidden charges</div>
+    <div><i>📅</i><b>Easy Booking</b>Book in few clicks</div>
+    <div><i>🔒</i><b>Secure &amp; Safe</b>Your privacy is our priority</div>
+    <div><i>🎧</i><b>24/7 Support</b>We are here to help</div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap cols">
+    <div>
+      <a class="logo" href="index.html">
+        <img src="images/logo.svg" alt="PurohitMitra Logo" width="32" height="32" style="vertical-align:middle;margin-right:8px" />
+        <span><b>PurohitMitra</b></span>
+      </a>
+      <p class="mu" style="margin-top:10px;line-height:1.5">Connecting devotees with verified, authentic Vedic Purohits for all your religious pujas, rituals, and ceremonies across India.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pujas.html">Pujas &amp; Rituals</a></li>
+        <li><a href="purohits.html">Verified Purohits</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="help.html">Help &amp; FAQs</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>For Customers</h4>
+      <ul>
+        <li><a href="purohits.html">Search Purohits</a></li>
+        <li><a href="CustomerModule/my-bookings.html">Booking History</a></li>
+        <li><a href="CustomerModule/dashboard.html">Customer Dashboard</a></li>
+        <li><a href="help.html">Help &amp; Support</a></li>
+        <li><a href="javascript:void(0)" onclick="openPolicyModal('cancellation')">Cancellation Policy</a></li>
+        <li><a href="javascript:void(0)" onclick="openPolicyModal('refund')">Refund Policy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>For Purohits</h4>
+      <ul>
+        <li><a href="javascript:void(0)" onclick="openPurohitModal('register')">Register as Purohit</a></li>
+        <li><a href="javascript:void(0)" onclick="openPurohitModal('login')">Purohit Login</a></li>
+        <li><a href="javascript:void(0)" onclick="openPurohitModal('guide')">Purohit Guide</a></li>
+        <li><a href="javascript:void(0)" onclick="openPolicyModal('terms')">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Support &amp; Contact</h4>
+      <ul>
+        <li><a href="tel:+919876543210">📞 +91 98765 43210</a></li>
+        <li><a href="mailto:support@purohitmitra.com">✉ support@purohitmitra.com</a></li>
+        <li><span style="color:var(--mu);display:block;margin-top:4px">🕒 Mon - Sun: 7:00 AM - 10:00 PM</span></li>
+        <li style="margin-top:8px"><a href="CustomerModule/dashboard.html" class="btn s mo" style="display:inline-block;padding:6px 12px;font-size:11px">Devotee Portal →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="copy">
+    <div class="wrap">
+      <span>© 2026 PurohitMitra. All Rights Reserved.</span>
+      <div>
+        <a href="javascript:void(0)" onclick="openPolicyModal('privacy')">Privacy Policy</a> &nbsp;|&nbsp;
+        <a href="javascript:void(0)" onclick="openPolicyModal('terms')">Terms of Service</a> &nbsp;|&nbsp;
+        <a href="javascript:void(0)" onclick="openPolicyModal('cancellation')">Cancellation Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Accordion toggle
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.onclick = () => {
+      const item = q.parentElement;
+      item.classList.toggle('open');
+    };
+  });
+
+  // Category filter
+  function filterFaq(cat) {
+    document.querySelectorAll('.faq-item').forEach(el => {
+      if (cat === 'all' || el.dataset.cat === cat) {
+        el.style.display = 'block';
+        el.classList.add('open');
+      } else {
+        el.style.display = 'none';
+      }
+    });
+  }
+
+  // Live search
+  const searchInput = document.getElementById('faqSearchInput');
+  if (searchInput) {
+    searchInput.oninput = (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.faq-item').forEach(el => {
+        const text = el.textContent.toLowerCase();
+        if (!q || text.includes(q)) {
+          el.style.display = 'block';
+          if (q) el.classList.add('open');
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    };
+  }
+</script>
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

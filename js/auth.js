@@ -846,6 +846,76 @@
       }
     }
 
+    
+    // 2. Update CustomerModule header (header.top)
+    const cmTop = document.querySelector('header.top');
+    if (cmTop) {
+      const spArea = cmTop.querySelector('.sp');
+      if (spArea) {
+        if (loggedIn) {
+          // Ensure user name reflects user
+          const userLink = spArea.querySelector('.user');
+          if (userLink) {
+            userLink.style.display = 'inline-flex';
+            const userNameEl = userLink.querySelector('b');
+            if (userNameEl) userNameEl.textContent = user.name;
+          }
+          const bell = spArea.querySelector('.bell');
+          if (bell) bell.style.display = 'inline-flex';
+
+          // Clean Sign Out button in CustomerModule
+          let signOutBtn = spArea.querySelector('.pm-cm-signout');
+          if (!signOutBtn) {
+            signOutBtn = document.createElement('a');
+            signOutBtn.className = 'pm-cm-signout';
+            signOutBtn.href = 'javascript:void(0)';
+            signOutBtn.onclick = window.pmLogout;
+            signOutBtn.textContent = 'Sign Out';
+            signOutBtn.style.cssText = 'color:#c92a2a;text-decoration:none;font-size:12px;font-weight:600;padding:6px 10px;border-radius:6px;background:#fff3ea;white-space:nowrap;margin-left:4px';
+            spArea.appendChild(signOutBtn);
+          } else {
+            signOutBtn.style.display = 'inline-block';
+          }
+          const authButtons = spArea.querySelector('.pm-cm-auth-btns');
+          if (authButtons) authButtons.style.display = 'none';
+        } else {
+          // NOT logged in on a CustomerModule page
+          const pageName = window.location.pathname.split('/').pop();
+          if (pageName === 'help-support.html') {
+            window.location.href = '../help.html';
+            return;
+          }
+          if (pageName === 'about.html' || pageName === 'how-it-works.html') {
+            window.location.href = '../' + pageName;
+            return;
+          }
+
+          // Hide private elements
+          const bell = spArea.querySelector('.bell');
+          const userLink = spArea.querySelector('.user');
+          const signOutBtn = spArea.querySelector('.pm-cm-signout');
+          if (bell) bell.style.display = 'none';
+          if (userLink) userLink.style.display = 'none';
+          if (signOutBtn) signOutBtn.style.display = 'none';
+
+          // Show Login & Sign Up
+          let authButtons = spArea.querySelector('.pm-cm-auth-btns');
+          if (!authButtons) {
+            authButtons = document.createElement('div');
+            authButtons.className = 'pm-cm-auth-btns';
+            authButtons.style.cssText = 'display:inline-flex;align-items:center;gap:8px';
+            authButtons.innerHTML = `
+              <a class="btn s mo" href="javascript:void(0)" onclick="window.pmOpenAuthModal('signin')" style="padding:6px 14px;font-size:13px;border-radius:6px;background:#fff;border:1px solid #e8590c;color:#e8590c;text-decoration:none;font-weight:600">Login</a>
+              <a class="btn s m" href="javascript:void(0)" onclick="window.pmOpenAuthModal('register-customer')" style="padding:6px 14px;font-size:13px;border-radius:6px;background:#e8590c;color:#fff;text-decoration:none;font-weight:600">Sign Up</a>
+            `;
+            spArea.appendChild(authButtons);
+          } else {
+            authButtons.style.display = 'inline-flex';
+          }
+        }
+      }
+    }
+  
     // 2. Intercept Booking Actions on Public Pages if Not Logged In
     if (!loggedIn) {
       document.querySelectorAll('a, button').forEach(el => {
