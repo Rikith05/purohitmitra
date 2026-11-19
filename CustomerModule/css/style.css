@@ -170,3 +170,226 @@ select.in {
   background: var(--o);
   color: #fff;
 }
+
+
+/* ==========================================================================
+   UNIFIED SINGLE-LINE HEADER NAVIGATION (All Pages)
+   Logo + Title + Subtitle + Home + Pujas ▾ + Purohits + How It Works + About Us + Help
+   Strictly in a SINGLE LINE. Never double-lined.
+   ========================================================================== */
+header, .top {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--bd, #fed7aa) !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04) !important;
+  height: 64px !important;
+  padding: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+header .wrap.nav, .top .wrap.nav, .top-bar-inner, .nav {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  height: 64px !important;
+  max-width: 1400px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  gap: 24px !important;
+  box-sizing: border-box !important;
+}
+
+/* 1. Logo: Diya icon + PurohitMitra + Your Trusted Purohit Companion */
+.logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  text-decoration: none !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+.logo img, .logo svg {
+  width: 35px !important;
+  height: 35px !important;
+  flex-shrink: 0 !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
+}
+.logo span {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+}
+.logo b {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #7a1631 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.2px !important;
+  display: block !important;
+}
+.logo small {
+  display: block !important;
+  font-family: 'DM Sans', -apple-system, sans-serif !important;
+  font-size: 11px !important;
+  color: #78716c !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1px !important;
+  margin-top: 1px !important;
+}
+
+/* 2. Navigation Links: Home, Pujas, Purohits, How It Works, About Us, Help */
+.nav-links, .nav ul, .topnav {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  height: 64px !important;
+}
+
+.nav-links li, .nav ul li, .topnav > * {
+  display: inline-flex !important;
+  align-items: center !important;
+  height: 64px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.nav-links li a, .nav ul li a, .topnav > a, .topnav .has-drop > a {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  height: 64px !important;
+  padding: 0 4px !important;
+  font-family: 'DM Sans', -apple-system, sans-serif !important;
+  font-size: 14.5px !important;
+  font-weight: 600 !important;
+  color: #2c1810 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  position: relative !important;
+  transition: color 0.15s ease !important;
+  border-bottom: 3px solid transparent !important;
+  box-sizing: border-box !important;
+}
+
+.nav-links li a:hover, .nav ul li a:hover, .topnav > a:hover, .topnav .has-drop > a:hover {
+  color: var(--o, #e8590c) !important;
+}
+
+/* Active Page Indicator with underline bar - exactly as in user screenshot */
+.nav-links li a.on, .nav ul li a.on, .topnav > a.on, .topnav .has-drop > a.on {
+  color: var(--o, #e8590c) !important;
+  border-bottom: 3px solid var(--o, #e8590c) !important;
+}
+
+/* Caret ▾ */
+.nav-caret {
+  display: inline-block !important;
+  font-size: 11px !important;
+  margin-left: 2px !important;
+  transition: transform 0.2s ease !important;
+  line-height: 1 !important;
+}
+.has-drop:hover .nav-caret, .has-drop.open .nav-caret {
+  transform: rotate(180deg) !important;
+}
+
+/* Dropdown menu */
+.nav-drop {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 270px;
+  background: #ffffff;
+  border: 1px solid #efe3d6;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  padding: 8px 0;
+  z-index: 99999;
+}
+.has-drop:hover .nav-drop,
+.has-drop:focus-within .nav-drop,
+.has-drop.open .nav-drop {
+  display: block !important;
+}
+.nav-drop a {
+  display: block !important;
+  padding: 9px 16px !important;
+  font-size: 13px !important;
+  color: #2c1810 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  line-height: 1.4 !important;
+  border-bottom: 1px solid #fdf5ef !important;
+  height: auto !important;
+}
+.nav-drop a:last-child {
+  border-bottom: none !important;
+}
+.nav-drop a:hover {
+  background: #fff3ea !important;
+  color: #e8590c !important;
+}
+.nav-drop a b {
+  color: #7a1631 !important;
+  display: block !important;
+  font-size: 13px !important;
+}
+.nav-drop a small {
+  color: #8c827a !important;
+  font-size: 11px !important;
+}
+
+/* 3. Right Actions Area */
+.nav-right, .sp, .pm-header-user-area {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-left: auto !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  height: 64px !important;
+}
+
+/* Prevent any wrapping or breaking in header */
+header *, .top *, .nav *, .topnav * {
+  white-space: nowrap;
+}
+
+@media (max-width: 1080px) {
+  .nav-links, .nav ul, .topnav {
+    gap: 14px !important;
+  }
+  header .wrap.nav, .top .wrap.nav, .nav {
+    gap: 16px !important;
+    padding: 0 14px !important;
+  }
+}
+@media (max-width: 768px) {
+  header, .top {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  header .wrap.nav, .top .wrap.nav, .nav {
+    min-width: max-content !important;
+  }
+}

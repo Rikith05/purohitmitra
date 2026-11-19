@@ -25,108 +25,76 @@
   </head>
   <body>
     <!-- Clean Logged-in Devotee Header with Menu Button -->
-    <header class="top">
-      <div class="top-left">
-        <button class="menu-btn" aria-label="Toggle menu" title="Open Sidebar Menu">
-          <span style="font-size:20px;line-height:1">☰</span>
-          <span class="menu-txt">Menu</span>
-        </button>
+        <header class="top">
+      <div class="wrap nav">
         <a class="logo" href="dashboard.html">
-          <img src="images/logo.svg" alt="PurohitMitra Logo" width="34" height="34" />
+          <img src="images/logo.svg" alt="PurohitMitra Logo" width="34" height="34" style="vertical-align:middle;margin-right:8px" />
           <span><b>PurohitMitra</b><small>Your Trusted Purohit Companion</small></span>
         </a>
-      </div>
-      <nav class="topnav">
-        <a href="../index.html">Home</a>
-        <div class="has-drop"><a href="../pujas.html">Pujas <span class="nav-caret">▾</span></a><div class="nav-drop"><a href="../pujas.html"><b>All Pujas &amp; Rituals</b><br><small style="color:var(--mu)">Explore complete 40+ Vedic ceremonies</small></a><a href="../puja-details.html?puja=Griha%20Pravesh%20Puja">🏡 Griha Pravesh Puja</a><a href="../puja-details.html?puja=Satyanarayana%20Puja">✨ Satyanarayana Vrata</a><a href="../puja-details.html?puja=Ganesh%20Puja">🐘 Ganesh Puja &amp; Aarti</a><a href="../puja-details.html?puja=Navagraha%20Shanti%20Puja">🪐 Navagraha Shanti Havan</a><a href="../puja-details.html?puja=Vivaha%20(Wedding)%20Puja">💍 Vivaha (Wedding) Puja</a></div></div>
-        <a href="../purohits.html">Purohits</a>
-        <a href="../how-it-works.html">How It Works</a>
-        <a href="../about.html">About Us</a>
-        <a href="../help.html">Help</a>
-      </nav>
-      <div class="sp">
-        <span class="loc" title="Current Location">📍 Hyderabad <span class="nav-caret">▾</span></span>
-        <a href="notifications.html" class="bell" aria-label="Notifications">🔔<i>3</i></a>
-        <a href="my-profile.html" class="user">
-          <span class="av"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti"></span>
-          <b>Srinivas Somisetti</b>
-        </a>
+        <nav class="topnav">
+          <a href="../index.html" >Home</a>
+          <div class="has-drop"><a href="../pujas.html" class="on">Pujas <span class="nav-caret">▾</span></a><div class="nav-drop"><a href="../pujas.html"><b>All Pujas &amp; Rituals</b><br><small style="color:var(--mu)">Explore complete 40+ Vedic ceremonies</small></a><a href="../puja-details.html?puja=Griha%20Pravesh%20Puja">🏡 Griha Pravesh Puja</a><a href="../puja-details.html?puja=Satyanarayana%20Puja">✨ Satyanarayana Vrata</a><a href="../puja-details.html?puja=Ganesh%20Puja">🐘 Ganesh Puja &amp; Aarti</a><a href="../puja-details.html?puja=Navagraha%20Shanti%20Puja">🪐 Navagraha Shanti Havan</a><a href="../puja-details.html?puja=Vivaha%20(Wedding)%20Puja">💍 Vivaha (Wedding) Puja</a></div></div>
+          <a href="../purohits.html" >Purohits</a>
+          <a href="../how-it-works.html" >How It Works</a>
+          <a href="../about.html" >About Us</a>
+          <a href="../help.html" >Help</a>
+        </nav>
+        <div class="sp">
+          <button class="menu-btn" aria-label="Toggle menu" title="Open Devotee Portal Menu">
+            <span style="font-size:16px;line-height:1">☰</span>
+            <span class="menu-txt">Menu</span>
+          </button>
+          <span class="loc" title="Current Location">📍 Hyderabad <span class="nav-caret">▾</span></span>
+          <a href="notifications.html" class="bell" aria-label="Notifications">🔔<i>3</i></a>
+          <a href="my-profile.html" class="user">
+            <span class="av"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti"></span>
+            <b>Srinivas Somisetti</b>
+          </a>
+          <a class="pm-cm-signout" href="javascript:void(0)" onclick="window.pmLogout()" style="color:#c92a2a;text-decoration:none;font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;background:#fff3ea;white-space:nowrap" title="Sign Out">Sign Out</a>
+        </div>
       </div>
     </header>
 
     <div class="layout">
       <!-- Slide-Out Sidebar Drawer -->
-        <aside class="filter-panel side">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <h3 style="margin:0;font-size:16px;color:var(--m)">Filter Pujas</h3>
-      <button type="button" id="resetPujaFiltersBtn" class="filter-clear-link" onclick="resetPujaFilters()">Reset All</button>
-    </div>
-
-    <p style="margin:10px 0 6px;font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.5px">Categories</p>
-    <ul class="filter-cat-list" style="list-style:none;padding:0;margin:0 0 14px 0">
-      <li class="on" data-cat="">All Pujas</li>
-      <li data-cat="griha">Griha Pujas</li>
-      <li data-cat="homa">Homa / Havan</li>
-      <li data-cat="vrata">Vratas &amp; Upvas</li>
-      <li data-cat="samskara">Samskara Pujas</li>
-      <li data-cat="shanti">Shanti Pujas</li>
-      <li data-cat="temple">Temple Pujas</li>
-    </ul>
-
-    <div style="border-top:1px solid #f0e6dc;padding-top:14px;margin-bottom:14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <span style="font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.5px">Price Range</span>
-        <span id="priceRangeVal" style="font-size:12px;font-weight:700;color:var(--o)">Up to ₹50,000+</span>
-      </div>
-      <input type="range" id="priceRange" min="1000" max="50000" step="500" value="50000" style="width:100%;accent-color:var(--o);cursor:pointer;margin:4px 0">
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mu)">
-        <span>₹0</span>
-        <span>₹50,000+</span>
-      </div>
-    </div>
-
-    <div style="border-top:1px solid #f0e6dc;padding-top:14px;margin-bottom:14px">
-      <p style="margin:0 0 8px 0;font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.5px">Duration</p>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <label class="filter-checkbox-label">
-          <input type="checkbox" name="duration" value="under-1">
-          <span>Under 1 Hour</span>
-        </label>
-        <label class="filter-checkbox-label">
-          <input type="checkbox" name="duration" value="1-2">
-          <span>1 - 2 Hours</span>
-        </label>
-        <label class="filter-checkbox-label">
-          <input type="checkbox" name="duration" value="2-4">
-          <span>2 - 4 Hours</span>
-        </label>
-        <label class="filter-checkbox-label">
-          <input type="checkbox" name="duration" value="4-plus">
-          <span>4+ Hours</span>
-        </label>
-      </div>
-    </div>
-
-    <div style="border-top:1px solid #f0e6dc;padding-top:14px;margin-bottom:14px">
-      <p style="margin:0 0 8px 0;font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.5px">Conducted At</p>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <label class="filter-checkbox-label">
-          <input type="checkbox" name="location" value="home">
-          <span>At Home</span>
-        </label>
-        <label class="filter-checkbox-label">
-          <input type="checkbox" name="location" value="temple">
-          <span>At Temple</span>
-        </label>
-        <label class="filter-checkbox-label">
-          <input type="checkbox" name="location" value="online">
-          <span>Online Puja</span>
-        </label>
-      </div>
-    </div>
-
-    <button type="button" class="btn w" onclick="resetPujaFilters()" style="width:100%;padding:9px;font-size:13px;border-radius:8px;margin-top:6px">Clear Filters</button>
-  </aside>
+        <aside class="side">
+        <div class="side-head">
+          <a class="logo" href="dashboard.html" style="gap:8px">
+            <img src="images/logo.svg" alt="PurohitMitra" width="30" height="30" />
+            <span><b>PurohitMitra</b></span>
+          </a>
+          <button class="side-close" aria-label="Close menu" title="Close Menu">✕</button>
+        </div>
+        <div class="side-user">
+          <div class="av" style="overflow:hidden;width:40px;height:40px;border-radius:50%;padding:0;flex-shrink:0"><img src="images/avatar_user.jpg" alt="Srinivas Somisetti" style="width:100%;height:100%;object-fit:cover"></div>
+          <div>
+            <b style="display:block;font-size:14px;line-height:1.2">Srinivas Somisetti</b>
+            <small style="color:var(--mu);font-size:12px">📍 Hyderabad · Devotee</small>
+          </div>
+        </div>
+        <nav>
+          <div class="side-section-label">Devotee Portal</div>
+          <a href="dashboard.html" data-page="dashboard"><span>🏠</span>Dashboard</a>
+          <a href="my-bookings.html" data-page="my-bookings"><span>📅</span>My Bookings</a>
+          <a href="payments.html" data-page="payments"><span>💳</span>Payments</a>
+          <a href="offers.html" data-page="offers"><span>🏷️</span>Offers</a>
+          <a href="favorites.html" data-page="favorites"><span>♡</span>Favorites</a>
+          <a href="notifications.html" data-page="notifications"><span>🔔</span>Notifications <em>3</em></a>
+          <a href="my-profile.html" data-page="my-profile"><span>👤</span>My Profile</a>
+          <a href="saved-addresses.html" data-page="saved-addresses"><span>📍</span>Saved Addresses</a>
+          <a href="my-reviews.html" data-page="my-reviews"><span>⭐</span>My Reviews</a>
+          <a href="messages.html" data-page="messages"><span>✉️</span>Messages</a>
+          <a href="help-support.html" data-page="help-support"><span>❓</span>Help & Support</a>
+          <a href="settings.html" data-page="settings"><span>⚙️</span>Settings</a>
+          <div class="side-section-label" style="margin-top:14px">Explore Services</div>
+          <a href="pujas.html" data-page="pujas" class="active"><span>🪔</span>Pujas &amp; Rituals</a>
+          <a href="purohits.html" data-page="purohits"><span>🧔</span>Verified Purohits</a>
+          <a href="how-it-works.html" data-page="how-it-works"><span>ℹ️</span>How It Works</a>
+          <a href="about.html" data-page="about"><span>📖</span>About Us</a>
+          <div style="border-top:1px solid var(--bd);margin:10px 0"></div>
+          <a href="../index.html" id="logout"><span>⎋</span>Logout</a>
+        </nav>
+      </aside>
 
       <!-- Main Page Content -->
       <main class="main">
@@ -265,9 +233,13 @@
         </div>
         <div class="wrap" style="display:grid;grid-template-columns:230px 1fr;gap:20px">
           <aside class="filter-panel">
-            <h3>Filter Pujas</h3>
-            <p class="mu" style="margin:10px 0 4px"><b>Categories</b></p>
-            <ul>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+              <h3 style="margin:0;font-size:16px;color:var(--m)">Filter Pujas</h3>
+              <button type="button" id="resetPujaFiltersBtn" class="filter-clear-link" onclick="resetPujaFilters()">Reset All</button>
+            </div>
+
+            <p style="margin:10px 0 6px;font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.5px">Categories</p>
+            <ul class="filter-cat-list" style="list-style:none;padding:0;margin:0 0 14px 0">
               <li class="on" data-cat="">All Pujas</li>
               <li data-cat="griha">Griha Pujas</li>
               <li data-cat="homa">Homa / Havan</li>
@@ -276,23 +248,60 @@
               <li data-cat="shanti">Shanti Pujas</li>
               <li data-cat="temple">Temple Pujas</li>
             </ul>
-            <p class="mu" style="margin:12px 0 4px"><b>Price Range</b></p>
-            <div class="bar"><span style="background:var(--o)"></span></div>
-            <p class="mu">₹0 — ₹50,000+</p>
-            <p style="margin-top:12px"><b>Duration</b></p>
-            <ul>
-              <li>☐ Under 1 Hour</li>
-              <li>☐ 1 - 2 Hours</li>
-              <li>☐ 2 - 4 Hours</li>
-              <li>☐ 4+ Hours</li>
-            </ul>
-            <p><b>Conducted At</b></p>
-            <ul>
-              <li>☐ At Home</li>
-              <li>☐ At Temple</li>
-              <li>☐ Online Puja</li>
-            </ul>
-            <button type="button" class="btn w" onclick="resetPujaFilters()" style="margin:10px 0">Clear Filters</button>
+
+            <div style="border-top:1px solid #f0e6dc;padding-top:14px;margin-bottom:14px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <span style="font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.5px">Price Range</span>
+                <span id="priceRangeVal" style="font-size:12px;font-weight:700;color:var(--o)">Up to ₹50,000+</span>
+              </div>
+              <input type="range" id="priceRange" min="1000" max="50000" step="500" value="50000" style="width:100%;accent-color:var(--o);cursor:pointer;margin:4px 0">
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mu)">
+                <span>₹0</span>
+                <span>₹50,000+</span>
+              </div>
+            </div>
+
+            <div style="border-top:1px solid #f0e6dc;padding-top:14px;margin-bottom:14px">
+              <p style="margin:0 0 8px 0;font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.5px">Duration</p>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="duration" value="under-1">
+                  <span>Under 1 Hour</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="duration" value="1-2">
+                  <span>1 - 2 Hours</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="duration" value="2-4">
+                  <span>2 - 4 Hours</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="duration" value="4-plus">
+                  <span>4+ Hours</span>
+                </label>
+              </div>
+            </div>
+
+            <div style="border-top:1px solid #f0e6dc;padding-top:14px;margin-bottom:14px">
+              <p style="margin:0 0 8px 0;font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.5px">Conducted At</p>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="location" value="home">
+                  <span>At Home</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="location" value="temple">
+                  <span>At Temple</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="location" value="online">
+                  <span>Online Puja</span>
+                </label>
+              </div>
+            </div>
+
+            <button type="button" class="btn w" onclick="resetPujaFilters()" style="width:100%;padding:9px;font-size:13px;border-radius:8px;margin-top:6px">Clear Filters</button>
           </aside>
           <div>
             <div class="head">

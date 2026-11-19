@@ -792,15 +792,9 @@
 
       if (loggedIn) {
         // User is logged in: show Menu button, User pill, bell icon
-        let menuBtn = topNav.querySelector('.pm-menu-btn');
-        if (!menuBtn) {
-          menuBtn = document.createElement('button');
-          menuBtn.className = 'pm-menu-btn';
-          menuBtn.innerHTML = `☰ <span>Menu</span>`;
-          menuBtn.title = 'Open Devotee Portal Drawer';
-          menuBtn.onclick = window.pmToggleDrawer;
-          topNav.insertBefore(menuBtn, topNav.firstChild);
-        }
+        // Ensure menu button is never placed before logo
+        let oldMenuBtn = topNav.querySelector(':scope > .pm-menu-btn');
+        if (oldMenuBtn) oldMenuBtn.remove();
 
         // Hide or replace Login & Sign Up
         if (loginBtn) loginBtn.style.display = 'none';
@@ -811,8 +805,11 @@
         if (!userArea) {
           userArea = document.createElement('div');
           userArea.className = 'pm-header-user-area';
-          userArea.style.cssText = 'display:inline-flex;align-items:center;gap:12px;margin-left:auto';
+          userArea.style.cssText = 'display:inline-flex;align-items:center;gap:12px;margin-left:auto;white-space:nowrap;flex-shrink:0';
           userArea.innerHTML = `
+            <button type="button" class="pm-menu-btn menu-btn" title="Open Devotee Portal Drawer" onclick="window.pmToggleDrawer()" style="padding:5px 10px;font-size:12px;border-radius:20px;border:1px solid #ffd8a8;background:#fff8f3;color:#e8590c;font-weight:600;display:inline-flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap">
+              <span>☰</span> <span>Menu</span>
+            </button>
             <a href="${rootPrefix}CustomerModule/notifications.html" class="pm-bell-link" title="Notifications">
               🔔<i>3</i>
             </a>
@@ -820,7 +817,7 @@
               <span class="av"><img src="${rootPrefix}images/avatar_user.jpg" alt="${user.name}"></span>
               <span>${user.name}</span>
             </a>
-            <a href="javascript:void(0)" onclick="window.pmLogout()" style="color:#c92a2a;text-decoration:none;font-size:12px;font-weight:600;padding:6px 8px;border-radius:6px;background:#fff3ea" title="Sign Out">Sign Out</a>
+            <a href="javascript:void(0)" onclick="window.pmLogout()" style="color:#c92a2a;text-decoration:none;font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;background:#fff3ea;white-space:nowrap" title="Sign Out">Sign Out</a>
           `;
           topNav.appendChild(userArea);
         } else {
