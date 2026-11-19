@@ -205,3 +205,79 @@ select.in {
   height: 36px;
   object-fit: contain;
 }
+
+
+/* ==========================================================================
+   Interactive Calendar & Custom Time Slot Styles
+   ========================================================================== */
+.cal-header-custom {
+  margin-bottom: 8px;
+}
+.cal-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.cal-nav-btn:hover {
+  background: #e8590c !important;
+  color: #fff !important;
+  transform: scale(1.08);
+}
+.cal .day-cell {
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-block;
+  user-select: none;
+}
+.cal .day-cell:hover {
+  background: var(--ol, #fff3ea);
+  color: var(--o, #e8590c);
+  font-weight: 700;
+  border-radius: 6px;
+}
+.cal .day-cell.d {
+  background: var(--o, #e8590c) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 6px rgba(232, 89, 12, 0.4);
+}
+.cal .day-cell:focus {
+  outline: 2px solid var(--o, #e8590c);
+  outline-offset: 1px;
+}
+.slot {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.slot:hover {
+  border-color: var(--o, #e8590c);
+  background: #fffaf5;
+  transform: translateX(2px);
+}
+.slot.on {
+  border-color: var(--o, #e8590c) !important;
+  background: var(--ol, #fff3ea) !important;
+  color: var(--o, #e8590c) !important;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(232, 89, 12, 0.15);
+}
+.muhurtham-chip {
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+.muhurtham-chip:hover {
+  border-color: #e8590c !important;
+  background: #fff3ea !important;
+  color: #e8590c !important;
+}
+#customTimeBox {
+  animation: pmFadeSlideDown 0.25s ease-out;
+}
+@keyframes pmFadeSlideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
