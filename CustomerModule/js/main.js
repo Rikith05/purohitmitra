@@ -281,7 +281,7 @@ function handleHomeSearch() {
 }
 
 
-// ===== 2. Puja Interactive Search, Filter & Dynamic Pagination =====
+// ===== 2. Puja Interactive Search, Multi-Filter & Dynamic Pagination =====
 
 function initPujaSearchAndPagination() {
   const grid = document.querySelector('.grid.g3');
@@ -289,7 +289,12 @@ function initPujaSearchAndPagination() {
   const catSelect = document.getElementById('heroPujaCat');
   const countEl = document.querySelector('.head .mu:first-child');
   const paginationContainer = document.getElementById('pujaPagination');
-  const sideCats = document.querySelectorAll('.filter-panel li, aside.side ul:first-of-type li');
+  const sideCats = document.querySelectorAll('.filter-cat-list li, .filter-panel li[data-cat], aside.side li[data-cat], aside.side ul:first-of-type li');
+  const priceRange = document.getElementById('priceRange');
+  const priceRangeVal = document.getElementById('priceRangeVal');
+  const durationInputs = document.querySelectorAll('input[name="duration"]');
+  const locationInputs = document.querySelectorAll('input[name="location"]');
+  const sortSelect = document.getElementById('sortPujas');
   
   if (!grid) return;
   const cards = Array.from(grid.querySelectorAll('.card.pc'));
@@ -299,6 +304,9 @@ function initPujaSearchAndPagination() {
   let currentPage = 1;
   let activeCategory = '';
   let activeQuery = '';
+  let activeMaxPrice = priceRange ? parseInt(priceRange.value, 10) : 50000;
+  let activeDurations = [];
+  let activeLocations = [];
 
   // Read URL parameters if present
   const urlParams = new URLSearchParams(window.location.search);
@@ -309,18 +317,54 @@ function initPujaSearchAndPagination() {
   if (urlParams.has('cat')) {
     activeCategory = urlParams.get('cat').toLowerCase();
     if (catSelect) catSelect.value = activeCategory;
+    sideCats.forEach(el => {
+      const cat = (el.dataset.cat || '').toLowerCase();
+      el.classList.toggle('on', cat === activeCategory || (!activeCategory && cat === ''));
+    });
+  }
+
+  function parseCardPrice(card) {
+    if (card.dataset.price) {
+      const p = parseInt(card.dataset.price, 10);
+      if (!isNaN(p)) return p;
+    }
+    const prEl = card.querySelector('.pr');
+    if (prEl) {
+      const num = prEl.innerText.replace(/[^\d]/g, '');
+      const p = parseInt(num, 10);
+      if (!isNaN(p)) return p;
+    }
+    return 0;
   }
 
   function getMatchingCards() {
-    return cards.filter(card => {
+    let result = cards.filter(card => {
       const title = (card.querySelector('h3') || {}).innerText?.toLowerCase() || '';
       const desc = (card.querySelector('p') || {}).innerText?.toLowerCase() || '';
       const cardCat = (card.dataset.category || '').toLowerCase();
+      const cardPrice = parseCardPrice(card);
+      const cardDurations = (card.dataset.duration || '').toLowerCase().split(/\s+/).filter(Boolean);
+      const cardLocations = (card.dataset.location || '').toLowerCase().split(/\s+/).filter(Boolean);
       
       const matchesQuery = !activeQuery || title.includes(activeQuery) || desc.includes(activeQuery);
       const matchesCat = !activeCategory || cardCat.includes(activeCategory);
-      return matchesQuery && matchesCat;
+      const matchesPrice = (cardPrice === 0) || (cardPrice <= activeMaxPrice);
+      const matchesDuration = (activeDurations.length === 0) || 
+        activeDurations.some(d => cardDurations.includes(d));
+      const matchesLocation = (activeLocations.length === 0) || 
+        activeLocations.some(l => cardLocations.includes(l));
+
+      return matchesQuery && matchesCat && matchesPrice && matchesDuration && matchesLocation;
     });
+
+    // Sorting
+    const sortVal = sortSelect ? sortSelect.value : 'pop';
+    if (sortVal === 'price-asc') {
+      result.sort((a, b) => parseCardPrice(a) - parseCardPrice(b));
+    } else if (sortVal === 'price-desc') {
+      result.sort((a, b) => parseCardPrice(b) - parseCardPrice(a));
+    }
+    return result;
   }
 
   function renderPage() {
@@ -333,11 +377,14 @@ function initPujaSearchAndPagination() {
     // Hide all cards first
     cards.forEach(c => c.style.display = 'none');
 
-    // Show slice for current page
+    // Show slice for current page and maintain sorted order in DOM
     const startIdx = (currentPage - 1) * pageSize;
     const endIdx = Math.min(startIdx + pageSize, totalMatching);
     const visibleCards = matching.slice(startIdx, endIdx);
-    visibleCards.forEach(c => c.style.display = 'block');
+    visibleCards.forEach(c => {
+      c.style.display = 'block';
+      grid.appendChild(c);
+    });
 
     // Update Showing text
     if (countEl) {
@@ -357,8 +404,8 @@ function initPujaSearchAndPagination() {
         noMatchEl.style.cssText = 'text-align:center;padding:40px 20px;grid-column:1/-1;color:var(--mu);background:#fff;border-radius:12px;border:1px dashed var(--bd)';
         noMatchEl.innerHTML = `
           <h3 style="color:var(--m);font-size:18px;margin-bottom:8px">No Pujas Found</h3>
-          <p style="font-size:13px;margin-bottom:14px">We couldn't find any pujas matching your criteria.</p>
-          <button type="button" class="btn p s" onclick="resetPujaFilters()">Show All Pujas</button>
+          <p style="font-size:13px;margin-bottom:14px">We couldn't find any pujas matching your selected criteria.</p>
+          <button type="button" class="btn p s" onclick="resetPujaFilters()">Reset All Filters</button>
         `;
         grid.appendChild(noMatchEl);
       }
@@ -371,7 +418,7 @@ function initPujaSearchAndPagination() {
     if (paginationContainer) {
       if (totalPages <= 1) {
         paginationContainer.style.display = totalMatching > 0 ? 'block' : 'none';
-        paginationContainer.innerHTML = `<span class="btn s p">1</span>`;
+        paginationContainer.innerHTML = totalMatching > 0 ? `<span class="btn s p">1</span>` : '';
       } else {
         paginationContainer.style.display = 'block';
         let html = '';
@@ -395,10 +442,24 @@ function initPujaSearchAndPagination() {
   window.resetPujaFilters = function() {
     activeQuery = '';
     activeCategory = '';
+    activeMaxPrice = 50000;
+    activeDurations = [];
+    activeLocations = [];
+
     if (searchInput) searchInput.value = '';
     if (catSelect) catSelect.value = '';
+    if (priceRange) priceRange.value = 50000;
+    if (priceRangeVal) priceRangeVal.textContent = 'Up to ₹50,000+';
+
+    durationInputs.forEach(chk => { chk.checked = false; });
+    locationInputs.forEach(chk => { chk.checked = false; });
+
     sideCats.forEach(el => el.classList.remove('on'));
-    if (sideCats[0]) sideCats[0].classList.add('on');
+    const defaultCat = document.querySelector('.filter-cat-list li[data-cat=""], .side li[data-cat=""], .filter-panel li[data-cat=""]');
+    if (defaultCat) defaultCat.classList.add('on');
+
+    if (sortSelect) sortSelect.value = 'pop';
+
     currentPage = 1;
     renderPage();
   };
@@ -415,7 +476,7 @@ function initPujaSearchAndPagination() {
     catSelect.addEventListener('change', function(e) {
       activeCategory = e.target.value.toLowerCase();
       sideCats.forEach(el => {
-        const cat = el.dataset.cat || '';
+        const cat = (el.dataset.cat || '').toLowerCase();
         el.classList.toggle('on', cat === activeCategory || (!activeCategory && cat === ''));
       });
       currentPage = 1;
@@ -435,6 +496,44 @@ function initPujaSearchAndPagination() {
       renderPage();
     });
   });
+
+  // Price range slider
+  if (priceRange) {
+    priceRange.addEventListener('input', function() {
+      activeMaxPrice = parseInt(this.value, 10);
+      if (priceRangeVal) {
+        priceRangeVal.textContent = activeMaxPrice >= 50000 ? 'Up to ₹50,000+' : `Up to ₹${activeMaxPrice.toLocaleString('en-IN')}`;
+      }
+      currentPage = 1;
+      renderPage();
+    });
+  }
+
+  // Duration checkboxes
+  durationInputs.forEach(chk => {
+    chk.addEventListener('change', function() {
+      activeDurations = Array.from(durationInputs).filter(c => c.checked).map(c => c.value);
+      currentPage = 1;
+      renderPage();
+    });
+  });
+
+  // Location checkboxes
+  locationInputs.forEach(chk => {
+    chk.addEventListener('change', function() {
+      activeLocations = Array.from(locationInputs).filter(c => c.checked).map(c => c.value);
+      currentPage = 1;
+      renderPage();
+    });
+  });
+
+  // Sort dropdown
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function() {
+      currentPage = 1;
+      renderPage();
+    });
+  }
 
   renderPage();
 }
@@ -679,7 +778,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 6. Sort Pujas handler
   const sortPujas = document.getElementById('sortPujas');
-  if (sortPujas) {
+  if (sortPujas && typeof window.setPujaPage !== 'function') {
     sortPujas.addEventListener('change', function() {
       const val = this.value;
       const grid = document.querySelector('.grid.g3');
