@@ -170,3 +170,38 @@ select.in {
   background: var(--o);
   color: #fff;
 }
+
+
+/* ===== Perfect Image Fitting & Proportions (Pages 1 to 27 Reference) ===== */
+.ph {
+  position: relative;
+  overflow: hidden;
+  background: #fdf5ed;
+}
+.ph img, .thumb img, .thumb-img, .card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: inherit;
+}
+.prc .ph img, .purohit-card .ph img {
+  object-position: top center;
+}
+.pc .ph {
+  height: 130px;
+  border-radius: 10px 10px 0 0;
+}
+.prc .ph {
+  height: 160px;
+  border-radius: 10px 10px 0 0;
+}
+.circ i {
+  overflow: hidden;
+}
+.circ i img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}

@@ -8,10 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Helper for rendering clear, sharp avatar/thumb images with emoji fallback
   const renderThumb = (x, isRound = false) => {
-    if (x && x.img) {
-      return `<img src="${x.img}" alt="${esc(x.n || '')}" class="thumb-img" onerror="this.onerror=null;this.replaceWith('${x.e || (isRound ? '🧔' : '🪔')}')">`;
+    if (!x) return isRound ? '🧔' : '🪔';
+    const fallback = x.icon || x.e || (isRound ? '🧔' : '🪔');
+    const name = esc(x.name || x.n || '');
+    const img = x.image || x.img;
+    if (img) {
+      return `<img src="${img}" alt="${name}" class="thumb-img" onerror="this.style.display='none';if(this.nextElementSibling){this.nextElementSibling.style.display='inline'}"><span style="display:none">${fallback}</span>`;
     }
-    return x && x.e ? x.e : (isRound ? '🧔' : '🪔');
+    return fallback;
   };
 
   // ----- Page: favorites -----
@@ -31,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ? r
             .map((x) =>
               tab === "purohits"
-                ? `<div class="fc"><div class="thumb round">${renderThumb(x, true)}</div><div><h3>${x.n}</h3><span class="star">★</span> ${x.r} (${x.rv} Reviews)<p>${x.exp} Years Experience<br>Languages: ${x.lang}<br>📍 ${x.km} km away</p><div class="acts"><button class="btn-o" data-v="${x.n}">View Profile</button><button class="btn" data-b="${x.n}">Book Now</button></div></div><button class="heart" data-r="${x.n}" aria-label="Remove">♥</button></div>`
-                : `<div class="fc"><div class="thumb">${renderThumb(x, false)}</div><div><h3>${x.n}</h3><span class="star">★</span> ${x.r} (${x.bk} Bookings)<p>${x.d}</p><span class="badge b-warn">Starts from ${inr(x.p)}</span><div class="acts"><button class="btn" data-b="${x.n}">Book Now</button></div></div><button class="heart" data-r="${x.n}" aria-label="Remove">♥</button></div>`,
+                ? `<div class="fc"><div class="thumb round">${renderThumb(x, true)}</div><div><h3>${x.name || x.n || 'Purohit'}</h3><span class="star">★</span> ${x.rating || x.r || 4.8} (${x.reviews || x.rv || 100} Reviews)<p>${x.experience || x.exp || 10} Years Experience<br>Languages: ${x.languages || x.lang || 'Telugu, Sanskrit'}<br>📍 ${x.distance || x.km || 2.5} km away</p><div class="acts"><button class="btn-o" data-v="${x.name || x.n}">View Profile</button><button class="btn" data-b="${x.name || x.n}">Book Now</button></div></div><button class="heart" data-r="${x.name || x.n}" aria-label="Remove">♥</button></div>`
+                : `<div class="fc"><div class="thumb">${renderThumb(x, false)}</div><div><h3>${x.name || x.n || 'Puja'}</h3><span class="star">★</span> ${x.rating || x.r || 4.8} (${x.bookings || x.bk || 100} Bookings)<p>${x.desc || x.d || ''}</p><span class="badge b-warn">Starts from ${inr(x.price || x.p || 1500)}</span><div class="acts"><button class="btn" data-b="${x.name || x.n}">Book Now</button></div></div><button class="heart" data-r="${x.name || x.n}" aria-label="Remove">♥</button></div>`,
             )
             .join("")
         : '<p class="empty">No favorites found.</p>';
@@ -98,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
           r
             .map(
               (n) =>
-                `<div class="ni ${n.u ? "unread" : ""}" data-i="${N.indexOf(n)}"><div class="ic">${n.i || '🔔'}</div><div><h3>${n.t || ''}</h3><p class="muted">${n.m || ''}</p></div><small>${n.w || ''}</small>${n.u ? '<span class="dot"></span>' : ""}</div>`,
+                `<div class="ni ${(n.u || n.unread) ? "unread" : ""}" data-i="${N.indexOf(n)}"><div class="ic">${n.icon || n.i || '🔔'}</div><div><h3>${n.title || n.t || 'Notification'}</h3><p class="muted">${n.message || n.m || ''}</p></div><small>${n.time || n.when || n.w || 'Just now'}</small>${(n.u || n.unread) ? '<span class="dot"></span>' : ""}</div>`,
             )
             .join("") || '<p class="empty">No notifications.</p>';
       }
@@ -208,12 +212,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const list = () => {
       const cList = $("#cList");
       if (!cList) return;
-      cList.innerHTML = C.filter((c) => c.n.toLowerCase().includes(q))
+      cList.innerHTML = C.filter((c) => (c.name || c.n || '').toLowerCase().includes(q))
         .map((c) => {
           const i = C.indexOf(c);
-          const lastMsg = c.m && c.m.length ? c.m[c.m.length - 1] : ["in", "", ""];
-          const lastText = Array.isArray(lastMsg) ? lastMsg[1] : (lastMsg.t || lastMsg.text || "");
-          return `<div class="cv ${i === cur ? "active" : ""}" data-i="${i}"><div class="thumb round">${renderThumb(c, true)}</div><div><b>${c.n}</b><p>${esc(lastText)}</p></div><div class="tr"><small>${c.t || ''}</small>${c.u ? `<em>${c.u}</em>` : ""}</div></div>`;
+          const messages = c.messages || c.m || [];
+          const lastMsg = messages.length ? messages[messages.length - 1] : ["in", "", ""];
+          const lastText = Array.isArray(lastMsg) ? lastMsg[1] : (lastMsg.text || lastMsg.t || lastMsg.message || "");
+          const lastTime = Array.isArray(lastMsg) ? lastMsg[2] : (lastMsg.time || lastMsg.t || c.time || c.t || "");
+          const unreadCount = c.unread !== undefined ? c.unread : (c.u !== undefined ? c.u : 0);
+          return `<div class="cv ${i === cur ? "active" : ""}" data-i="${i}"><div class="thumb round">${renderThumb(c, true)}</div><div><b>${c.name || c.n}</b><p>${esc(lastText)}</p></div><div class="tr"><small>${lastTime}</small>${unreadCount ? `<em>${unreadCount}</em>` : ""}</div></div>`;
         })
         .join("");
     };
@@ -228,10 +235,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       const msgs = $("#msgs");
       if (msgs) {
-        msgs.innerHTML = (c.m || [])
+        const messageList = c.messages || c.m || [];
+        msgs.innerHTML = messageList
           .map((m) => {
-            const dir = Array.isArray(m) ? m[0] : (m.w || m.dir || "in");
-            const text = Array.isArray(m) ? m[1] : (m.t || m.text || "");
+            const dir = Array.isArray(m) ? m[0] : (m.dir || m.w || "in");
+            const text = Array.isArray(m) ? m[1] : (m.text || m.t || m.message || "");
             const time = Array.isArray(m) ? m[2] : (m.time || "");
             return `<div class="m ${dir}">${esc(text)}<small>${esc(time)}${dir === "out" ? " ✓✓" : ""}</small></div>`;
           })

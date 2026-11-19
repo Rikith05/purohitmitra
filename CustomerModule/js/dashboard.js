@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .slice(0, 3)
       .map(
         (n) =>
-          `<div class="nt"><span>${n.i || '🔔'}</span><div><b>${n.t || ''}</b><br><small>${n.w || ''}</small></div></div>`,
+          `<div class="nt"><span>${n.icon || n.i || '🔔'}</span><div><b>${n.title || n.t || 'Notification'}</b><br><small>${n.time || n.when || n.w || 'Just now'}</small></div></div>`,
       )
       .join("");
   }

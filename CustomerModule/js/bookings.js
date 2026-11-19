@@ -38,10 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
       list.innerHTML = rows.length
         ? rows
             .map(
-              (b) => `<div class="bkc"><div class="thumb" style="overflow:hidden">${b.img ? `<img src="${b.img}" alt="${b.puja}" style="width:100%;height:100%;object-fit:cover">` : b.icon}</div>
-    <div><h3>${b.puja}</h3><span class="muted">${b.purohit}</span><br>📅 ${b.date} · 🕒 ${b.time}<br>📍 ${b.addr}</div>
-    <div><small>Booking ID</small><b>${b.id}</b><small>Amount</small><b>${inr(b.amt)}</b><small>Payment Status</small>${badge(b.pay)}</div>
-    <div>Status ${badge(b.status)}${b.days ? `<br>📅 ${b.days} days to go` : ""}<div class="acts"><a class="btn-o" href="booking-details.html?id=${b.id}">View Details</a>${b.pay === "Paid" || b.tab !== "upcoming" ? (b.tab === "upcoming" ? '<a class="btn" href="messages.html">Chat with Purohit</a>' : "") : `<button class="btn" data-a="pay" data-id="${b.id}">Pay Now</button>`}</div></div>
+              (b) => `<div class="bkc"><div class="thumb" style="overflow:hidden">${(b.image || b.img) ? `<img src="${b.image || b.img}" alt="${b.puja || b.name || ''}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentElement.innerHTML='${b.icon || '🪔'}'">` : (b.icon || '🪔')}</div>
+    <div><h3>${b.puja || b.name || 'Puja'}</h3><span class="muted">${b.purohit || 'Verified Purohit'}</span><br>📅 ${b.date || ''} · 🕒 ${b.time || ''}<br>📍 ${b.addr || ''}</div>
+    <div><small>Booking ID</small><b>${b.id || ''}</b><small>Amount</small><b>${inr(b.amt || 0)}</b><small>Payment Status</small>${badge(b.pay || 'Pending')}</div>
+    <div>Status ${badge(b.status || 'Confirmed')}${b.days ? `<br>📅 ${b.days} days to go` : ""}<div class="acts"><a class="btn-o" href="booking-details.html?id=${b.id || ''}">View Details</a>${b.pay === "Paid" || b.tab !== "upcoming" ? (b.tab === "upcoming" ? '<a class="btn" href="messages.html">Chat with Purohit</a>' : "") : `<button class="btn" data-a="pay" data-id="${b.id}">Pay Now</button>`}</div></div>
     ${b.tab === "upcoming" ? `<div class="menu"><button aria-label="More">⋮</button><ul><li data-a="resch" data-id="${b.id}">Reschedule</li><li data-a="cancel" data-id="${b.id}" class="red">Cancel Booking</li><li data-a="inv" data-id="${b.id}">Download Invoice</li></ul></div>` : ""}</div>`,
             )
             .join("")

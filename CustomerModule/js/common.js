@@ -577,6 +577,193 @@ const PM = {
   ],
 };
 
+
+// ============================================================================
+// PM Data Dual-Key Normalizer & Auto-Enrichment
+// Guarantees zero "undefined" errors across any template or renderer
+// ============================================================================
+(function normalizePMData(pm) {
+  if (!pm) return;
+  if (typeof window !== "undefined") window.PM = pm;
+
+  if (Array.isArray(pm.notifs)) {
+    pm.notifs.forEach(n => {
+      n.icon = n.icon || n.i || "🔔";
+      n.i = n.i || n.icon;
+      n.title = n.title || n.t || "Notification";
+      n.t = n.t || n.title;
+      n.message = n.message || n.m || "";
+      n.m = n.m || n.message;
+      n.time = n.time || n.when || n.w || "";
+      n.w = n.w || n.time;
+      n.when = n.when || n.time;
+      n.category = n.category || n.c || "system";
+      n.c = n.c || n.category;
+      n.unread = n.unread !== undefined ? n.unread : (n.u !== undefined ? n.u : 0);
+      n.u = n.u !== undefined ? n.u : n.unread;
+    });
+  }
+
+  if (Array.isArray(pm.addresses)) {
+    pm.addresses.forEach(a => {
+      a.icon = a.icon || a.i || "🏠";
+      a.i = a.i || a.icon;
+      a.name = a.name || a.label || a.title || "Address";
+      a.label = a.label || a.name;
+      a.title = a.title || a.name;
+      a.address = a.address || a.line || a.fullAddress || "";
+      a.line = a.line || a.address;
+      a.fullAddress = a.fullAddress || a.address;
+      a.phone = a.phone || a.ph || "+91 98490 12345";
+      a.ph = a.ph || a.phone;
+      a.type = a.type || "Home";
+      a.isDefault = a.isDefault !== undefined ? a.isDefault : Boolean(a.def);
+      a.def = a.def !== undefined ? a.def : a.isDefault;
+    });
+  }
+
+  if (Array.isArray(pm.offers)) {
+    // Add additional festive/promo offers if not present
+    const codes = pm.offers.map(o => o.code);
+    if (!codes.includes("FESTIVE20")) {
+      pm.offers.unshift({
+        t: "20% OFF on Festive Pujas & Homams",
+        d: "Celebrate festivals with 20% off on all Homam and Shanti rituals.",
+        code: "FESTIVE20",
+        till: "30 Jun 2025",
+        min: 1500,
+        s: "active",
+        i: "🎁"
+      });
+    }
+    if (!codes.includes("FIRSTPUJA")) {
+      pm.offers.push({
+        t: "First Puja Booking Discount",
+        d: "Flat ₹300 OFF on your First Puja Booking.",
+        code: "FIRSTPUJA",
+        till: "15 Jun 2025",
+        min: 1200,
+        s: "active",
+        i: "🪔"
+      });
+    }
+    if (!codes.includes("GRIHAPRAVESH")) {
+      pm.offers.push({
+        t: "Griha Pravesh Package Special",
+        d: "Flat ₹500 OFF on Griha Pravesh Packages.",
+        code: "GRIHAPRAVESH",
+        till: "31 Jul 2025",
+        min: 2500,
+        s: "active",
+        i: "🏡"
+      });
+    }
+
+    pm.offers.forEach(o => {
+      o.icon = o.icon || o.i || "🎁";
+      o.i = o.i || o.icon;
+      o.title = o.title || o.t || "Special Offer";
+      o.t = o.t || o.title;
+      o.name = o.name || o.title;
+      o.desc = o.desc || o.description || o.d || "";
+      o.d = o.d || o.desc;
+      o.description = o.description || o.desc;
+      o.validTill = o.validTill || o.till || o.valid_till || "Limited Time";
+      o.till = o.till || o.validTill;
+      o.valid_till = o.valid_till || o.validTill;
+      o.status = o.status || o.s || "active";
+      o.s = o.s || o.status;
+      o.min = o.min !== undefined ? o.min : (o.minPurchase || 0);
+      o.minPurchase = o.minPurchase !== undefined ? o.minPurchase : o.min;
+      o.code = o.code || "PUJA10";
+    });
+  }
+
+  if (Array.isArray(pm.purohits)) {
+    pm.purohits.forEach(p => {
+      p.name = p.name || p.n || "Purohit";
+      p.n = p.n || p.name;
+      p.rating = p.rating !== undefined ? p.rating : (p.r !== undefined ? p.r : 4.8);
+      p.r = p.r !== undefined ? p.r : p.rating;
+      p.reviews = p.reviews !== undefined ? p.reviews : (p.rv !== undefined ? p.rv : 100);
+      p.rv = p.rv !== undefined ? p.rv : p.reviews;
+      p.experience = p.experience !== undefined ? p.experience : (p.exp !== undefined ? p.exp : 10);
+      p.exp = p.exp !== undefined ? p.exp : p.experience;
+      p.languages = p.languages || p.lang || "Telugu, Sanskrit, Hindi";
+      p.lang = p.lang || p.languages;
+      p.distance = p.distance !== undefined ? p.distance : (p.km !== undefined ? p.km : 3.0);
+      p.km = p.km !== undefined ? p.km : p.distance;
+      p.icon = p.icon || p.e || "🧔";
+      p.e = p.e || p.icon;
+      p.image = p.image || p.img || "";
+      p.img = p.img || p.image;
+    });
+  }
+
+  if (Array.isArray(pm.pujas)) {
+    pm.pujas.forEach(u => {
+      u.name = u.name || u.n || "Puja";
+      u.n = u.n || u.name;
+      u.rating = u.rating !== undefined ? u.rating : (u.r !== undefined ? u.r : 4.8);
+      u.r = u.r !== undefined ? u.r : u.rating;
+      u.bookings = u.bookings !== undefined ? u.bookings : (u.bk !== undefined ? u.bk : 100);
+      u.bk = u.bk !== undefined ? u.bk : u.bookings;
+      u.desc = u.desc || u.d || "";
+      u.d = u.d || u.desc;
+      u.price = u.price !== undefined ? u.price : (u.p !== undefined ? u.p : 1500);
+      u.p = u.p !== undefined ? u.p : u.price;
+      u.icon = u.icon || u.e || "🪔";
+      u.e = u.e || u.icon;
+      u.image = u.image || u.img || "";
+      u.img = u.img || u.image;
+    });
+  }
+
+  if (Array.isArray(pm.convos)) {
+    pm.convos.forEach(c => {
+      c.name = c.name || c.n || "Purohit";
+      c.n = c.n || c.name;
+      c.time = c.time || c.t || "10:30 AM";
+      c.t = c.t || c.time;
+      c.unread = c.unread !== undefined ? c.unread : (c.u !== undefined ? c.u : 0);
+      c.u = c.u !== undefined ? c.u : c.unread;
+      c.icon = c.icon || c.e || "🧔";
+      c.e = c.e || c.icon;
+      c.image = c.image || c.img || "";
+      c.img = c.img || c.image;
+      c.online = c.online !== undefined ? c.online : (c.on !== undefined ? c.on : 0);
+      c.on = c.on !== undefined ? c.on : c.online;
+      if (Array.isArray(c.m)) {
+        c.m.forEach(msg => {
+          if (Array.isArray(msg)) {
+            msg.dir = msg[0];
+            msg.w = msg[0];
+            msg.text = msg[1];
+            msg.t = msg[1];
+            msg.message = msg[1];
+            msg.time = msg[2];
+          } else if (msg && typeof msg === "object") {
+            msg[0] = msg.dir || msg.w || "in";
+            msg[1] = msg.text || msg.t || msg.message || "";
+            msg[2] = msg.time || "";
+          }
+        });
+      }
+    });
+  }
+
+  if (Array.isArray(pm.bookings)) {
+    pm.bookings.forEach(b => {
+      b.name = b.name || b.puja || "Puja Booking";
+      b.puja = b.puja || b.name;
+      b.image = b.image || b.img || "";
+      b.img = b.img || b.image;
+      b.icon = b.icon || "🪔";
+    });
+  }
+})(PM);
+
+
 // ----- Helpers -----
 const inr = (n) => "₹ " + Number(n).toLocaleString("en-IN");
 const stars = (n) => "★".repeat(Math.floor(n)) + (n % 1 ? "⯨" : "") + "☆".repeat(5 - Math.ceil(n));

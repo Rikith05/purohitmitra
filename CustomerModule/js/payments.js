@@ -79,9 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
           .map(
             (
               o,
-            ) => `<div class="off"><div class="oi">${o.i || '🎁'}</div><div class="grow"><h3>${o.t || ''}</h3><p class="muted">${o.d || ''}</p></div>
-    <div class="cd" data-c="${o.code}"><b>${o.code}</b> ⧉<small>Tap to copy</small></div><div><small class="muted">${o.s === "upcoming" ? "" : "Valid Till"}</small><br><b>${o.till || ''}</b>${o.min ? `<br><small class="muted">Min. Purchase ${inr(o.min)}</small>` : ""}</div>
-    ${o.s === "active" ? `<button class="btn" data-c="${o.code}">Apply Now</button>` : '<span class="badge b-warn">UPCOMING</span>'}</div>`,
+            ) => `<div class="off"><div class="oi">${o.icon || o.i || '🎁'}</div><div class="grow"><h3>${o.title || o.t || o.name || 'Special Offer'}</h3><p class="muted">${o.desc || o.description || o.d || ''}</p></div>
+    <div class="cd" data-c="${o.code}"><b>${o.code}</b> ⧉<small>Tap to copy</small></div><div><small class="muted">${(o.status || o.s) === "upcoming" ? "Starting" : "Valid Till"}</small><br><b>${o.validTill || o.till || 'Limited Time'}</b>${(o.min || o.minPurchase) ? `<br><small class="muted">Min. Purchase ${inr(o.min || o.minPurchase)}</small>` : ""}</div>
+    ${(o.status || o.s) === "active" ? `<button class="btn" data-c="${o.code}">Apply Now</button>` : '<span class="badge b-warn">UPCOMING</span>'}</div>`,
           )
           .join("") || '<p class="empty">No offers.</p>';
       const tabAll = $("#oTabs [data-tab=all]");

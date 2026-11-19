@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
           r
             .map(
               (a) =>
-                `<div class="ac ${a.def ? "def" : ""}"><div class="top3"><div class="thumb">${a.i || '🏠'}</div><div><h3>${a.label || 'Address'} ${a.def ? '<span class="tagd">DEFAULT</span>' : ""}</h3><p class="muted">${a.line || ''}</p><p>📞 ${a.ph || ''}</p></div></div><div class="acts"><button data-a="edit" data-id="${a.id}">✎ Edit</button><button class="del" data-a="del" data-id="${a.id}">🗑 Delete</button><button class="gray" data-a="def" data-id="${a.id}">${a.def ? "✓ Default Address" : "○ Set as Default"}</button></div></div>`,
+                `<div class="ac ${(a.def || a.isDefault) ? "def" : ""}"><div class="top3"><div class="thumb">${a.icon || a.i || '🏠'}</div><div><h3>${a.label || a.name || a.title || 'Address'} ${(a.def || a.isDefault) ? '<span class="tagd">DEFAULT</span>' : ""}</h3><p class="muted">${a.line || a.address || a.fullAddress || ''}</p><p>📞 ${a.ph || a.phone || '+91 98490 12345'}</p></div></div><div class="acts"><button data-a="edit" data-id="${a.id}">✎ Edit</button><button class="del" data-a="del" data-id="${a.id}">🗑 Delete</button><button class="gray" data-a="def" data-id="${a.id}">${(a.def || a.isDefault) ? "✓ Default Address" : "○ Set as Default"}</button></div></div>`,
             )
             .join("") || '<p class="empty">No addresses.</p>';
       }
