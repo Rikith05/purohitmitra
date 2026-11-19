@@ -1409,8 +1409,8 @@ label {
 
 /* ==========================================================================
    UNIFIED SINGLE-LINE HEADER NAVIGATION (All Pages)
-   Logo + Title + Subtitle + Home + Pujas ▾ + Purohits + How It Works + About Us + Help
-   Strictly in a SINGLE LINE. Never double-lined.
+   [☰ Menu] + Logo + Title + Subtitle + Home + Pujas ▾ + Purohits + How It Works + About Us + Help
+   Strictly in a SINGLE LINE. Never double-lined. Menu in left corner.
    ========================================================================== */
 header, .top {
   position: sticky !important;
@@ -1431,14 +1431,42 @@ header .wrap.nav, .top .wrap.nav, .top-bar-inner, .nav {
   align-items: center !important;
   justify-content: flex-start !important;
   height: 64px !important;
-  max-width: 1400px !important;
+  max-width: 1440px !important;
   width: 100% !important;
   margin: 0 auto !important;
-  padding: 0 20px !important;
+  padding: 0 16px !important;
   flex-wrap: nowrap !important;
   white-space: nowrap !important;
-  gap: 24px !important;
+  gap: 16px !important;
   box-sizing: border-box !important;
+}
+
+/* 0. Left Corner Menu Button */
+.menu-btn, .pm-menu-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  height: 38px !important;
+  padding: 0 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid #ffd8a8 !important;
+  background: #fff8f3 !important;
+  color: #e8590c !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+.menu-btn:hover, .pm-menu-btn:hover {
+  background: #e8590c !important;
+  color: #ffffff !important;
+  border-color: #e8590c !important;
+}
+.menu-btn .menu-txt {
+  font-size: 13px !important;
+  font-weight: 600 !important;
 }
 
 /* 1. Logo: Diya icon + PurohitMitra + Your Trusted Purohit Companion */
@@ -1487,7 +1515,7 @@ header .wrap.nav, .top .wrap.nav, .top-bar-inner, .nav {
 .nav-links, .nav ul, .topnav {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 20px !important;
+  gap: 18px !important;
   list-style: none !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -1514,7 +1542,7 @@ header .wrap.nav, .top .wrap.nav, .top-bar-inner, .nav {
   height: 64px !important;
   padding: 0 4px !important;
   font-family: 'DM Sans', -apple-system, sans-serif !important;
-  font-size: 14.5px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
   color: #2c1810 !important;
   text-decoration: none !important;
@@ -1529,7 +1557,7 @@ header .wrap.nav, .top .wrap.nav, .top-bar-inner, .nav {
   color: var(--o, #e8590c) !important;
 }
 
-/* Active Page Indicator with underline bar - exactly as in user screenshot */
+/* Active Page Indicator with underline bar - matches user screenshot */
 .nav-links li a.on, .nav ul li a.on, .topnav > a.on, .topnav .has-drop > a.on {
   color: var(--o, #e8590c) !important;
   border-bottom: 3px solid var(--o, #e8590c) !important;
@@ -1612,14 +1640,14 @@ header *, .top *, .nav *, .topnav * {
 
 @media (max-width: 1080px) {
   .nav-links, .nav ul, .topnav {
-    gap: 14px !important;
+    gap: 12px !important;
   }
   header .wrap.nav, .top .wrap.nav, .nav {
-    gap: 16px !important;
-    padding: 0 14px !important;
+    gap: 12px !important;
+    padding: 0 10px !important;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   header, .top {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;

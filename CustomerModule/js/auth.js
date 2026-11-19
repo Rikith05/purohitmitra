@@ -807,9 +807,6 @@
           userArea.className = 'pm-header-user-area';
           userArea.style.cssText = 'display:inline-flex;align-items:center;gap:12px;margin-left:auto;white-space:nowrap;flex-shrink:0';
           userArea.innerHTML = `
-            <button type="button" class="pm-menu-btn menu-btn" title="Open Devotee Portal Drawer" onclick="window.pmToggleDrawer()" style="padding:5px 10px;font-size:12px;border-radius:20px;border:1px solid #ffd8a8;background:#fff8f3;color:#e8590c;font-weight:600;display:inline-flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap">
-              <span>☰</span> <span>Menu</span>
-            </button>
             <a href="${rootPrefix}CustomerModule/notifications.html" class="pm-bell-link" title="Notifications">
               🔔<i>3</i>
             </a>
