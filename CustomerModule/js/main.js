@@ -251,7 +251,7 @@ function openLocationModal() {
 function selectCity(cityName) {
   localStorage.setItem('pm_location', cityName);
   document.querySelectorAll('.loc').forEach(el => {
-    el.innerHTML = `📍 ${cityName} ⌄`;
+    el.innerHTML = `📍 ${cityName} <span class="nav-caret">▾</span>`;
   });
   closeModal();
   if (typeof toast === 'function') {
@@ -614,11 +614,30 @@ function initPurohitSearchAndPagination() {
 // ===== DOM Ready Initializations =====
 
 document.addEventListener('DOMContentLoaded', function() {
+  /* Pujas Dropdown Toggle */
+  document.querySelectorAll('.has-drop').forEach(item => {
+    const link = item.querySelector('a');
+    if (link) {
+      link.addEventListener('click', function(e) {
+        // If clicking on mobile or toggling dropdown
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          item.classList.toggle('open');
+        }
+      });
+    }
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.has-drop')) {
+      document.querySelectorAll('.has-drop.open').forEach(el => el.classList.remove('open'));
+    }
+  });
+
   // 1. Restore saved location
   const savedLoc = localStorage.getItem('pm_location');
   if (savedLoc) {
     document.querySelectorAll('.loc').forEach(el => {
-      el.innerHTML = `📍 ${savedLoc} ⌄`;
+      el.innerHTML = `📍 ${savedLoc} <span class="nav-caret">▾</span>`;
     });
   }
 
@@ -650,10 +669,10 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       if (payBreakdown.style.display === 'none' || !payBreakdown.style.display) {
         payBreakdown.style.display = 'block';
-        togglePayDetails.innerHTML = 'Hide Details ⌃';
+        togglePayDetails.innerHTML = 'Hide Details <span class="nav-caret" style="transform:rotate(180deg)">▾</span>';
       } else {
         payBreakdown.style.display = 'none';
-        togglePayDetails.innerHTML = 'View Details ⌄';
+        togglePayDetails.innerHTML = 'View Details <span class="nav-caret">▾</span>';
       }
     });
   }
@@ -731,6 +750,18 @@ document.addEventListener('DOMContentLoaded', function() {
         let val = parseInt(numEl.textContent.trim()) || 5;
         numEl.textContent = val + 1;
       });
+    }
+  }
+});
+
+
+/* Delegated click for all .loc elements */
+document.addEventListener('click', function(e) {
+  const locEl = e.target.closest('.loc');
+  if (locEl) {
+    e.preventDefault();
+    if (typeof openLocationModal === 'function') {
+      openLocationModal();
     }
   }
 });
