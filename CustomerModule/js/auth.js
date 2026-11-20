@@ -785,18 +785,32 @@
     // 1. Update public page header
     const topNav = document.querySelector('header .wrap.nav');
     if (topNav) {
-      // Find Login / Sign Up buttons
       const loginBtn = topNav.querySelector('a.btn.s.mo, a[href*="dashboard.html"]');
       const signUpBtn = topNav.querySelector('a.btn.s.m, a[href*="my-profile.html"]');
-      const locSpan = topNav.querySelector('.loc');
+
+      let menuBtn = topNav.querySelector(':scope > .menu-btn, :scope > .pm-menu-btn');
 
       if (loggedIn) {
-        // User is logged in: show Menu button, User pill, bell icon
-        // Ensure menu button is never placed before logo
-        let oldMenuBtn = topNav.querySelector(':scope > .pm-menu-btn');
-        if (oldMenuBtn) oldMenuBtn.remove();
+        // Logged-in state: Menu button at far left corner before logo
+        if (!menuBtn) {
+          menuBtn = document.createElement('button');
+          menuBtn.className = 'menu-btn pm-menu-btn';
+          menuBtn.setAttribute('aria-label', 'Toggle menu');
+          menuBtn.setAttribute('title', 'Open Devotee Portal Menu');
+          menuBtn.onclick = function() {
+            if (typeof window.pmToggleDrawer === 'function') {
+              window.pmToggleDrawer();
+            } else {
+              document.body.classList.toggle('nav-open');
+            }
+          };
+          menuBtn.innerHTML = '<span style="font-size:16px;line-height:1">☰</span> <span class="menu-txt">Menu</span>';
+          topNav.insertBefore(menuBtn, topNav.firstChild);
+        } else {
+          menuBtn.style.display = 'inline-flex';
+        }
 
-        // Hide or replace Login & Sign Up
+        // Hide Login & Sign Up
         if (loginBtn) loginBtn.style.display = 'none';
         if (signUpBtn) signUpBtn.style.display = 'none';
 
@@ -804,26 +818,26 @@
         let userArea = topNav.querySelector('.pm-header-user-area');
         if (!userArea) {
           userArea = document.createElement('div');
-          userArea.className = 'pm-header-user-area';
+          userArea.className = 'pm-header-user-area sp';
           userArea.style.cssText = 'display:inline-flex;align-items:center;gap:12px;margin-left:auto;white-space:nowrap;flex-shrink:0';
           userArea.innerHTML = `
-            <a href="${rootPrefix}CustomerModule/notifications.html" class="pm-bell-link" title="Notifications">
+            <a href="${rootPrefix}CustomerModule/notifications.html" class="bell pm-bell-link" title="Notifications">
               🔔<i>3</i>
             </a>
-            <a href="${rootPrefix}CustomerModule/my-profile.html" class="pm-user-pill" title="My Profile">
+            <a href="${rootPrefix}CustomerModule/my-profile.html" class="user pm-user-pill" title="My Profile">
               <span class="av"><img src="${rootPrefix}images/avatar_user.jpg" alt="${user.name}"></span>
-              <span>${user.name}</span>
+              <b>${user.name}</b>
             </a>
-            <a href="javascript:void(0)" onclick="window.pmLogout()" style="color:#c92a2a;text-decoration:none;font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;background:#fff3ea;white-space:nowrap" title="Sign Out">Sign Out</a>
           `;
           topNav.appendChild(userArea);
         } else {
           userArea.style.display = 'inline-flex';
         }
       } else {
-        // Unauthenticated view
-        const menuBtn = topNav.querySelector('.pm-menu-btn');
-        if (menuBtn) menuBtn.remove();
+        // Unauthenticated view (matches Image 4: starts cleanly with Logo)
+        if (menuBtn) {
+          menuBtn.style.display = 'none';
+        }
         const userArea = topNav.querySelector('.pm-header-user-area');
         if (userArea) userArea.style.display = 'none';
 
@@ -840,14 +854,12 @@
       }
     }
 
-    
     // 2. Update CustomerModule header (header.top)
     const cmTop = document.querySelector('header.top');
     if (cmTop) {
       const spArea = cmTop.querySelector('.sp');
       if (spArea) {
         if (loggedIn) {
-          // Ensure user name reflects user
           const userLink = spArea.querySelector('.user');
           if (userLink) {
             userLink.style.display = 'inline-flex';
@@ -856,90 +868,17 @@
           }
           const bell = spArea.querySelector('.bell');
           if (bell) bell.style.display = 'inline-flex';
-
-          // Clean Sign Out button in CustomerModule
-          let signOutBtn = spArea.querySelector('.pm-cm-signout');
-          if (!signOutBtn) {
-            signOutBtn = document.createElement('a');
-            signOutBtn.className = 'pm-cm-signout';
-            signOutBtn.href = 'javascript:void(0)';
-            signOutBtn.onclick = window.pmLogout;
-            signOutBtn.textContent = 'Sign Out';
-            signOutBtn.style.cssText = 'color:#c92a2a;text-decoration:none;font-size:12px;font-weight:600;padding:6px 10px;border-radius:6px;background:#fff3ea;white-space:nowrap;margin-left:4px';
-            spArea.appendChild(signOutBtn);
-          } else {
-            signOutBtn.style.display = 'inline-block';
-          }
-          const authButtons = spArea.querySelector('.pm-cm-auth-btns');
-          if (authButtons) authButtons.style.display = 'none';
-        } else {
-          // NOT logged in on a CustomerModule page
-          const pageName = window.location.pathname.split('/').pop();
-          if (pageName === 'help-support.html') {
-            window.location.href = '../help.html';
-            return;
-          }
-          if (pageName === 'about.html' || pageName === 'how-it-works.html') {
-            window.location.href = '../' + pageName;
-            return;
-          }
-
-          // Hide private elements
-          const bell = spArea.querySelector('.bell');
-          const userLink = spArea.querySelector('.user');
-          const signOutBtn = spArea.querySelector('.pm-cm-signout');
-          if (bell) bell.style.display = 'none';
-          if (userLink) userLink.style.display = 'none';
-          if (signOutBtn) signOutBtn.style.display = 'none';
-
-          // Show Login & Sign Up
-          let authButtons = spArea.querySelector('.pm-cm-auth-btns');
-          if (!authButtons) {
-            authButtons = document.createElement('div');
-            authButtons.className = 'pm-cm-auth-btns';
-            authButtons.style.cssText = 'display:inline-flex;align-items:center;gap:8px';
-            authButtons.innerHTML = `
-              <a class="btn s mo" href="javascript:void(0)" onclick="window.pmOpenAuthModal('signin')" style="padding:6px 14px;font-size:13px;border-radius:6px;background:#fff;border:1px solid #e8590c;color:#e8590c;text-decoration:none;font-weight:600">Login</a>
-              <a class="btn s m" href="javascript:void(0)" onclick="window.pmOpenAuthModal('register-customer')" style="padding:6px 14px;font-size:13px;border-radius:6px;background:#e8590c;color:#fff;text-decoration:none;font-weight:600">Sign Up</a>
-            `;
-            spArea.appendChild(authButtons);
-          } else {
-            authButtons.style.display = 'inline-flex';
-          }
+        }
+      }
+      // Ensure menu button is present at start of CustomerModule header
+      const cmWrap = cmTop.querySelector('.wrap.nav');
+      if (cmWrap) {
+        let cmMenuBtn = cmWrap.querySelector(':scope > .menu-btn, :scope > .pm-menu-btn');
+        if (cmMenuBtn) {
+          cmMenuBtn.style.display = 'inline-flex';
         }
       }
     }
-  
-    // 2. Intercept Booking Actions on Public Pages if Not Logged In
-    if (!loggedIn) {
-      document.querySelectorAll('a, button').forEach(el => {
-        const text = (el.innerText || '').trim().toLowerCase();
-        const href = (el.getAttribute('href') || '').toLowerCase();
-        const isBookingAction = text.includes('book now') || 
-                                text.includes('book a puja') || 
-                                text.includes('book puja') || 
-                                text.includes('book purohit') ||
-                                href.includes('book-puja.html') ||
-                                href.includes('book-purohit.html') ||
-                                href.includes('choose-purohit.html') ||
-                                href.includes('payment.html');
-        
-        if (isBookingAction) {
-          el.addEventListener('click', function (e) {
-            if (!window.pmIsLoggedIn()) {
-              e.preventDefault();
-              e.stopPropagation();
-              const target = el.getAttribute('href') || '';
-              window.pmOpenAuthModal('signin', target);
-            }
-          }, true);
-        }
-      });
-    }
-
-    // 3. Update Drawer user info if present
-    const drawerUserName = document.getElementById('pmDrawerUserName');
-    if (drawerUserName) drawerUserName.textContent = user.name;
   }
 
   // --------------------------------------------------------------------------
