@@ -799,7 +799,7 @@
     const user = window.pmGetUser();
 
     // 1. Update public page header
-    const topNav = document.querySelector('header .wrap.nav');
+    const topNav = document.querySelector('header:not(.top) .wrap.nav');
     if (topNav) {
       const loginBtn = topNav.querySelector('a.btn.s.mo, a[href*="dashboard.html"]');
       const signUpBtn = topNav.querySelector('a.btn.s.m, a[href*="my-profile.html"]');
@@ -874,6 +874,7 @@
     // 2. Update CustomerModule header (header.top)
     const cmTop = document.querySelector('header.top');
     if (cmTop) {
+      cmTop.querySelectorAll('.pm-header-user-area').forEach(el => el.remove());
       const spArea = cmTop.querySelector('.sp');
       if (spArea) {
         if (loggedIn) {
