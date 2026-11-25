@@ -1,3 +1,13 @@
+
+const _pmRelDate = (offsetDays) => {
+  const d = new Date(Date.now() + offsetDays * 86400000);
+  const mons = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const fullMons = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  return {
+    short: `${String(d.getDate()).padStart(2,'0')} ${mons[d.getMonth()]}`,
+    full: `${d.getDate()} ${fullMons[d.getMonth()]} ${d.getFullYear()}`
+  };
+};
 /**
  * Shared helpers, sample data (PM object) and common UI behaviour: sidebar toggle, toast, modal, tabs.
  * Vanilla JS, no frameworks.
@@ -340,7 +350,7 @@ const PM = {
     {
       c: "bookings",
       t: "Booking Confirmed",
-      m: "Satyanarayana Puja with Pandit Narayan Shastri on 15 May 2025 is confirmed.",
+      m: `Satyanarayana Puja with Pandit Narayan Shastri on ${_pmRelDate(2).full} is confirmed.`,
       w: "10 mins ago",
       u: 1,
       i: "📅",
@@ -372,7 +382,7 @@ const PM = {
     {
       c: "bookings",
       t: "Upcoming Puja Reminder",
-      m: "Don't forget! Your Griha Pravesh Puja is on 25 May 2025, 09:30 AM.",
+      m: `Don't forget! Your Griha Pravesh Puja is on ${_pmRelDate(5).full}, 09:30 AM.`,
       w: "Yesterday, 1:30 PM",
       u: 0,
       i: "🔔",
@@ -558,21 +568,21 @@ const PM = {
     },
     {
       n: "Pandit Raghav Sharma",
-      t: "10 May",
+      t: _pmRelDate(-4).short,
       u: 0,
       e: "🧑",
       img: "images/purohit_raghav.jpg",
       on: 0,
-      m: [["in", "Looking forward to performing the puja at your residence.", "10 May"]],
+      m: [["in", "Looking forward to performing the puja at your residence.", _pmRelDate(-4).short]],
     },
     {
       n: "Acharya Madhusudan",
-      t: "08 May",
+      t: _pmRelDate(-6).short,
       u: 0,
       e: "🧔",
       img: "images/purohit_madhusudan.jpg",
       on: 0,
-      m: [["in", "Here is the list of sacred items required for the Homam ceremony.", "08 May"]],
+      m: [["in", "Here is the list of sacred items required for the Homam ceremony.", _pmRelDate(-6).short]],
     },
   ],
 };

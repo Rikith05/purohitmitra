@@ -414,8 +414,7 @@ header *, .top *, .nav *, .topnav * {
 }
 @media (max-width: 820px) {
   header, .top {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+    overflow: visible !important;
   }
   header .wrap.nav, .top .wrap.nav, .nav {
     min-width: max-content !important;
@@ -436,9 +435,7 @@ header, .top {
   padding: 0 !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  overflow-x: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  scrollbar-width: none !important;
+  overflow: visible !important;
 }
 header::-webkit-scrollbar, .top::-webkit-scrollbar {
   display: none !important;
@@ -894,4 +891,22 @@ header *, .top *, .nav *, .topnav * {
   color: #ea580c !important;
   font-weight: 600 !important;
   box-shadow: 0 1px 4px rgba(234, 88, 12, 0.1) !important;
+}
+
+/* Fix: Ensure header dropdowns are never clipped & caret points down by default */
+header, .top {
+  overflow: visible !important;
+}
+.nav-caret {
+  display: inline-block !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  margin-left: 4px !important;
+  transform: rotate(0deg) !important;
+  transition: transform 0.2s ease !important;
+}
+.has-drop:hover .nav-caret,
+.has-drop.open .nav-caret,
+.loc.open .nav-caret {
+  transform: rotate(180deg) !important;
 }

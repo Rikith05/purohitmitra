@@ -77,7 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let tab = "all";
     const N = PM.notifs || [];
     const draw = () => {
-      const un = N.filter((n) => n.u).length;
+      const isUn = (n) => Boolean(n.u || n.unread);
+      const un = N.filter(isUn).length;
       $$(".side em,.bell i").forEach((x) => {
         x.textContent = un;
         x.style.display = un ? "" : "none";
@@ -95,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
           c = t === "all" ? N.length : t === "unread" ? un : N.filter((n) => n.c === t).length;
         b.textContent = `${lab[t] || t} (${c})`;
       });
-      const r = N.filter((n) => tab === "all" || (tab === "unread" ? n.u : n.c === tab));
+      const r = N.filter((n) => tab === "all" || (tab === "unread" ? isUn(n) : n.c === tab));
       const nList = $("#nList");
       if (nList) {
         nList.innerHTML =
@@ -114,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const markAll = $("#markAll");
     if (markAll) {
       markAll.onclick = () => {
-        N.forEach((n) => (n.u = 0));
+        N.forEach((n) => { n.u = 0; n.unread = 0; });
         draw();
         toast("All notifications marked as read");
       };
@@ -125,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const c = e.target.closest(".ni");
         if (c && c.dataset.i !== undefined) {
           N[+c.dataset.i].u = 0;
+          N[+c.dataset.i].unread = 0;
           draw();
         }
       };
@@ -228,6 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!C.length) return;
       const c = C[cur] || C[0];
       c.u = 0;
+      c.unread = 0;
       const chHead = $("#chHead");
       if (chHead) {
         chHead.innerHTML =
@@ -267,7 +270,29 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     }
     const attach = $("#attach");
-    if (attach) attach.onclick = () => toast("Attachments need a backend (demo)");
+    if (attach) {
+      let fileIn = document.getElementById("pmMsgFileIn");
+      if (!fileIn) {
+        fileIn = document.createElement("input");
+        fileIn.type = "file";
+        fileIn.id = "pmMsgFileIn";
+        fileIn.accept = "image/*,.pdf,.doc,.docx";
+        fileIn.style.display = "none";
+        document.body.appendChild(fileIn);
+        fileIn.onchange = () => {
+          if (fileIn.files && fileIn.files[0]) {
+            const fname = fileIn.files[0].name;
+            const c = C[cur] || C[0];
+            c.m = c.m || [];
+            c.m.push(["out", `📎 Attached: ${fname}`, now()]);
+            fileIn.value = "";
+            chat();
+            toast(`Sent attachment: ${fname}`);
+          }
+        };
+      }
+      attach.onclick = () => fileIn.click();
+    }
     const sendF = $("#sendF");
     if (sendF) {
       sendF.onsubmit = (e) => {
