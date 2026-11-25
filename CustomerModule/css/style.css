@@ -997,3 +997,15 @@ header .wrap.nav, .top .wrap.nav, .nav {
     padding: 0 10px !important;
   }
 }
+
+/* Fix: Ensure hero search autocomplete dropdown is never clipped by .hero */
+.hero, .hero2 {
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 20 !important;
+}
+.search {
+  position: relative !important;
+  z-index: 30 !important;
+  overflow: visible !important;
+}
