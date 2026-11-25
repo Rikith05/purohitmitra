@@ -76,7 +76,27 @@ document.addEventListener("DOMContentLoaded", () => {
   if (pg === "notifications") {
     let tab = "all";
     const N = PM.notifs || [];
+    try {
+      const savedRead = JSON.parse(localStorage.getItem("pm_notifs_read_indices") || "null");
+      if (Array.isArray(savedRead)) {
+        savedRead.forEach((idx) => {
+          if (N[idx]) { N[idx].u = 0; N[idx].unread = 0; }
+        });
+      }
+    } catch (e) {}
+    const persistNotifState = () => {
+      const readIndices = [];
+      let unreadCount = 0;
+      N.forEach((n, idx) => {
+        if (n.u || n.unread) unreadCount++;
+        else readIndices.push(idx);
+      });
+      localStorage.setItem("pm_notifs_read_indices", JSON.stringify(readIndices));
+      localStorage.setItem("pm_notif_unread", String(unreadCount));
+      if (typeof window.pmSyncNotifBadges === "function") window.pmSyncNotifBadges();
+    };
     const draw = () => {
+      persistNotifState();
       const isUn = (n) => Boolean(n.u || n.unread);
       const un = N.filter(isUn).length;
       $$(".side em,.bell i").forEach((x) => {

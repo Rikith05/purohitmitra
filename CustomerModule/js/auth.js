@@ -450,7 +450,7 @@
           <a href="${rootPrefix}CustomerModule/payments.html"><span>💳</span> Payments</a>
           <a href="${rootPrefix}CustomerModule/offers.html"><span>🏷️</span> Offers</a>
           <a href="${rootPrefix}CustomerModule/favorites.html"><span>♡</span> Favorites</a>
-          <a href="${rootPrefix}CustomerModule/notifications.html"><span>🔔</span> Notifications <em>3</em></a>
+          <a href="${rootPrefix}CustomerModule/notifications.html"><span>🔔</span> Notifications <em>${window.pmGetNotifUnreadCount()}</em></a>
           <a href="${rootPrefix}CustomerModule/my-profile.html"><span>👤</span> My Profile</a>
           <a href="${rootPrefix}CustomerModule/saved-addresses.html"><span>📍</span> Saved Addresses</a>
           <a href="${rootPrefix}CustomerModule/my-reviews.html"><span>⭐</span> My Reviews</a>
@@ -778,6 +778,22 @@
   // --------------------------------------------------------------------------
   // Update Header & Navigation based on Login Status
   // --------------------------------------------------------------------------
+  
+  window.pmGetNotifUnreadCount = function () {
+    const raw = localStorage.getItem('pm_notif_unread');
+    if (raw === null) return 3;
+    const n = parseInt(raw, 10);
+    return isNaN(n) ? 3 : Math.max(0, n);
+  };
+
+  window.pmSyncNotifBadges = function () {
+    const count = window.pmGetNotifUnreadCount();
+    document.querySelectorAll('.bell i, .pm-bell-link i, .side a[href*="notifications"] em, .pm-drawer a[href*="notifications"] em').forEach((el) => {
+      el.textContent = count;
+      el.style.display = count > 0 ? '' : 'none';
+    });
+  };
+
   function updateNavigationForAuth() {
     const loggedIn = window.pmIsLoggedIn();
     const user = window.pmGetUser();
@@ -822,7 +838,7 @@
           userArea.style.cssText = 'display:inline-flex;align-items:center;gap:12px;margin-left:auto;white-space:nowrap;flex-shrink:0';
           userArea.innerHTML = `
             <a href="${rootPrefix}CustomerModule/notifications.html" class="bell pm-bell-link" title="Notifications">
-              🔔<i>3</i>
+              🔔<i>${window.pmGetNotifUnreadCount()}</i>
             </a>
             <a href="${rootPrefix}CustomerModule/my-profile.html" class="user pm-user-pill" title="My Profile">
               <span class="av"><img src="${rootPrefix}images/avatar_user.jpg" alt="${user.name}"></span>
