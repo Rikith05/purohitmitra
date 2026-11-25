@@ -171,11 +171,23 @@
                   </div>
                   
                   <div id="customTimePickerWrap" style="display:none;margin-top:10px;padding:14px;background:#fffaf5;border:1px dashed #fed7aa;border-radius:8px">
-                    <label for="customTimeInput" style="font-size:12px;font-weight:600;color:#78716c;display:block;margin-bottom:6px">Enter Preferred Muhurtham Time</label>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+                      <div>
+                        <label for="customStartTime" style="font-size:11.5px;font-weight:600;color:#78716c;display:block;margin-bottom:4px">Start Time</label>
+                        <input type="time" id="customStartTime" class="in" style="width:100%;font-size:13px;padding:8px 10px;border:1px solid #fed7aa;border-radius:6px;box-sizing:border-box" />
+                      </div>
+                      <div>
+                        <label for="customEndTime" style="font-size:11.5px;font-weight:600;color:#78716c;display:block;margin-bottom:4px">End Time</label>
+                        <input type="time" id="customEndTime" class="in" style="width:100%;font-size:13px;padding:8px 10px;border:1px solid #fed7aa;border-radius:6px;box-sizing:border-box" />
+                      </div>
+                    </div>
+                    <label for="customTimeInput" style="font-size:12px;font-weight:600;color:#78716c;display:block;margin-bottom:6px">Or Enter Preferred Muhurtham Time</label>
                     <input type="text" id="customTimeInput" class="in" placeholder="e.g. 7:15 AM - 9:30 AM" style="width:100%;font-size:13px;padding:9px 14px;border:1px solid #fed7aa;border-radius:6px;box-sizing:border-box" />
+                    <div id="customTimeError" role="alert" style="display:none;margin-top:8px;font-size:12px;font-weight:600;color:#dc2626"></div>
                   </div>
                 </div>
               </div>
+              <div id="dtValidationBanner" role="alert" style="display:none;margin-top:16px;padding:10px 14px;border-radius:8px;background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;font-size:13px;font-weight:500"></div>
             </div></div><div class="card" style="margin-bottom:12px">
   <h3 style="margin-bottom:8px">2. Location Details</h3>
   <p class="mu" style="margin-bottom:8px">Puja will be conducted at</p>
@@ -280,7 +292,7 @@
     <div class="f"><label for="bkContactEmail">Email Address</label><input type="email" id="bkContactEmail" class="in" value="srinivas.somisetti@gmail.com" style="width:100%;box-sizing:border-box" /></div>
   </div>
   <div class="note"><b>Important Note</b><br>Please ensure all details are correct. Purohit will reach out to you on the provided contact number.</div>
-</div><div style="display:flex;justify-content:space-between"><a class="btn" href="puja-details.html">← Back</a><a class="btn p" style="width:200px" href="choose-purohit.html">Continue →</a></div></div><div class="grid"><div class="card pad0"><div class="ph" style="height:140px;border-radius:0;background:none;overflow:hidden"><img src="images/puja_griha_pravesh.jpg" alt="Griha Pravesh Puja" style="width:100%;height:100%;object-fit:cover"></div><div class="b"><h3>Griha Pravesh Puja</h3><p class="mu">Purifies your new home and brings positive energy, happiness and prosperity.</p><p class="mu">🕐 2 - 3 Hours &nbsp; 🏠 At Home &nbsp; ₹ 2,500 onwards</p></div></div><div class="card"><h3>Booking Summary</h3><div class="kv"><span>Puja</span><span>Griha Pravesh Puja</span></div><div class="kv"><span>Date</span><span id="bkSummaryDate" style="color:#e8590c;font-weight:600">25 May 2025, Sunday</span></div><div class="kv"><span>Time</span><span id="bkSummaryTime" style="color:#e8590c;font-weight:600">8:00 AM - 10:00 AM</span></div><div class="kv"><span>Location</span><span id="bkSummaryLocation">At Home, Hyderabad</span></div><div class="kv"><span>Purohit</span><span>To be Selected</span></div><div class="kv"><span>Add-ons</span><span>No add-ons selected</span></div></div><div class="card" style="background:var(--cr)"><h3>Why book with PurohitMitra?</h3><ul class="ck"><li>Verified &amp; Experienced Purohits</li><li>Transparent Pricing</li><li>Complete Puja as per Vedic Vidhi</li><li>Puja Samagri Guidance</li><li>On-time &amp; Hassle-free Service</li><li>24/7 Customer Support</li></ul></div><div class="card"><h3>Need Help?</h3><p class="mu">Our support team is here for you</p><p style="margin-top:8px">📞 +91 12345 67890<br>✉ support@purohitmitra.com<br>🕗 Mon - Sun: 8:00 AM - 9:00 PM</p></div></div></div></div><div class="wrap"><div class="trust">
+</div><div style="display:flex;justify-content:space-between"><a class="btn" href="puja-details.html">← Back</a><a id="bkContinueBtn" class="btn p" style="width:200px" href="choose-purohit.html">Continue →</a></div></div><div class="grid"><div class="card pad0"><div class="ph" style="height:140px;border-radius:0;background:none;overflow:hidden"><img src="images/puja_griha_pravesh.jpg" alt="Griha Pravesh Puja" style="width:100%;height:100%;object-fit:cover"></div><div class="b"><h3>Griha Pravesh Puja</h3><p class="mu">Purifies your new home and brings positive energy, happiness and prosperity.</p><p class="mu">🕐 2 - 3 Hours &nbsp; 🏠 At Home &nbsp; ₹ 2,500 onwards</p></div></div><div class="card"><h3>Booking Summary</h3><div class="kv"><span>Puja</span><span>Griha Pravesh Puja</span></div><div class="kv"><span>Date</span><span id="bkSummaryDate" style="color:#e8590c;font-weight:600">25 May 2025, Sunday</span></div><div class="kv"><span>Time</span><span id="bkSummaryTime" style="color:#e8590c;font-weight:600">8:00 AM - 10:00 AM</span></div><div class="kv"><span>Location</span><span id="bkSummaryLocation">At Home, Hyderabad</span></div><div class="kv"><span>Purohit</span><span>To be Selected</span></div><div class="kv"><span>Add-ons</span><span>No add-ons selected</span></div></div><div class="card" style="background:var(--cr)"><h3>Why book with PurohitMitra?</h3><ul class="ck"><li>Verified &amp; Experienced Purohits</li><li>Transparent Pricing</li><li>Complete Puja as per Vedic Vidhi</li><li>Puja Samagri Guidance</li><li>On-time &amp; Hassle-free Service</li><li>24/7 Customer Support</li></ul></div><div class="card"><h3>Need Help?</h3><p class="mu">Our support team is here for you</p><p style="margin-top:8px">📞 +91 12345 67890<br>✉ support@purohitmitra.com<br>🕗 Mon - Sun: 8:00 AM - 9:00 PM</p></div></div></div></div><div class="wrap"><div class="trust">
   <div class="trust-item trust-item-verified">
     <div class="trust-icon-wrap shield-glow">
       <svg class="symbol-svg verified-shield-svg" width="38" height="38" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -419,16 +431,76 @@
     <script>
       // Dynamic Puja Booking Calendar, Maps, Form & State Persistence Engine
       (function initBookingDateTimeEngine() {
+        window.__PM_BOOKING_ENGINE_ACTIVE = true;
+
         const months = [
           'January', 'February', 'March', 'April', 'May', 'June',
           'July', 'August', 'September', 'October', 'November', 'December'
         ];
         const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const defaultTarget = new Date(today);
-        defaultTarget.setDate(today.getDate() + 1); // Dynamic upcoming date (tomorrow)
+        function getTodayStart(now = new Date()) {
+          return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        }
+
+        function getNowMinutes(now = new Date()) {
+          return now.getHours() * 60 + now.getMinutes();
+        }
+
+        function formatMinutes12(mins) {
+          const h24 = Math.floor(mins / 60) % 24;
+          const m = String(mins % 60).padStart(2, '0');
+          const mer = h24 >= 12 ? 'PM' : 'AM';
+          const h12 = h24 % 12 || 12;
+          return `${h12}:${m} ${mer}`;
+        }
+
+        function formatMinutes24(mins) {
+          const h24 = String(Math.floor(mins / 60) % 24).padStart(2, '0');
+          const m = String(mins % 60).padStart(2, '0');
+          return `${h24}:${m}`;
+        }
+
+        function parseTimeToMinutes(token) {
+          if (!token) return null;
+          const match = String(token).trim().match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/i);
+          if (!match) return null;
+          let hours = parseInt(match[1], 10);
+          const mins = match[2] ? parseInt(match[2], 10) : 0;
+          const mer = match[3] ? match[3].toLowerCase() : null;
+          if (isNaN(hours) || isNaN(mins) || mins < 0 || mins > 59) return null;
+          if (mer) {
+            if (hours < 1 || hours > 12) return null;
+            if (mer === 'am') {
+              if (hours === 12) hours = 0;
+            } else {
+              if (hours !== 12) hours += 12;
+            }
+          } else if (hours < 0 || hours > 23) {
+            return null;
+          }
+          return hours * 60 + mins;
+        }
+
+        function parseTimeRange(str) {
+          if (!str) return null;
+          const cleaned = String(str).replace(/^Custom\s*\((.*)\)$/i, '$1').trim();
+          if (!cleaned) return null;
+          const parts = cleaned.split(/\s*[–—-]\s*|\s+to\s+/i);
+          if (parts.length > 2) return null;
+          const startMinutes = parseTimeToMinutes(parts[0]);
+          if (startMinutes === null) return null;
+          if (parts.length === 2 && parts[1].trim() !== '') {
+            const endMinutes = parseTimeToMinutes(parts[1]);
+            if (endMinutes === null) return null;
+            return { startMinutes, endMinutes };
+          }
+          return { startMinutes, endMinutes: null };
+        }
+
+        const initialToday = getTodayStart();
+        const defaultTarget = new Date(initialToday);
+        defaultTarget.setDate(initialToday.getDate() + 1); // Dynamic upcoming date (tomorrow)
 
         let currentYear = defaultTarget.getFullYear();
         let currentMonth = defaultTarget.getMonth();
@@ -436,6 +508,7 @@
         let selectedMonth = defaultTarget.getMonth();
         let selectedDay = defaultTarget.getDate();
         let selectedSlot = '8:00 AM – 10:00 AM';
+        let isCustomMode = false;
 
         const monthTitle = document.getElementById('calMonthTitle');
         const calGrid = document.getElementById('bookingCalGrid');
@@ -447,6 +520,11 @@
         const slotsList = document.getElementById('bookingSlotsList');
         const customTimeWrap = document.getElementById('customTimePickerWrap');
         const customTimeInput = document.getElementById('customTimeInput');
+        const customStartTime = document.getElementById('customStartTime');
+        const customEndTime = document.getElementById('customEndTime');
+        const customTimeError = document.getElementById('customTimeError');
+        const dtValidationBanner = document.getElementById('dtValidationBanner');
+        const continueBtn = document.getElementById('bkContinueBtn');
 
         const citySelect = document.getElementById('citySelect');
         const stateSelect = document.getElementById('stateSelect');
@@ -456,6 +534,40 @@
         const openMapBtn = document.getElementById('bkOpenMapBtn');
         const mapBadge = document.getElementById('bkMapBadge');
         const purposeSel = document.getElementById('pujaPurpose');
+
+        function getSelectedDateObj() {
+          return new Date(selectedYear, selectedMonth, selectedDay);
+        }
+
+        function isSelectedToday(now = new Date()) {
+          return getSelectedDateObj().getTime() === getTodayStart(now).getTime();
+        }
+
+        function isSelectedPastDate(now = new Date()) {
+          return getSelectedDateObj() < getTodayStart(now);
+        }
+
+        function showBannerError(msg) {
+          if (!dtValidationBanner) return;
+          if (msg) {
+            dtValidationBanner.textContent = msg;
+            dtValidationBanner.style.display = 'block';
+          } else {
+            dtValidationBanner.textContent = '';
+            dtValidationBanner.style.display = 'none';
+          }
+        }
+
+        function showCustomError(msg) {
+          if (!customTimeError) return;
+          if (msg) {
+            customTimeError.textContent = msg;
+            customTimeError.style.display = 'block';
+          } else {
+            customTimeError.textContent = '';
+            customTimeError.style.display = 'none';
+          }
+        }
 
         function getFormattedDate() {
           const dt = new Date(selectedYear, selectedMonth, selectedDay);
@@ -468,9 +580,10 @@
         }
 
         function saveDraft() {
+          const dateText = getFormattedDate();
           const draft = {
             puja: purposeSel ? purposeSel.value : 'Griha Pravesh Puja',
-            dateText: getFormattedDate(),
+            dateText,
             timeText: selectedSlot,
             locationType: getSelectedLocationType(),
             city: citySelect ? citySelect.value : 'Hyderabad',
@@ -484,6 +597,8 @@
             contactEmail: (document.getElementById('bkContactEmail') || {}).value || ''
           };
           localStorage.setItem('pm_booking_draft', JSON.stringify(draft));
+          sessionStorage.setItem('pm_booking_date', dateText);
+          sessionStorage.setItem('pm_booking_time', selectedSlot);
         }
 
         function updateSummary() {
@@ -496,9 +611,219 @@
           saveDraft();
         }
 
+        function applySlotStyles(slotEl, active) {
+          if (active) {
+            slotEl.classList.add('on');
+            slotEl.style.border = '1.5px solid #ea580c';
+            slotEl.style.background = '#fff7ed';
+            slotEl.style.color = '#ea580c';
+            slotEl.style.fontWeight = '600';
+          } else {
+            slotEl.classList.remove('on');
+            slotEl.style.border = '1px solid #e7e5e4';
+            slotEl.style.background = '#ffffff';
+            slotEl.style.color = '#292524';
+            slotEl.style.fontWeight = '500';
+          }
+        }
+
+        function validateCustomTime(showErrors) {
+          if (!isCustomMode) {
+            showCustomError('');
+            return { valid: true };
+          }
+          const now = new Date();
+          const nowMinutes = getNowMinutes(now);
+          const rawVal = customTimeInput ? customTimeInput.value.trim() : '';
+
+          if (!rawVal) {
+            const msg = 'Please select or enter a preferred Muhurtham time.';
+            if (showErrors) showCustomError(msg);
+            return { valid: false, message: msg };
+          }
+
+          const parsed = parseTimeRange(rawVal);
+          if (!parsed) {
+            const msg = 'Enter a valid time range (e.g. 5:30 PM - 7:30 PM).';
+            if (showErrors) showCustomError(msg);
+            return { valid: false, message: msg };
+          }
+
+          if (parsed.endMinutes !== null && parsed.endMinutes <= parsed.startMinutes) {
+            const msg = 'End time must be after start time.';
+            if (showErrors) showCustomError(msg);
+            return { valid: false, message: msg };
+          }
+
+          if (isSelectedPastDate(now)) {
+            const msg = 'Past dates cannot be selected. Please choose today or a future date.';
+            if (showErrors) showCustomError(msg);
+            return { valid: false, message: msg };
+          }
+
+          if (isSelectedToday(now) && parsed.startMinutes <= nowMinutes) {
+            const msg = `Selected time has already passed. Choose a time after ${formatMinutes12(nowMinutes)}.`;
+            if (showErrors) showCustomError(msg);
+            return { valid: false, message: msg };
+          }
+
+          showCustomError('');
+          return { valid: true };
+        }
+
+        function validateBookingDateTime(opts = {}) {
+          const showErrors = Boolean(opts.showErrors);
+          const now = new Date();
+          const nowMinutes = getNowMinutes(now);
+
+          if (isSelectedPastDate(now)) {
+            const msg = 'Selected date is in the past. Please choose today or an upcoming date.';
+            if (showErrors) showBannerError(msg);
+            return { valid: false, message: msg };
+          }
+
+          if (isCustomMode) {
+            const customRes = validateCustomTime(showErrors);
+            if (!customRes.valid) {
+              if (showErrors) showBannerError(customRes.message);
+              return customRes;
+            }
+            if (showErrors) showBannerError('');
+            return { valid: true };
+          }
+
+          const activeSlotEl = slotsList ? slotsList.querySelector('.slot.on') : null;
+          if (!activeSlotEl || activeSlotEl.dataset.disabled === 'true') {
+            const msg = 'Please select an available upcoming time slot.';
+            if (showErrors) showBannerError(msg);
+            return { valid: false, message: msg };
+          }
+
+          const slotVal = activeSlotEl.getAttribute('data-slot') || '';
+          const parsed = parseTimeRange(slotVal);
+          if (isSelectedToday(now) && parsed && parsed.startMinutes <= nowMinutes) {
+            const msg = 'The selected time slot has already passed for today. Please choose an upcoming time slot.';
+            if (showErrors) showBannerError(msg);
+            return { valid: false, message: msg };
+          }
+
+          if (showErrors) showBannerError('');
+          return { valid: true };
+        }
+
+        function updateSlotAvailability() {
+          if (!slotsList) return;
+          const now = new Date();
+          const nowMinutes = getNowMinutes(now);
+          const todaySelected = isSelectedToday(now);
+          const pastDateSelected = isSelectedPastDate(now);
+
+          const slotEls = Array.from(slotsList.querySelectorAll('.slot'));
+          let activeDisabled = false;
+          let firstAvailablePreset = null;
+          let customSlotEl = null;
+
+          slotEls.forEach(slotEl => {
+            const slotVal = slotEl.getAttribute('data-slot') || '';
+            const isOther = slotVal === 'Other (Custom Time)';
+            if (isOther) {
+              customSlotEl = slotEl;
+            }
+
+            let isDisabled = pastDateSelected;
+            if (!isDisabled && todaySelected && !isOther) {
+              const parsed = parseTimeRange(slotVal);
+              if (parsed && parsed.startMinutes <= nowMinutes) {
+                isDisabled = true;
+              }
+            }
+
+            let statusBadge = slotEl.querySelector('.pm-slot-status');
+            if (isDisabled) {
+              slotEl.classList.add('pm-slot-disabled');
+              slotEl.setAttribute('aria-disabled', 'true');
+              slotEl.dataset.disabled = 'true';
+              slotEl.title = 'This time slot has already passed';
+              if (!statusBadge) {
+                statusBadge = document.createElement('small');
+                statusBadge.className = 'pm-slot-status';
+                statusBadge.style.cssText = 'float:right;font-size:11px;font-weight:600;color:#a8a29e';
+                statusBadge.textContent = 'Unavailable';
+                slotEl.appendChild(statusBadge);
+              }
+              if (slotEl.classList.contains('on')) {
+                applySlotStyles(slotEl, false);
+                activeDisabled = true;
+              } else {
+                slotEl.style.border = '';
+                slotEl.style.background = '';
+                slotEl.style.color = '';
+                slotEl.style.fontWeight = '';
+              }
+            } else {
+              slotEl.classList.remove('pm-slot-disabled');
+              slotEl.removeAttribute('aria-disabled');
+              slotEl.dataset.disabled = 'false';
+              slotEl.removeAttribute('title');
+              if (statusBadge) statusBadge.remove();
+              if (!slotEl.classList.contains('on')) {
+                applySlotStyles(slotEl, false);
+              }
+              if (!isOther && !firstAvailablePreset) {
+                firstAvailablePreset = slotEl;
+              }
+            }
+          });
+
+          if (customStartTime) {
+            if (todaySelected) {
+              const minStart = Math.min(nowMinutes + 1, 23 * 60 + 59);
+              customStartTime.min = formatMinutes24(minStart);
+            } else {
+              customStartTime.removeAttribute('min');
+            }
+          }
+
+          if (activeDisabled) {
+            if (firstAvailablePreset) {
+              isCustomMode = false;
+              if (customTimeWrap) customTimeWrap.style.display = 'none';
+              applySlotStyles(firstAvailablePreset, true);
+              selectedSlot = firstAvailablePreset.getAttribute('data-slot');
+              showCustomError('');
+            } else if (customSlotEl && !pastDateSelected) {
+              isCustomMode = true;
+              applySlotStyles(customSlotEl, true);
+              if (customTimeWrap) customTimeWrap.style.display = 'block';
+              selectedSlot = (customTimeInput && customTimeInput.value.trim())
+                ? `Custom (${customTimeInput.value.trim()})`
+                : 'Custom Time';
+            }
+          }
+
+          if (isCustomMode) {
+            validateCustomTime(Boolean(customTimeInput && customTimeInput.value.trim()));
+          } else {
+            showCustomError('');
+          }
+          showBannerError('');
+        }
+
         function renderCalendar() {
           if (!calGrid || !monthTitle) return;
+          const now = new Date();
+          const todayStart = getTodayStart(now);
+
           monthTitle.textContent = `${months[currentMonth]} ${currentYear}`;
+
+          if (prevBtn) {
+            const minMonth = todayStart.getFullYear() * 12 + todayStart.getMonth();
+            const curTotal = currentYear * 12 + currentMonth;
+            const atMinMonth = curTotal <= minMonth;
+            prevBtn.disabled = atMinMonth;
+            prevBtn.setAttribute('aria-disabled', atMinMonth ? 'true' : 'false');
+            prevBtn.title = atMinMonth ? 'Cannot view past months' : 'Previous month';
+          }
 
           const headers = Array.from(calGrid.querySelectorAll('.h'));
           calGrid.innerHTML = '';
@@ -513,6 +838,7 @@
             const span = document.createElement('span');
             span.className = 'x pm-day';
             span.textContent = dayNum;
+            span.setAttribute('aria-disabled', 'true');
             span.style.cssText = 'font-size:13px;color:#c7c2bd;height:38px;display:flex;align-items:center;justify-content:center;cursor:default';
             calGrid.appendChild(span);
           }
@@ -520,7 +846,8 @@
           const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
           for (let day = 1; day <= daysInMonth; day++) {
             const cellDate = new Date(currentYear, currentMonth, day);
-            const isPast = cellDate < today;
+            const isPast = cellDate < todayStart;
+            const isToday = cellDate.getTime() === todayStart.getTime();
             const isSelected = (currentYear === selectedYear && currentMonth === selectedMonth && day === selectedDay);
 
             const span = document.createElement('span');
@@ -529,33 +856,70 @@
             span.textContent = day;
 
             if (isPast) {
-              span.classList.add('x');
+              span.classList.add('x', 'pm-day-past');
+              span.setAttribute('aria-disabled', 'true');
               span.title = 'Past date unavailable';
-              span.style.cssText = 'font-size:13px;color:#d6d3d1;height:38px;display:flex;align-items:center;justify-content:center;cursor:not-allowed;text-decoration:line-through';
-            } else if (isSelected) {
-              span.classList.add('d');
-              span.style.cssText = 'background:#ea580c!important;color:#ffffff!important;font-weight:700!important;height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px!important;box-shadow:0 2px 8px rgba(234,88,12,0.35)!important;cursor:pointer';
+              span.style.cssText = 'font-size:13px;color:#c7c2bd;background:#fafaf9;height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:not-allowed;text-decoration:line-through;opacity:0.6';
             } else {
-              span.style.cssText = 'font-size:13px;color:#292524;height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;transition:all 0.15s ease';
-            }
+              if (isToday) {
+                span.classList.add('pm-day-today');
+                span.title = 'Today';
+              }
+              span.setAttribute('tabindex', '0');
+              span.setAttribute('role', 'button');
+              span.setAttribute('aria-label', `${day} ${months[currentMonth]} ${currentYear}`);
+              span.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
 
-            if (!isPast) {
-              span.addEventListener('click', () => {
+              if (isSelected) {
+                span.classList.add('d');
+                span.style.cssText = 'background:#ea580c!important;color:#ffffff!important;font-weight:700!important;height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px!important;box-shadow:0 2px 8px rgba(234,88,12,0.35)!important;cursor:pointer';
+              } else {
+                span.style.cssText = 'font-size:13px;color:#292524;height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;transition:all 0.15s ease';
+              }
+
+              const selectDay = () => {
+                const liveToday = getTodayStart();
+                if (new Date(currentYear, currentMonth, day) < liveToday) {
+                  renderCalendar();
+                  return;
+                }
                 selectedYear = currentYear;
                 selectedMonth = currentMonth;
                 selectedDay = day;
+                updateSlotAvailability();
                 renderCalendar();
                 updateSummary();
+              };
+
+              span.addEventListener('click', selectDay);
+              span.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  selectDay();
+                }
               });
             }
             calGrid.appendChild(span);
           }
+
+          const totalCells = startOffset + daysInMonth;
+          const trailingDays = (7 - (totalCells % 7)) % 7;
+          for (let n = 1; n <= trailingDays; n++) {
+            const span = document.createElement('span');
+            span.className = 'x pm-day';
+            span.textContent = n;
+            span.setAttribute('aria-disabled', 'true');
+            span.style.cssText = 'font-size:13px;color:#c7c2bd;height:38px;display:flex;align-items:center;justify-content:center;cursor:default';
+            calGrid.appendChild(span);
+          }
+
           updateSummary();
         }
 
         if (prevBtn) {
           prevBtn.addEventListener('click', () => {
-            const minMonth = today.getFullYear() * 12 + today.getMonth();
+            const todayStart = getTodayStart();
+            const minMonth = todayStart.getFullYear() * 12 + todayStart.getMonth();
             const curTotal = currentYear * 12 + currentMonth;
             if (curTotal <= minMonth) return;
             currentMonth--;
@@ -576,38 +940,100 @@
           slotsList.addEventListener('click', (e) => {
             const slotEl = e.target.closest('.slot');
             if (!slotEl) return;
+            if (slotEl.dataset.disabled === 'true' || slotEl.classList.contains('pm-slot-disabled')) {
+              showBannerError('This time slot has already passed for today. Please choose an upcoming time slot.');
+              return;
+            }
+            showBannerError('');
+
             slotsList.querySelectorAll('.slot').forEach(s => {
-              s.classList.remove('on');
-              s.style.border = '1px solid #e7e5e4';
-              s.style.background = '#ffffff';
-              s.style.color = '#292524';
-              s.style.fontWeight = '500';
+              if (s.dataset.disabled !== 'true') {
+                applySlotStyles(s, false);
+              }
             });
-            slotEl.classList.add('on');
-            slotEl.style.border = '1.5px solid #ea580c';
-            slotEl.style.background = '#fff7ed';
-            slotEl.style.color = '#ea580c';
-            slotEl.style.fontWeight = '600';
+            applySlotStyles(slotEl, true);
 
             const slotVal = slotEl.getAttribute('data-slot');
             if (slotVal === 'Other (Custom Time)') {
+              isCustomMode = true;
               if (customTimeWrap) customTimeWrap.style.display = 'block';
-              if (customTimeInput) {
-                customTimeInput.focus();
-                selectedSlot = customTimeInput.value || 'Custom Time';
+              if (customTimeInput && !customTimeInput.value.trim() && customStartTime) {
+                const now = new Date();
+                const defaultStartMins = isSelectedToday(now)
+                  ? Math.min(Math.ceil((getNowMinutes(now) + 30) / 15) * 15, 23 * 60 + 30)
+                  : 7 * 60 + 15;
+                const defaultEndMins = Math.min(defaultStartMins + 120, 23 * 60 + 59);
+                customStartTime.value = formatMinutes24(defaultStartMins);
+                if (customEndTime) customEndTime.value = formatMinutes24(defaultEndMins);
+                customTimeInput.value = `${formatMinutes12(defaultStartMins)} - ${formatMinutes12(defaultEndMins)}`;
               }
+              if (customTimeInput) {
+                selectedSlot = customTimeInput.value.trim()
+                  ? `Custom (${customTimeInput.value.trim()})`
+                  : 'Custom Time';
+                customTimeInput.focus();
+              }
+              validateCustomTime(true);
             } else {
+              isCustomMode = false;
               if (customTimeWrap) customTimeWrap.style.display = 'none';
               selectedSlot = slotVal;
+              showCustomError('');
             }
             updateSummary();
           });
         }
 
+        function syncFromTimePickers() {
+          if (!customStartTime) return;
+          const startVal = customStartTime.value;
+          const endVal = customEndTime ? customEndTime.value : '';
+          const sMins = parseTimeToMinutes(startVal);
+          const eMins = parseTimeToMinutes(endVal);
+          if (sMins !== null && eMins !== null) {
+            if (customTimeInput) customTimeInput.value = `${formatMinutes12(sMins)} - ${formatMinutes12(eMins)}`;
+          } else if (sMins !== null) {
+            if (customTimeInput) customTimeInput.value = formatMinutes12(sMins);
+          }
+          if (customTimeInput) {
+            selectedSlot = customTimeInput.value.trim()
+              ? `Custom (${customTimeInput.value.trim()})`
+              : 'Custom Time';
+          }
+          validateCustomTime(true);
+          showBannerError('');
+          updateSummary();
+        }
+
+        if (customStartTime) customStartTime.addEventListener('input', syncFromTimePickers);
+        if (customEndTime) customEndTime.addEventListener('input', syncFromTimePickers);
+
         if (customTimeInput) {
           customTimeInput.addEventListener('input', (e) => {
-            selectedSlot = e.target.value ? `Custom (${e.target.value})` : 'Custom Time';
+            const val = e.target.value.trim();
+            selectedSlot = val ? `Custom (${val})` : 'Custom Time';
+            const parsed = parseTimeRange(val);
+            if (parsed) {
+              if (customStartTime) customStartTime.value = formatMinutes24(parsed.startMinutes);
+              if (customEndTime && parsed.endMinutes !== null) customEndTime.value = formatMinutes24(parsed.endMinutes);
+            }
+            validateCustomTime(true);
+            showBannerError('');
             updateSummary();
+          });
+        }
+
+        if (continueBtn) {
+          continueBtn.addEventListener('click', (e) => {
+            updateSlotAvailability();
+            const result = validateBookingDateTime({ showErrors: true });
+            if (!result.valid) {
+              e.preventDefault();
+              const dtCard = document.querySelector('.pm-datetime-card');
+              if (dtCard) dtCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              return false;
+            }
+            saveDraft();
           });
         }
 
@@ -719,6 +1145,7 @@
         });
         if (purposeSel) purposeSel.addEventListener('change', updateSummary);
 
+        updateSlotAvailability();
         renderCalendar();
       })();
     </script>

@@ -49,31 +49,76 @@
     syncSubsequentBookingPages();
   });
 
+  // Helper: parse "6:00 AM" / "16:30" to minutes since midnight
+  function parseTimeToMinutes(token) {
+    if (!token) return null;
+    const match = String(token).trim().match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/i);
+    if (!match) return null;
+    let hours = parseInt(match[1], 10);
+    const mins = match[2] ? parseInt(match[2], 10) : 0;
+    const mer = match[3] ? match[3].toLowerCase() : null;
+    if (isNaN(hours) || isNaN(mins) || mins < 0 || mins > 59) return null;
+    if (mer) {
+      if (hours < 1 || hours > 12) return null;
+      if (mer === 'am') {
+        if (hours === 12) hours = 0;
+      } else {
+        if (hours !== 12) hours += 12;
+      }
+    } else if (hours < 0 || hours > 23) {
+      return null;
+    }
+    return hours * 60 + mins;
+  }
+
+  function parseSlotStartMinutes(slotText) {
+    if (!slotText) return null;
+    const parts = String(slotText).split(/\s*[–—-]\s*|\s+to\s+/i);
+    return parseTimeToMinutes(parts[0]);
+  }
+
+  function isSameLocalDay(a, b) {
+    return a && b &&
+      a.getFullYear() === b.getFullYear() &&
+      a.getMonth() === b.getMonth() &&
+      a.getDate() === b.getDate();
+  }
+
   // =========================================================================
   // 1. BOOK PUJA FLOW (book-puja.html)
   // =========================================================================
   function initPujaBooking() {
+    // Yield to the dedicated booking engine in book-puja.html when active
+    if (window.__PM_BOOKING_ENGINE_ACTIVE) return;
+
     const calEl = document.querySelector('.cal');
     const slots = document.querySelectorAll('.slot');
     if (!calEl && !slots.length) return;
 
-    // Initial state: default 25 May 2025
-    let currentYear = 2025;
-    let currentMonth = 4; // May (0-indexed)
-    let selectedDate = new Date(2025, 4, 25);
-    let selectedTime = '8:00 AM - 10:00 AM';
+    const now = new Date();
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const defaultDate = new Date(todayStart);
+    defaultDate.setDate(todayStart.getDate() + 1);
+
+    let currentYear = defaultDate.getFullYear();
+    let currentMonth = defaultDate.getMonth();
+    let selectedDate = new Date(defaultDate);
+    let selectedTime = '8:00 AM – 10:00 AM';
     let isCustomTime = false;
     let customTimeDetail = '';
 
-    // Check if previously stored in sessionStorage
+    // Restore from sessionStorage only if date is today or in the future
     const savedDateStr = sessionStorage.getItem('pm_booking_date');
     const savedTimeStr = sessionStorage.getItem('pm_booking_time');
     if (savedDateStr) {
       const parsed = new Date(savedDateStr);
       if (!isNaN(parsed.getTime())) {
-        selectedDate = parsed;
-        currentYear = parsed.getFullYear();
-        currentMonth = parsed.getMonth();
+        const parsedStart = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+        if (parsedStart >= todayStart) {
+          selectedDate = parsedStart;
+          currentYear = parsedStart.getFullYear();
+          currentMonth = parsedStart.getMonth();
+        }
       }
     }
     if (savedTimeStr) {
@@ -81,7 +126,7 @@
     }
 
     // 1.A Enhance Calendar Header & Controls
-    const calContainer = calEl.parentElement;
+    const calContainer = calEl ? calEl.parentElement : null;
     if (calContainer) {
       // Replace static month title with interactive nav
       const existingTitle = calContainer.querySelector('b');
@@ -102,6 +147,10 @@
         const nextBtn = document.getElementById('calNextBtn');
         if (prevBtn) {
           prevBtn.onclick = () => {
+            const liveNow = new Date();
+            const minMonth = liveNow.getFullYear() * 12 + liveNow.getMonth();
+            const curTotal = currentYear * 12 + currentMonth;
+            if (curTotal <= minMonth) return;
             currentMonth--;
             if (currentMonth < 0) {
               currentMonth = 11;
@@ -123,11 +172,71 @@
       }
     }
 
+    function updateSlotStates() {
+      const liveNow = new Date();
+      const liveToday = new Date(liveNow.getFullYear(), liveNow.getMonth(), liveNow.getDate());
+      const nowMins = liveNow.getHours() * 60 + liveNow.getMinutes();
+      const isTodaySel = isSameLocalDay(selectedDate, liveToday);
+      const isPastDaySel = selectedDate < liveToday;
+
+      let activeSlotInvalid = false;
+      let firstEligibleSlot = null;
+
+      slots.forEach(slot => {
+        const rawSlot = (slot.getAttribute('data-slot') || slot.textContent || '').trim();
+        const isOther = rawSlot.includes('Other (Custom Time)') || rawSlot.includes('Custom:');
+        let disabled = isPastDaySel;
+
+        if (!disabled && isTodaySel && !isOther) {
+          const startMins = parseSlotStartMinutes(rawSlot);
+          if (startMins !== null && startMins <= nowMins) {
+            disabled = true;
+          }
+        }
+
+        if (disabled) {
+          slot.classList.add('pm-slot-disabled');
+          slot.setAttribute('aria-disabled', 'true');
+          slot.dataset.disabled = 'true';
+          slot.title = 'This time slot has already passed for today';
+          if (slot.classList.contains('on')) {
+            slot.classList.remove('on');
+            activeSlotInvalid = true;
+          }
+        } else {
+          slot.classList.remove('pm-slot-disabled');
+          slot.removeAttribute('aria-disabled');
+          slot.dataset.disabled = 'false';
+          slot.removeAttribute('title');
+          if (!firstEligibleSlot && !isOther) {
+            firstEligibleSlot = slot;
+          }
+        }
+      });
+
+      if (activeSlotInvalid && firstEligibleSlot) {
+        firstEligibleSlot.classList.add('on');
+        isCustomTime = false;
+        selectedTime = (firstEligibleSlot.getAttribute('data-slot') || firstEligibleSlot.textContent).trim();
+        const box = document.getElementById('customTimeBox');
+        if (box) box.style.display = 'none';
+      }
+    }
+
     // Calendar render function
     function renderCalendar(year, month) {
+      const liveNow = new Date();
+      const liveToday = new Date(liveNow.getFullYear(), liveNow.getMonth(), liveNow.getDate());
       const monthTitle = document.getElementById('calMonthTitle');
       if (monthTitle) {
         monthTitle.textContent = `${MONTH_NAMES[month]} ${year}`;
+      }
+
+      const prevBtn = document.getElementById('calPrevBtn');
+      if (prevBtn) {
+        const isAtMin = (year * 12 + month) <= (liveToday.getFullYear() * 12 + liveToday.getMonth());
+        prevBtn.disabled = isAtMin;
+        prevBtn.setAttribute('aria-disabled', isAtMin ? 'true' : 'false');
       }
 
       if (!calEl) return;
@@ -160,38 +269,43 @@
       // Days in current month
       const daysInMonth = new Date(year, month + 1, 0).getDate();
       for (let d = 1; d <= daysInMonth; d++) {
+        const cellDate = new Date(year, month, d);
+        const isPast = cellDate < liveToday;
         const span = document.createElement('span');
         span.textContent = d;
-        span.className = 'day-cell';
-        span.style.cursor = 'pointer';
-        span.style.transition = 'all .15s ease';
-        span.setAttribute('tabindex', '0');
-        span.setAttribute('role', 'button');
-        span.setAttribute('aria-label', `${d} ${MONTH_NAMES[month]} ${year}`);
 
-        // Check if selected
-        if (
-          selectedDate &&
-          selectedDate.getFullYear() === year &&
-          selectedDate.getMonth() === month &&
-          selectedDate.getDate() === d
-        ) {
-          span.classList.add('d');
-        }
+        if (isPast) {
+          span.className = 'x pm-day-past';
+          span.setAttribute('aria-disabled', 'true');
+          span.title = 'Past date unavailable';
+          span.style.cursor = 'not-allowed';
+        } else {
+          span.className = 'day-cell';
+          span.style.cursor = 'pointer';
+          span.style.transition = 'all .15s ease';
+          span.setAttribute('tabindex', '0');
+          span.setAttribute('role', 'button');
+          span.setAttribute('aria-label', `${d} ${MONTH_NAMES[month]} ${year}`);
 
-        span.onclick = () => {
-          selectedDate = new Date(year, month, d);
-          calEl.querySelectorAll('.day-cell').forEach(c => c.classList.remove('d'));
-          span.classList.add('d');
-          updateBookingSummary();
-        };
-
-        span.onkeydown = (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            span.click();
+          if (isSameLocalDay(selectedDate, cellDate)) {
+            span.classList.add('d');
           }
-        };
+
+          span.onclick = () => {
+            selectedDate = new Date(year, month, d);
+            calEl.querySelectorAll('.day-cell').forEach(c => c.classList.remove('d'));
+            span.classList.add('d');
+            updateSlotStates();
+            updateBookingSummary();
+          };
+
+          span.onkeydown = (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              span.click();
+            }
+          };
+        }
 
         calEl.appendChild(span);
       }
@@ -210,6 +324,7 @@
 
     // Initial calendar render
     renderCalendar(currentYear, currentMonth);
+    updateSlotStates();
 
     // 1.B Enhance Time Slots & Add "Other (Custom Time)" Customizer
     const slotsContainer = slots[0]?.parentElement;
@@ -317,6 +432,25 @@
         // Apply Custom Time Button
         if (applyBtn) {
           applyBtn.onclick = () => {
+            const liveNow = new Date();
+            const liveToday = new Date(liveNow.getFullYear(), liveNow.getMonth(), liveNow.getDate());
+            const nowMins = liveNow.getHours() * 60 + liveNow.getMinutes();
+            const startMins = parseTimeToMinutes(startInput.value);
+            const endMins = parseTimeToMinutes(endInput.value);
+
+            if (startMins === null || endMins === null) {
+              showCustomToast('Please select valid start and end times.');
+              return;
+            }
+            if (endMins <= startMins) {
+              showCustomToast('End time must be after start time.');
+              return;
+            }
+            if (selectedDate < liveToday || (isSameLocalDay(selectedDate, liveToday) && startMins <= nowMins)) {
+              showCustomToast('Past time is unavailable. Please choose an upcoming time.');
+              return;
+            }
+
             const s = formatTime12(startInput.value);
             const e = formatTime12(endInput.value);
             const note = noteInput.value.trim();
@@ -341,6 +475,10 @@
       slots.forEach(slot => {
         slot.style.cursor = 'pointer';
         slot.onclick = () => {
+          if (slot.dataset.disabled === 'true' || slot.classList.contains('pm-slot-disabled')) {
+            showCustomToast('This time slot has already passed for today.');
+            return;
+          }
           slots.forEach(s => s.classList.remove('on'));
           slot.classList.add('on');
 
