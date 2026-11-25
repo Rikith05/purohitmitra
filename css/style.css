@@ -1520,9 +1520,7 @@ header .wrap.nav, .top .wrap.nav, .nav {
    INTERACTIVE BUBBLE POP-OUT EFFECT ON HOVER & SELECTION
    ========================================================================== */
 .card.pc,
-.card.prc,
 .g5 .card,
-.g4 .card,
 .g3 .card.pad0,
 .circ > a,
 .circ > div,
@@ -1537,9 +1535,7 @@ header .wrap.nav, .top .wrap.nav, .nav {
 }
 
 .card.pc:hover,
-.card.prc:hover,
 .g5 .card:hover,
-.g4 .card:hover,
 .g3 .card.pad0:hover,
 .recs > a:hover,
 .recs > div:hover,
@@ -1563,25 +1559,20 @@ header .wrap.nav, .top .wrap.nav, .nav {
 }
 
 .card.pc img,
-.card.prc img,
 .g5 .card img {
   transition: transform 0.35s ease !important;
 }
 
 .card.pc:hover img,
-.card.prc:hover img,
 .g5 .card:hover img {
   transform: scale(1.06) !important;
 }
 
 .card.pc:active,
-.card.prc:active,
 .g5 .card:active,
 .card.pc.selected,
-.card.prc.selected,
 .g5 .card.selected,
-.card.pc.on,
-.card.prc.on {
+.card.pc.on {
   transform: translateY(-4px) scale(1.02) !important;
   border-color: #ea580c !important;
   box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.16), 0 12px 26px rgba(234, 88, 12, 0.2) !important;
@@ -1627,4 +1618,18 @@ header .wrap.nav, .top .wrap.nav, .nav {
 .acts button:active {
   transform: translateY(-1px) scale(0.98) !important;
   box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2) !important;
+}
+
+/* Keep Purohit cards stationary; only View Details & Book Now buttons bubble */
+.card.prc,
+.card.prc:hover,
+.card.prc:active,
+.card.prc.selected,
+.card.prc:hover img {
+  transform: none !important;
+  cursor: default !important;
+}
+.card.prc:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  border-color: var(--bd, #fed7aa) !important;
 }
