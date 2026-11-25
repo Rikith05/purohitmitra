@@ -878,7 +878,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logout) {
     logout.onclick = (e) => {
       e.preventDefault();
-      if (confirm("Are you sure you want to log out?")) {
+      if (typeof window.pmLogout === "function") {
+        window.pmLogout();
+      } else {
+        localStorage.removeItem("pm_logged_in");
+        localStorage.removeItem("pm_user_role");
         toast("Logged out successfully");
         setTimeout(() => {
           window.location.href = "../index.html";
