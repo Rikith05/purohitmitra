@@ -124,6 +124,7 @@
             <p>Manage your addresses for puja bookings.</p>
           </div>
           <button class="btn-o" id="addA">+ Add New Address</button>
+              <button type="button" class="btn mo" onclick="window.pmOpenMapPicker && window.pmOpenMapPicker('Hyderabad', function(loc){ if(window.pmToast) window.pmToast('📍 Map Location Selected: ' + loc.address); })" style="margin-left:8px;cursor:pointer">📍 Pick on Map</button>
         </div>
         <section class="card">
           <div class="tabs" id="aTabs">
@@ -171,6 +172,7 @@
       </main>
     </div>
     <!-- Scripts: shared first, then page-specific -->
+    <script src="js/maps.js"></script>
     <script src="js/common.js"></script>
     <script src="js/profile.js"></script>
       <script src="js/auth.js"></script>

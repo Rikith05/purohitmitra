@@ -132,37 +132,48 @@
         <div class="wrap" style="display:grid;grid-template-columns:220px 1fr;gap:20px;margin-top:20px">
           <aside class="filter-panel">
             <h3>Filters</h3>
-            <p style="margin-top:10px"><b>📍 Location</b></p>
-            <div class="f"><div class="in" style="font-size:13px;color:var(--mu)">Hyderabad, Telangana</div></div>
-            <b>Specialization</b>
-            <ul id="purohitSpecList">
-              <li class="on" data-spec="">All Specializations</li>
-              <li data-spec="homa">Vedic Rituals &amp; Havan</li>
-              <li data-spec="griha">Griha Pravesh &amp; Vastu</li>
-              <li data-spec="vivaha">Marriage &amp; Samskara</li>
-              <li data-spec="satya">Vratas &amp; Upvas</li>
-              <li data-spec="rudra">Rudrabhishek</li>
-            </ul>
-            <b>Languages Known</b>
-            <ul id="purohitLangList">
-              <li class="on" data-lang="">All Languages</li>
-              <li data-lang="telugu">Telugu</li>
-              <li data-lang="sanskrit">Sanskrit</li>
-              <li data-lang="hindi">Hindi</li>
-              <li data-lang="tamil">Tamil</li>
-              <li data-lang="kannada">Kannada</li>
-            </ul>
-            <b>Experience</b>
-            <ul>
-              <li>☐ 1 - 5 Years</li>
-              <li>☐ 5 - 10 Years</li>
-              <li>☐ 10 - 20 Years</li>
-              <li>☐ 20+ Years</li>
-            </ul>
-            <b>Price Range (Dakshina)</b>
-            <div class="bar"><span style="background:var(--o)"></span></div>
-            <p class="mu">₹ 500 — ₹ 10,000+</p>
-            <button type="button" class="btn w" onclick="resetPurohitFilters()" style="margin-top:10px">Clear Filters</button>
+    <p style="margin-top:10px"><b>📍 Location</b></p>
+    <div class="f" style="margin-bottom:10px">
+      <select id="purohitSidebarLoc" class="in" style="width:100%;font-size:13px;padding:7px 10px;border:1px solid var(--bd);border-radius:7px;background:#fff;cursor:pointer">
+        <option value="">All Locations</option>
+        <option value="Hyderabad" selected>Hyderabad, Telangana</option>
+        <option value="Bengaluru">Bengaluru, Karnataka</option>
+        <option value="Chennai">Chennai, Tamil Nadu</option>
+        <option value="Mumbai">Mumbai, Maharashtra</option>
+        <option value="Delhi NCR">Delhi NCR</option>
+      </select>
+    </div>
+    <b>Specialization</b>
+    <ul id="purohitSpecList">
+      <li class="on" data-spec="">All Specializations</li>
+      <li data-spec="homa">Vedic Rituals &amp; Havan</li>
+      <li data-spec="griha">Griha Pravesh &amp; Vastu</li>
+      <li data-spec="vivaha">Marriage &amp; Samskara</li>
+      <li data-spec="satya">Vratas &amp; Upvas</li>
+      <li data-spec="rudra">Rudrabhishek</li>
+    </ul>
+    <b>Languages Known</b>
+    <ul id="purohitLangList">
+      <li class="on" data-lang="">All Languages</li>
+      <li data-lang="telugu">Telugu</li>
+      <li data-lang="sanskrit">Sanskrit</li>
+      <li data-lang="hindi">Hindi</li>
+      <li data-lang="tamil">Tamil</li>
+      <li data-lang="kannada">Kannada</li>
+    </ul>
+    <b>Experience</b>
+    <ul id="purohitExpList">
+      <li><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" class="purohit-exp-cb" value="1-5"> 1 - 5 Years</label></li>
+      <li><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" class="purohit-exp-cb" value="5-10"> 5 - 10 Years</label></li>
+      <li><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" class="purohit-exp-cb" value="10-20"> 10 - 20 Years</label></li>
+      <li><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" class="purohit-exp-cb" value="20+"> 20+ Years</label></li>
+    </ul>
+    <b>Price Range (Dakshina)</b>
+    <div style="margin:8px 0">
+      <input type="range" id="dakshinaRange" min="500" max="10000" step="500" value="10000" style="width:100%;accent-color:var(--o);cursor:pointer" />
+    </div>
+    <p class="mu" id="dakshinaRangeVal" style="font-size:12.5px;font-weight:600;color:var(--o)">₹ 500 — ₹ 10,000+</p>
+    <button type="button" class="btn w" onclick="resetPurohitFilters()" style="margin-top:10px">Clear Filters</button>
           </aside>
           <div>
             <div class="head">
@@ -172,11 +183,13 @@
                   <option value="rating" selected>Highest Rated</option>
                   <option value="exp">Most Experienced</option>
                   <option value="reviews">Most Reviewed</option>
+          <option value="price-asc">Dakshina: Low to High</option>
+          <option value="price-desc">Dakshina: High to Low</option>
                 </select>
               </span>
             </div>
             <div class="grid g3">
-<div class="card pad0 prc" data-spec="griha satya homa" data-name="sri venkatesh dikshith" data-lang="telugu, tamil, sanskrit, hindi" data-exp="20">
+<div class="card pad0 prc" data-spec="griha satya homa" data-name="sri venkatesh dikshith" data-lang="telugu, tamil, sanskrit, hindi" data-exp="20" data-price="2500" data-loc="Hyderabad">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_venkatesh.jpg" alt="Sri Venkatesh Dikshith"></div>
     <span class="badge o" style="position:absolute;top:8px;left:8px">Top Rated</span>
@@ -192,7 +205,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="griha vivaha" data-name="pandit narayan shastri" data-lang="telugu, sanskrit, hindi" data-exp="15">
+<div class="card pad0 prc" data-spec="griha vivaha" data-name="pandit narayan shastri" data-lang="telugu, sanskrit, hindi" data-exp="15" data-price="3100" data-loc="Hyderabad">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_narayan.jpg" alt="Pandit Narayan Shastri"></div>
     <span class="badge o" style="position:absolute;top:8px;left:8px">Highly Recommended</span>
@@ -208,7 +221,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="satya homa" data-name="pandit raghav sharma" data-lang="hindi, sanskrit, kannada" data-exp="12">
+<div class="card pad0 prc" data-spec="satya homa" data-name="pandit raghav sharma" data-lang="hindi, sanskrit, kannada" data-exp="12" data-price="2100" data-loc="Bengaluru">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_raghav.jpg" alt="Pandit Raghav Sharma"></div>
     
@@ -224,7 +237,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="homa rudra" data-name="acharya madhusudan" data-lang="telugu, hindi, sanskrit" data-exp="18">
+<div class="card pad0 prc" data-spec="homa rudra" data-name="acharya madhusudan" data-lang="telugu, hindi, sanskrit" data-exp="18" data-price="3500" data-loc="Hyderabad">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_madhusudan.jpg" alt="Acharya Madhusudan"></div>
     <span class="badge o" style="position:absolute;top:8px;left:8px">Top Rated</span>
@@ -240,7 +253,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="navagraha homa pitru" data-name="pandit somashekar" data-lang="sanskrit, telugu, kannada, hindi" data-exp="25">
+<div class="card pad0 prc" data-spec="navagraha homa pitru" data-name="pandit somashekar" data-lang="sanskrit, telugu, kannada, hindi" data-exp="25" data-price="5100" data-loc="Bengaluru">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_somashekar.jpg" alt="Pandit Somashekar"></div>
     
@@ -256,7 +269,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="griha satya" data-name="pandit gopal krishna" data-lang="telugu, hindi" data-exp="8">
+<div class="card pad0 prc" data-spec="griha satya" data-name="pandit gopal krishna" data-lang="telugu, hindi" data-exp="8" data-price="1500" data-loc="Hyderabad">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_gopalkrishna.jpg" alt="Pandit Gopal Krishna"></div>
     <span class="badge o" style="position:absolute;top:8px;left:8px">Budget Friendly</span>
@@ -272,7 +285,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="griha homa" data-name="sri ramachandra upadhyaya" data-lang="telugu, sanskrit, english" data-exp="16">
+<div class="card pad0 prc" data-spec="griha homa" data-name="sri ramachandra upadhyaya" data-lang="telugu, sanskrit, english" data-exp="16" data-price="2800" data-loc="Hyderabad">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_narayan.jpg" alt="Sri Ramachandra Upadhyaya"></div>
     <span class="badge o" style="position:absolute;top:8px;left:8px">Rigveda Specialist</span>
@@ -288,7 +301,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="vivaha homa" data-name="acharya vidyadhar joshi" data-lang="hindi, marathi, sanskrit" data-exp="22">
+<div class="card pad0 prc" data-spec="vivaha homa" data-name="acharya vidyadhar joshi" data-lang="hindi, marathi, sanskrit" data-exp="22" data-price="4500" data-loc="Mumbai">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_madhusudan.jpg" alt="Acharya Vidyadhar Joshi"></div>
     <span class="badge o" style="position:absolute;top:8px;left:8px">Top Rated</span>
@@ -304,7 +317,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="navagraha homa" data-name="pandit anantharaman" data-lang="tamil, telugu, sanskrit" data-exp="14">
+<div class="card pad0 prc" data-spec="navagraha homa" data-name="pandit anantharaman" data-lang="tamil, telugu, sanskrit" data-exp="14" data-price="2200" data-loc="Chennai">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_venkatesh.jpg" alt="Pandit Anantharaman"></div>
     
@@ -320,7 +333,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="satya homa" data-name="pandit keshavacharya" data-lang="telugu, kannada, sanskrit" data-exp="19">
+<div class="card pad0 prc" data-spec="satya homa" data-name="pandit keshavacharya" data-lang="telugu, kannada, sanskrit" data-exp="19" data-price="3200" data-loc="Hyderabad">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_raghav.jpg" alt="Pandit Keshavacharya"></div>
     <span class="badge o" style="position:absolute;top:8px;left:8px">Pancharatra Agama</span>
@@ -336,7 +349,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="rudra" data-name="pandit badrinath dixit" data-lang="hindi, sanskrit, english" data-exp="11">
+<div class="card pad0 prc" data-spec="rudra" data-name="pandit badrinath dixit" data-lang="hindi, sanskrit, english" data-exp="11" data-price="1800" data-loc="Delhi NCR">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_somashekar.jpg" alt="Pandit Badrinath Dixit"></div>
     <span class="badge o" style="position:absolute;top:8px;left:8px">Samaveda Specialist</span>
@@ -352,7 +365,7 @@
     </div>
   </div>
 </div>
-<div class="card pad0 prc" data-spec="pitru navagraha" data-name="pandit dattatreya shastri" data-lang="telugu, sanskrit, hindi" data-exp="24">
+<div class="card pad0 prc" data-spec="pitru navagraha" data-name="pandit dattatreya shastri" data-lang="telugu, sanskrit, hindi" data-exp="24" data-price="4100" data-loc="Hyderabad">
   <div style="position:relative">
     <div class="ph f"><img src="images/purohit_gopalkrishna.jpg" alt="Pandit Dattatreya Shastri"></div>
     <span class="badge o" style="position:absolute;top:8px;left:8px">Vedic Scholar</span>

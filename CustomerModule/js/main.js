@@ -545,10 +545,16 @@ function initPurohitSearchAndPagination() {
   const grid = document.querySelector('.grid.g3');
   const searchInput = document.getElementById('purohitSearchInput');
   const specSelect = document.getElementById('heroPurohitSpec');
+  const locSelect = document.getElementById('purohitLocSelect');
+  const sidebarLoc = document.getElementById('purohitSidebarLoc');
   const countEl = document.querySelector('.head span:first-child');
   const paginationContainer = document.getElementById('purohitPagination');
   const specItems = document.querySelectorAll('#purohitSpecList li');
   const langItems = document.querySelectorAll('#purohitLangList li');
+  const expCheckboxes = document.querySelectorAll('.purohit-exp-cb');
+  const dakshinaRange = document.getElementById('dakshinaRange');
+  const dakshinaRangeVal = document.getElementById('dakshinaRangeVal');
+  const sortSelect = document.getElementById('sortPurohits');
 
   if (!grid) return;
   const cards = Array.from(grid.querySelectorAll('.card.prc'));
@@ -559,6 +565,9 @@ function initPurohitSearchAndPagination() {
   let activeSpec = '';
   let activeLang = '';
   let activeQuery = '';
+  let activeLoc = '';
+  let maxDakshina = 10000;
+  let selectedExp = [];
 
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('q')) {
@@ -569,20 +578,67 @@ function initPurohitSearchAndPagination() {
     activeSpec = urlParams.get('spec').toLowerCase();
     if (specSelect) specSelect.value = activeSpec;
   }
+  if (urlParams.has('loc')) {
+    activeLoc = urlParams.get('loc').toLowerCase();
+    if (locSelect) locSelect.value = urlParams.get('loc');
+    if (sidebarLoc) sidebarLoc.value = urlParams.get('loc');
+  }
+
+  function parseCardMeta(card) {
+    const txt = card.innerText || '';
+    const ratingMatch = txt.match(/([45]\.\d)/);
+    const reviewsMatch = txt.match(/\((\d+)\s*reviews?\)/i);
+    return {
+      rating: ratingMatch ? parseFloat(ratingMatch[1]) : 4.8,
+      reviews: reviewsMatch ? parseInt(reviewsMatch[1], 10) : 50,
+      exp: parseInt(card.dataset.exp || '10', 10),
+      price: parseInt(card.dataset.price || '2500', 10),
+      loc: (card.dataset.loc || 'hyderabad').toLowerCase()
+    };
+  }
+
+  function matchesExpRange(exp) {
+    if (!selectedExp.length) return true;
+    return selectedExp.some(r => {
+      if (r === '1-5') return exp >= 1 && exp <= 5;
+      if (r === '5-10') return exp > 5 && exp <= 10;
+      if (r === '10-20') return exp > 10 && exp <= 20;
+      if (r === '20+') return exp > 20;
+      return true;
+    });
+  }
 
   function getMatchingCards() {
-    return cards.filter(card => {
+    const filtered = cards.filter(card => {
       const name = (card.querySelector('h3') || {}).innerText?.toLowerCase() || '';
       const text = card.innerText?.toLowerCase() || '';
       const spec = (card.dataset.spec || '').toLowerCase();
       const lang = (card.dataset.lang || '').toLowerCase();
+      const meta = parseCardMeta(card);
 
       const matchesQuery = !activeQuery || name.includes(activeQuery) || text.includes(activeQuery);
       const matchesSpec = !activeSpec || spec.includes(activeSpec);
       const matchesLang = !activeLang || lang.includes(activeLang);
+      const matchesLoc = !activeLoc || meta.loc === activeLoc || text.includes(activeLoc);
+      const matchesPrice = maxDakshina >= 10000 || meta.price <= maxDakshina;
+      const matchesExp = matchesExpRange(meta.exp);
 
-      return matchesQuery && matchesSpec && matchesLang;
+      return matchesQuery && matchesSpec && matchesLang && matchesLoc && matchesPrice && matchesExp;
     });
+
+    if (sortSelect) {
+      const sortVal = sortSelect.value;
+      filtered.sort((a, b) => {
+        const ma = parseCardMeta(a);
+        const mb = parseCardMeta(b);
+        if (sortVal === 'exp') return mb.exp - ma.exp;
+        if (sortVal === 'reviews') return mb.reviews - ma.reviews;
+        if (sortVal === 'price-asc') return ma.price - mb.price;
+        if (sortVal === 'price-desc') return mb.price - ma.price;
+        return mb.rating - ma.rating;
+      });
+    }
+    return filtered;
   }
 
   function renderPage() {
@@ -597,7 +653,10 @@ function initPurohitSearchAndPagination() {
     const startIdx = (currentPage - 1) * pageSize;
     const endIdx = Math.min(startIdx + pageSize, totalMatching);
     const visibleCards = matching.slice(startIdx, endIdx);
-    visibleCards.forEach(c => c.style.display = 'block');
+    visibleCards.forEach(c => {
+      grid.appendChild(c);
+      c.style.display = 'block';
+    });
 
     if (countEl) {
       if (totalMatching === 0) {
@@ -615,11 +674,11 @@ function initPurohitSearchAndPagination() {
         noMatchEl.style.cssText = 'text-align:center;padding:40px 20px;grid-column:1/-1;color:var(--mu);background:#fff;border-radius:12px;border:1px dashed var(--bd)';
         noMatchEl.innerHTML = `
           <h3 style="color:var(--m);font-size:18px;margin-bottom:8px">No Purohits Found</h3>
-          <p style="font-size:13px;margin-bottom:14px">We couldn't find any purohits matching your search criteria.</p>
+          <p style="font-size:13px;margin-bottom:14px">We couldn't find any purohits matching your filter criteria.</p>
           <button type="button" class="btn p s" onclick="resetPurohitFilters()">Show All Purohits</button>
         `;
-        grid.appendChild(noMatchEl);
       }
+      grid.appendChild(noMatchEl);
       noMatchEl.style.display = 'block';
     } else if (noMatchEl) {
       noMatchEl.style.display = 'none';
@@ -653,8 +712,16 @@ function initPurohitSearchAndPagination() {
     activeQuery = '';
     activeSpec = '';
     activeLang = '';
+    activeLoc = '';
+    maxDakshina = 10000;
+    selectedExp = [];
     if (searchInput) searchInput.value = '';
     if (specSelect) specSelect.value = '';
+    if (locSelect) locSelect.value = '';
+    if (sidebarLoc) sidebarLoc.value = '';
+    if (dakshinaRange) dakshinaRange.value = '10000';
+    if (dakshinaRangeVal) dakshinaRangeVal.textContent = '₹ 500 — ₹ 10,000+';
+    expCheckboxes.forEach(cb => cb.checked = false);
     specItems.forEach(el => el.classList.remove('on'));
     if (specItems[0]) specItems[0].classList.add('on');
     langItems.forEach(el => el.classList.remove('on'));
@@ -683,6 +750,21 @@ function initPurohitSearchAndPagination() {
     });
   }
 
+  function syncLocationFilter(val) {
+    activeLoc = (val || '').toLowerCase();
+    if (locSelect && locSelect.value.toLowerCase() !== activeLoc) locSelect.value = val;
+    if (sidebarLoc && sidebarLoc.value.toLowerCase() !== activeLoc) sidebarLoc.value = val;
+    currentPage = 1;
+    renderPage();
+  }
+
+  if (locSelect) {
+    locSelect.addEventListener('change', (e) => syncLocationFilter(e.target.value));
+  }
+  if (sidebarLoc) {
+    sidebarLoc.addEventListener('change', (e) => syncLocationFilter(e.target.value));
+  }
+
   specItems.forEach(li => {
     li.style.cursor = 'pointer';
     li.addEventListener('click', function() {
@@ -706,9 +788,36 @@ function initPurohitSearchAndPagination() {
     });
   });
 
+  expCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      selectedExp = Array.from(expCheckboxes).filter(c => c.checked).map(c => c.value);
+      currentPage = 1;
+      renderPage();
+    });
+  });
+
+  if (dakshinaRange) {
+    dakshinaRange.addEventListener('input', (e) => {
+      maxDakshina = parseInt(e.target.value, 10);
+      if (dakshinaRangeVal) {
+        dakshinaRangeVal.textContent = maxDakshina >= 10000
+          ? '₹ 500 — ₹ 10,000+'
+          : `Up to ₹ ${maxDakshina.toLocaleString('en-IN')}`;
+      }
+      currentPage = 1;
+      renderPage();
+    });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener('change', () => {
+      currentPage = 1;
+      renderPage();
+    });
+  }
+
   renderPage();
 }
-
 
 // ===== DOM Ready Initializations =====
 

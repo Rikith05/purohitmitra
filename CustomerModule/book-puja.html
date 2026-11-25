@@ -176,7 +176,111 @@
                   </div>
                 </div>
               </div>
-            </div></div><div class="card" style="margin-bottom:12px"><h3 style="margin-bottom:8px">2. Location Details</h3><p class="mu">Puja will be conducted at</p><p>◉ At Home &nbsp; ○ At Temple &nbsp; ○ Other Location</p><div class="f"><label>Full Address</label><div class="in t">House / Flat No., Street, Area, Landmark</div></div><div class="fr c3"><div class="f"><label for="citySelect">City</label><select id="citySelect" class="in"><option value="Hyderabad" selected>Hyderabad</option><option value="Bengaluru">Bengaluru</option><option value="Chennai">Chennai</option><option value="Mumbai">Mumbai</option><option value="Delhi NCR">Delhi NCR</option><option value="Pune">Pune</option><option value="Visakhapatnam">Visakhapatnam</option><option value="Vijayawada">Vijayawada</option></select></div><div class="f"><label for="stateSelect">State</label><select id="stateSelect" class="in"><option value="Telangana" selected>Telangana</option><option value="Andhra Pradesh">Andhra Pradesh</option><option value="Karnataka">Karnataka</option><option value="Maharashtra">Maharashtra</option><option value="Tamil Nadu">Tamil Nadu</option><option value="Delhi">Delhi NCR</option></select></div><div class="f"><label>Pincode</label><div class="in ">500081</div></div></div><label><input type="checkbox"> Use my current location</label></div><div class="card" style="margin-bottom:12px"><h3 style="margin-bottom:8px">3. Puja Details</h3><div class="fr c2"><div class="f"><label for="pujaPurpose">Purpose of Puja *</label><select id="pujaPurpose" class="in"><option value="Griha Pravesh" selected>Griha Pravesh Puja</option><option value="Satyanarayana">Satyanarayana Puja</option><option value="Ganesh">Ganesh Puja</option><option value="Vivaha">Vivaha (Wedding) Puja</option><option value="Navagraha">Navagraha Shanti Puja</option><option value="Namakarana">Namakarana Puja</option><option value="Rudrabhishek">Rudrabhishek Puja</option><option value="Pitru Paksha">Pitru Paksha Puja</option><option value="Devi">Devi Puja</option></select></div><div class="f"><label>Number of Family Members *</label><div class="in-counter"><button type="button" class="btn-dec" aria-label="Decrease members">−</button><b class="count-val">5</b><button type="button" class="btn-inc" aria-label="Increase members">+</button></div></div><div class="f"><label>Any Special Requirements / Instructions</label><div class="in t">e.g. Preferred muhurat, specific prayers, gotra, etc.</div></div><div class="f"><label>Upload House Plan (Optional)</label><div class="in ">⬆ Upload File<br><span class="mu">PDF, JPG, PNG up to 5MB</span></div></div></div></div><div class="card" style="margin-bottom:12px"><h3 style="margin-bottom:8px">4. Contact Person Details</h3><div class="fr c3"><div class="f"><label>Full Name *</label><div class="in ">Ramesh Kumar</div></div><div class="f"><label>Mobile Number *</label><div class="in ">+91 &nbsp; 98765 43210</div></div><div class="f"><label>Email Address</label><div class="in ">rameshkumar@gmail.com</div></div></div><div class="note"><b>Important Note</b><br>Please ensure all details are correct. Purohit will reach out to you on the provided contact number.</div></div><div style="display:flex;justify-content:space-between"><a class="btn" href="puja-details.html">← Back</a><a class="btn p" style="width:200px" href="choose-purohit.html">Continue →</a></div></div><div class="grid"><div class="card pad0"><div class="ph" style="height:140px;border-radius:0;background:none;overflow:hidden"><img src="images/puja_griha_pravesh.jpg" alt="Griha Pravesh Puja" style="width:100%;height:100%;object-fit:cover"></div><div class="b"><h3>Griha Pravesh Puja</h3><p class="mu">Purifies your new home and brings positive energy, happiness and prosperity.</p><p class="mu">🕐 2 - 3 Hours &nbsp; 🏠 At Home &nbsp; ₹ 2,500 onwards</p></div></div><div class="card"><h3>Booking Summary</h3><div class="kv"><span>Puja</span><span>Griha Pravesh Puja</span></div><div class="kv"><span>Date</span><span id="bkSummaryDate" style="color:#e8590c;font-weight:600">25 May 2025, Sunday</span></div><div class="kv"><span>Time</span><span id="bkSummaryTime" style="color:#e8590c;font-weight:600">8:00 AM - 10:00 AM</span></div><div class="kv"><span>Location</span><span id="bkSummaryLocation">At Home, Hyderabad</span></div><div class="kv"><span>Purohit</span><span>To be Selected</span></div><div class="kv"><span>Add-ons</span><span>No add-ons selected</span></div></div><div class="card" style="background:var(--cr)"><h3>Why book with PurohitMitra?</h3><ul class="ck"><li>Verified &amp; Experienced Purohits</li><li>Transparent Pricing</li><li>Complete Puja as per Vedic Vidhi</li><li>Puja Samagri Guidance</li><li>On-time &amp; Hassle-free Service</li><li>24/7 Customer Support</li></ul></div><div class="card"><h3>Need Help?</h3><p class="mu">Our support team is here for you</p><p style="margin-top:8px">📞 +91 12345 67890<br>✉ support@purohitmitra.com<br>🕗 Mon - Sun: 8:00 AM - 9:00 PM</p></div></div></div></div><div class="wrap"><div class="trust">
+            </div></div><div class="card" style="margin-bottom:12px">
+  <h3 style="margin-bottom:8px">2. Location Details</h3>
+  <p class="mu" style="margin-bottom:8px">Puja will be conducted at</p>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px" id="bkConductedAtGroup">
+    <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:13.5px;font-weight:600;padding:6px 14px;border-radius:999px;border:1.5px solid #ea580c;background:#fff7ed;color:#ea580c">
+      <input type="radio" name="bkConductedAt" value="At Home" checked style="accent-color:#ea580c"> At Home
+    </label>
+    <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:13.5px;font-weight:500;padding:6px 14px;border-radius:999px;border:1px solid #e7e5e4;background:#fff;color:#292524">
+      <input type="radio" name="bkConductedAt" value="At Temple" style="accent-color:#ea580c"> At Temple
+    </label>
+    <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:13.5px;font-weight:500;padding:6px 14px;border-radius:999px;border:1px solid #e7e5e4;background:#fff;color:#292524">
+      <input type="radio" name="bkConductedAt" value="Other Location" style="accent-color:#ea580c"> Other Location
+    </label>
+  </div>
+  <div class="f">
+    <label for="bkFullAddress">Full Address *</label>
+    <textarea id="bkFullAddress" class="in t" rows="2" placeholder="House / Flat No., Street, Area, Landmark" style="width:100%;box-sizing:border-box;resize:vertical;font-family:inherit"></textarea>
+  </div>
+  <div class="fr c3">
+    <div class="f">
+      <label for="citySelect">City</label>
+      <select id="citySelect" class="in">
+        <option value="Hyderabad" selected>Hyderabad</option>
+        <option value="Bengaluru">Bengaluru</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi NCR">Delhi NCR</option>
+        <option value="Pune">Pune</option>
+        <option value="Visakhapatnam">Visakhapatnam</option>
+        <option value="Vijayawada">Vijayawada</option>
+      </select>
+    </div>
+    <div class="f">
+      <label for="stateSelect">State</label>
+      <select id="stateSelect" class="in">
+        <option value="Telangana" selected>Telangana</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Delhi">Delhi NCR</option>
+      </select>
+    </div>
+    <div class="f">
+      <label for="bkPincode">Pincode</label>
+      <input type="text" id="bkPincode" class="in" value="500081" maxlength="6" placeholder="500081" style="width:100%;box-sizing:border-box" />
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:8px">
+    <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:13px">
+      <input type="checkbox" id="bkUseCurrentLoc" style="accent-color:#ea580c"> Use my current location (GPS)
+    </label>
+    <button type="button" id="bkOpenMapBtn" class="btn s mo" style="cursor:pointer">📍 Select on Interactive Map</button>
+  </div>
+  <div id="bkMapBadge" style="display:none;margin-top:10px;padding:8px 12px;border-radius:8px;background:#fffaf5;border:1px solid #fed7aa;font-size:12.5px;color:#44372e"></div>
+</div>
+
+<div class="card" style="margin-bottom:12px">
+  <h3 style="margin-bottom:8px">3. Puja Details</h3>
+  <div class="fr c2">
+    <div class="f">
+      <label for="pujaPurpose">Purpose of Puja *</label>
+      <select id="pujaPurpose" class="in">
+        <option value="Griha Pravesh Puja" selected>Griha Pravesh Puja</option>
+        <option value="Satyanarayana Puja">Satyanarayana Puja</option>
+        <option value="Ganesh Puja">Ganesh Puja</option>
+        <option value="Vivaha (Wedding) Puja">Vivaha (Wedding) Puja</option>
+        <option value="Navagraha Shanti Puja">Navagraha Shanti Puja</option>
+        <option value="Namakarana Puja">Namakarana Puja</option>
+        <option value="Rudrabhishek Puja">Rudrabhishek Puja</option>
+        <option value="Pitru Paksha Puja">Pitru Paksha Puja</option>
+        <option value="Devi Puja">Devi Puja</option>
+      </select>
+    </div>
+    <div class="f">
+      <label>Number of Family Members *</label>
+      <div class="in-counter">
+        <button type="button" class="btn-dec" aria-label="Decrease members">−</button>
+        <b class="count-val" id="bkMembersCount">5</b>
+        <button type="button" class="btn-inc" aria-label="Increase members">+</button>
+      </div>
+    </div>
+    <div class="f">
+      <label for="bkSpecialNotes">Any Special Requirements / Instructions</label>
+      <textarea id="bkSpecialNotes" class="in t" rows="2" placeholder="e.g. Preferred muhurat, specific prayers, gotra, etc." style="width:100%;box-sizing:border-box;resize:vertical;font-family:inherit"></textarea>
+    </div>
+    <div class="f">
+      <label for="bkUploadPlan">Upload House Plan / Invitation (Optional)</label>
+      <label for="bkUploadPlan" id="bkUploadBox" class="in" style="display:block;cursor:pointer;text-align:center;padding:12px;border:1.5px dashed #fed7aa;background:#fffaf5">
+        ⬆ <span id="bkUploadLabel">Upload File</span><br><span class="mu">PDF, JPG, PNG up to 5MB</span>
+      </label>
+      <input type="file" id="bkUploadPlan" accept=".pdf,.jpg,.jpeg,.png" style="display:none" />
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:12px">
+  <h3 style="margin-bottom:8px">4. Contact Person Details</h3>
+  <div class="fr c3">
+    <div class="f"><label for="bkContactName">Full Name *</label><input type="text" id="bkContactName" class="in" value="Srinivas Somisetti" required style="width:100%;box-sizing:border-box" /></div>
+    <div class="f"><label for="bkContactPhone">Mobile Number *</label><input type="tel" id="bkContactPhone" class="in" value="+91 98765 43210" required style="width:100%;box-sizing:border-box" /></div>
+    <div class="f"><label for="bkContactEmail">Email Address</label><input type="email" id="bkContactEmail" class="in" value="srinivas.somisetti@gmail.com" style="width:100%;box-sizing:border-box" /></div>
+  </div>
+  <div class="note"><b>Important Note</b><br>Please ensure all details are correct. Purohit will reach out to you on the provided contact number.</div>
+</div><div style="display:flex;justify-content:space-between"><a class="btn" href="puja-details.html">← Back</a><a class="btn p" style="width:200px" href="choose-purohit.html">Continue →</a></div></div><div class="grid"><div class="card pad0"><div class="ph" style="height:140px;border-radius:0;background:none;overflow:hidden"><img src="images/puja_griha_pravesh.jpg" alt="Griha Pravesh Puja" style="width:100%;height:100%;object-fit:cover"></div><div class="b"><h3>Griha Pravesh Puja</h3><p class="mu">Purifies your new home and brings positive energy, happiness and prosperity.</p><p class="mu">🕐 2 - 3 Hours &nbsp; 🏠 At Home &nbsp; ₹ 2,500 onwards</p></div></div><div class="card"><h3>Booking Summary</h3><div class="kv"><span>Puja</span><span>Griha Pravesh Puja</span></div><div class="kv"><span>Date</span><span id="bkSummaryDate" style="color:#e8590c;font-weight:600">25 May 2025, Sunday</span></div><div class="kv"><span>Time</span><span id="bkSummaryTime" style="color:#e8590c;font-weight:600">8:00 AM - 10:00 AM</span></div><div class="kv"><span>Location</span><span id="bkSummaryLocation">At Home, Hyderabad</span></div><div class="kv"><span>Purohit</span><span>To be Selected</span></div><div class="kv"><span>Add-ons</span><span>No add-ons selected</span></div></div><div class="card" style="background:var(--cr)"><h3>Why book with PurohitMitra?</h3><ul class="ck"><li>Verified &amp; Experienced Purohits</li><li>Transparent Pricing</li><li>Complete Puja as per Vedic Vidhi</li><li>Puja Samagri Guidance</li><li>On-time &amp; Hassle-free Service</li><li>24/7 Customer Support</li></ul></div><div class="card"><h3>Need Help?</h3><p class="mu">Our support team is here for you</p><p style="margin-top:8px">📞 +91 12345 67890<br>✉ support@purohitmitra.com<br>🕗 Mon - Sun: 8:00 AM - 9:00 PM</p></div></div></div></div><div class="wrap"><div class="trust">
   <div class="trust-item trust-item-verified">
     <div class="trust-icon-wrap shield-glow">
       <svg class="symbol-svg verified-shield-svg" width="38" height="38" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -296,7 +400,8 @@
     <script src="js/common.js"></script>
       <script src="js/booking-customizer.js"></script>
   <script src="js/auth.js"></script>
-<script src="js/main.js"></script>
+<script src="js/maps.js"></script>
+    <script src="js/main.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const params = new URLSearchParams(window.location.search);
@@ -312,7 +417,7 @@
     </script>
   
     <script>
-      // Dynamic Puja Booking Calendar & Time Slot Engine
+      // Dynamic Puja Booking Calendar, Maps, Form & State Persistence Engine
       (function initBookingDateTimeEngine() {
         const months = [
           'January', 'February', 'March', 'April', 'May', 'June',
@@ -320,10 +425,17 @@
         ];
         const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-        let currentYear = 2025;
-        let currentMonth = 4; // May (0-indexed)
-        let selectedDay = 25;
-        let selectedSlot = '8:00 AM - 10:00 AM';
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const defaultTarget = new Date(today);
+        defaultTarget.setDate(today.getDate() + 1); // Dynamic upcoming date (tomorrow)
+
+        let currentYear = defaultTarget.getFullYear();
+        let currentMonth = defaultTarget.getMonth();
+        let selectedYear = defaultTarget.getFullYear();
+        let selectedMonth = defaultTarget.getMonth();
+        let selectedDay = defaultTarget.getDate();
+        let selectedSlot = '8:00 AM – 10:00 AM';
 
         const monthTitle = document.getElementById('calMonthTitle');
         const calGrid = document.getElementById('bookingCalGrid');
@@ -331,27 +443,63 @@
         const nextBtn = document.getElementById('calNextBtn');
         const summaryDate = document.getElementById('bkSummaryDate');
         const summaryTime = document.getElementById('bkSummaryTime');
+        const summaryLoc = document.getElementById('bkSummaryLocation');
         const slotsList = document.getElementById('bookingSlotsList');
         const customTimeWrap = document.getElementById('customTimePickerWrap');
         const customTimeInput = document.getElementById('customTimeInput');
 
+        const citySelect = document.getElementById('citySelect');
+        const stateSelect = document.getElementById('stateSelect');
+        const pincodeInput = document.getElementById('bkPincode');
+        const addressInput = document.getElementById('bkFullAddress');
+        const useGpsCb = document.getElementById('bkUseCurrentLoc');
+        const openMapBtn = document.getElementById('bkOpenMapBtn');
+        const mapBadge = document.getElementById('bkMapBadge');
+        const purposeSel = document.getElementById('pujaPurpose');
+
+        function getFormattedDate() {
+          const dt = new Date(selectedYear, selectedMonth, selectedDay);
+          return `${selectedDay} ${months[selectedMonth]} ${selectedYear}, ${dayNames[dt.getDay()]}`;
+        }
+
+        function getSelectedLocationType() {
+          const checked = document.querySelector('input[name="bkConductedAt"]:checked');
+          return checked ? checked.value : 'At Home';
+        }
+
+        function saveDraft() {
+          const draft = {
+            puja: purposeSel ? purposeSel.value : 'Griha Pravesh Puja',
+            dateText: getFormattedDate(),
+            timeText: selectedSlot,
+            locationType: getSelectedLocationType(),
+            city: citySelect ? citySelect.value : 'Hyderabad',
+            state: stateSelect ? stateSelect.value : 'Telangana',
+            pincode: pincodeInput ? pincodeInput.value : '500081',
+            address: addressInput ? addressInput.value : '',
+            members: (document.getElementById('bkMembersCount') || {}).textContent || '5',
+            notes: (document.getElementById('bkSpecialNotes') || {}).value || '',
+            contactName: (document.getElementById('bkContactName') || {}).value || '',
+            contactPhone: (document.getElementById('bkContactPhone') || {}).value || '',
+            contactEmail: (document.getElementById('bkContactEmail') || {}).value || ''
+          };
+          localStorage.setItem('pm_booking_draft', JSON.stringify(draft));
+        }
+
         function updateSummary() {
-          if (summaryDate) {
-            const dt = new Date(currentYear, currentMonth, selectedDay);
-            const dayOfWeek = dayNames[dt.getDay()];
-            const monthName = months[currentMonth];
-            summaryDate.textContent = `${selectedDay} ${monthName} ${currentYear}, ${dayOfWeek}`;
+          if (summaryDate) summaryDate.textContent = getFormattedDate();
+          if (summaryTime) summaryTime.textContent = selectedSlot;
+          if (summaryLoc) {
+            const c = citySelect ? citySelect.value : 'Hyderabad';
+            summaryLoc.textContent = `${getSelectedLocationType()}, ${c}`;
           }
-          if (summaryTime) {
-            summaryTime.textContent = selectedSlot;
-          }
+          saveDraft();
         }
 
         function renderCalendar() {
           if (!calGrid || !monthTitle) return;
           monthTitle.textContent = `${months[currentMonth]} ${currentYear}`;
 
-          // Keep day headers
           const headers = Array.from(calGrid.querySelectorAll('.h'));
           calGrid.innerHTML = '';
           headers.forEach(h => calGrid.appendChild(h));
@@ -359,7 +507,6 @@
           const firstDay = new Date(currentYear, currentMonth, 1).getDay();
           let startOffset = (firstDay === 0) ? 6 : firstDay - 1;
 
-          // Previous month muted days
           const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate();
           for (let i = startOffset - 1; i >= 0; i--) {
             const dayNum = prevMonthDays - i;
@@ -370,40 +517,49 @@
             calGrid.appendChild(span);
           }
 
-          // Current month days
           const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
           for (let day = 1; day <= daysInMonth; day++) {
+            const cellDate = new Date(currentYear, currentMonth, day);
+            const isPast = cellDate < today;
+            const isSelected = (currentYear === selectedYear && currentMonth === selectedMonth && day === selectedDay);
+
             const span = document.createElement('span');
             span.className = 'pm-day';
             span.setAttribute('data-day', day);
             span.textContent = day;
 
-            if (day === selectedDay) {
+            if (isPast) {
+              span.classList.add('x');
+              span.title = 'Past date unavailable';
+              span.style.cssText = 'font-size:13px;color:#d6d3d1;height:38px;display:flex;align-items:center;justify-content:center;cursor:not-allowed;text-decoration:line-through';
+            } else if (isSelected) {
               span.classList.add('d');
               span.style.cssText = 'background:#ea580c!important;color:#ffffff!important;font-weight:700!important;height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px!important;box-shadow:0 2px 8px rgba(234,88,12,0.35)!important;cursor:pointer';
             } else {
               span.style.cssText = 'font-size:13px;color:#292524;height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;transition:all 0.15s ease';
             }
 
-            span.addEventListener('click', () => {
-              selectedDay = day;
-              renderCalendar();
-              updateSummary();
-            });
-
+            if (!isPast) {
+              span.addEventListener('click', () => {
+                selectedYear = currentYear;
+                selectedMonth = currentMonth;
+                selectedDay = day;
+                renderCalendar();
+                updateSummary();
+              });
+            }
             calGrid.appendChild(span);
           }
-
           updateSummary();
         }
 
         if (prevBtn) {
           prevBtn.addEventListener('click', () => {
+            const minMonth = today.getFullYear() * 12 + today.getMonth();
+            const curTotal = currentYear * 12 + currentMonth;
+            if (curTotal <= minMonth) return;
             currentMonth--;
-            if (currentMonth < 0) {
-              currentMonth = 11;
-              currentYear--;
-            }
+            if (currentMonth < 0) { currentMonth = 11; currentYear--; }
             renderCalendar();
           });
         }
@@ -411,10 +567,7 @@
         if (nextBtn) {
           nextBtn.addEventListener('click', () => {
             currentMonth++;
-            if (currentMonth > 11) {
-              currentMonth = 0;
-              currentYear++;
-            }
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
             renderCalendar();
           });
         }
@@ -423,7 +576,6 @@
           slotsList.addEventListener('click', (e) => {
             const slotEl = e.target.closest('.slot');
             if (!slotEl) return;
-
             slotsList.querySelectorAll('.slot').forEach(s => {
               s.classList.remove('on');
               s.style.border = '1px solid #e7e5e4';
@@ -431,7 +583,6 @@
               s.style.color = '#292524';
               s.style.fontWeight = '500';
             });
-
             slotEl.classList.add('on');
             slotEl.style.border = '1.5px solid #ea580c';
             slotEl.style.background = '#fff7ed';
@@ -460,7 +611,114 @@
           });
         }
 
-        // Initialize calendar & summary
+        // Conducted At radio pills
+        document.querySelectorAll('input[name="bkConductedAt"]').forEach(radio => {
+          radio.addEventListener('change', () => {
+            document.querySelectorAll('#bkConductedAtGroup label').forEach(lbl => {
+              const r = lbl.querySelector('input');
+              if (r && r.checked) {
+                lbl.style.border = '1.5px solid #ea580c';
+                lbl.style.background = '#fff7ed';
+                lbl.style.color = '#ea580c';
+                lbl.style.fontWeight = '600';
+              } else {
+                lbl.style.border = '1px solid #e7e5e4';
+                lbl.style.background = '#fff';
+                lbl.style.color = '#292524';
+                lbl.style.fontWeight = '500';
+              }
+            });
+            updateSummary();
+          });
+        });
+
+        // City / State sync
+        const cityStateMap = {
+          'Hyderabad': ['Telangana', '500081'],
+          'Bengaluru': ['Karnataka', '560001'],
+          'Chennai': ['Tamil Nadu', '600001'],
+          'Mumbai': ['Maharashtra', '400001'],
+          'Delhi NCR': ['Delhi', '110001'],
+          'Pune': ['Maharashtra', '411001'],
+          'Visakhapatnam': ['Andhra Pradesh', '530001'],
+          'Vijayawada': ['Andhra Pradesh', '520001']
+        };
+        if (citySelect) {
+          const savedCity = localStorage.getItem('pm_location');
+          if (savedCity && cityStateMap[savedCity]) citySelect.value = savedCity;
+          citySelect.addEventListener('change', () => {
+            const meta = cityStateMap[citySelect.value];
+            if (meta) {
+              if (stateSelect) stateSelect.value = meta[0];
+              if (pincodeInput) pincodeInput.value = meta[1];
+            }
+            updateSummary();
+          });
+        }
+
+        // Map & GPS handlers
+        function applyLocationData(loc) {
+          if (addressInput) addressInput.value = loc.address || '';
+          if (citySelect && loc.city) {
+            const opt = Array.from(citySelect.options).find(o => o.value.toLowerCase() === loc.city.toLowerCase());
+            if (opt) citySelect.value = opt.value;
+          }
+          if (stateSelect && loc.state) {
+            const opt = Array.from(stateSelect.options).find(o => o.value.toLowerCase() === loc.state.toLowerCase());
+            if (opt) stateSelect.value = opt.value;
+          }
+          if (pincodeInput && loc.pincode) pincodeInput.value = loc.pincode;
+          if (mapBadge) {
+            mapBadge.style.display = 'block';
+            mapBadge.innerHTML = `📍 <b>Pinned on Map:</b> ${loc.address} (${loc.pincode || ''}) — GPS: ${Number(loc.lat).toFixed(4)}°N, ${Number(loc.lng).toFixed(4)}°E`;
+          }
+          updateSummary();
+        }
+
+        if (useGpsCb) {
+          useGpsCb.addEventListener('change', () => {
+            if (useGpsCb.checked && typeof window.pmDetectCurrentLocation === 'function') {
+              window.pmDetectCurrentLocation(applyLocationData);
+            }
+          });
+        }
+        if (openMapBtn) {
+          openMapBtn.addEventListener('click', () => {
+            if (typeof window.pmOpenMapPicker === 'function') {
+              window.pmOpenMapPicker(citySelect ? citySelect.value : 'Hyderabad', applyLocationData);
+            }
+          });
+        }
+
+        // Upload house plan preview
+        const uploadInput = document.getElementById('bkUploadPlan');
+        const uploadLabel = document.getElementById('bkUploadLabel');
+        if (uploadInput && uploadLabel) {
+          uploadInput.addEventListener('change', () => {
+            if (uploadInput.files && uploadInput.files[0]) {
+              uploadLabel.textContent = `✓ ${uploadInput.files[0].name}`;
+            }
+          });
+        }
+
+        // Pre-fill contact from logged in user
+        if (typeof window.pmGetUser === 'function') {
+          const u = window.pmGetUser();
+          const cn = document.getElementById('bkContactName');
+          const cp = document.getElementById('bkContactPhone');
+          const ce = document.getElementById('bkContactEmail');
+          if (cn && u.name) cn.value = u.name;
+          if (cp && u.phone) cp.value = u.phone.startsWith('+') ? u.phone : `+91 ${u.phone}`;
+          if (ce && u.email) ce.value = u.email;
+        }
+
+        // Save draft on input changes
+        ['bkFullAddress', 'bkPincode', 'bkSpecialNotes', 'bkContactName', 'bkContactPhone', 'bkContactEmail'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.addEventListener('input', saveDraft);
+        });
+        if (purposeSel) purposeSel.addEventListener('change', updateSummary);
+
         renderCalendar();
       })();
     </script>
