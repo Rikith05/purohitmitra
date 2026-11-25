@@ -1009,3 +1009,74 @@ header .wrap.nav, .top .wrap.nav, .nav {
   z-index: 30 !important;
   overflow: visible !important;
 }
+
+/* ==========================================================================
+   INTERACTIVE BUBBLE POP-OUT EFFECT ON HOVER & SELECTION
+   ========================================================================== */
+.card.pc,
+.card.prc,
+.g5 .card,
+.g4 .card,
+.g3 .card.pad0,
+.circ > a,
+.circ > div,
+.recs > a,
+.recs > div,
+.qa a {
+  cursor: pointer !important;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease !important;
+  will-change: transform;
+}
+
+.card.pc:hover,
+.card.prc:hover,
+.g5 .card:hover,
+.g4 .card:hover,
+.g3 .card.pad0:hover,
+.recs > a:hover,
+.recs > div:hover,
+.qa a:hover {
+  transform: translateY(-7px) scale(1.035) !important;
+  box-shadow: 0 16px 34px rgba(234, 88, 12, 0.18), 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  border-color: #fb923c !important;
+  z-index: 10 !important;
+  position: relative !important;
+}
+
+.circ > a:hover,
+.circ > div:hover {
+  transform: translateY(-6px) scale(1.07) !important;
+}
+
+.circ > a:hover .c,
+.circ > div:hover .c {
+  box-shadow: 0 10px 24px rgba(234, 88, 12, 0.22) !important;
+  border-color: #ea580c !important;
+}
+
+.card.pc img,
+.card.prc img,
+.g5 .card img {
+  transition: transform 0.35s ease !important;
+}
+
+.card.pc:hover img,
+.card.prc:hover img,
+.g5 .card:hover img {
+  transform: scale(1.06) !important;
+}
+
+.card.pc:active,
+.card.prc:active,
+.g5 .card:active,
+.card.pc.selected,
+.card.prc.selected,
+.g5 .card.selected,
+.card.pc.on,
+.card.prc.on {
+  transform: translateY(-4px) scale(1.02) !important;
+  border-color: #ea580c !important;
+  box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.16), 0 12px 26px rgba(234, 88, 12, 0.2) !important;
+}
