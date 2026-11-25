@@ -76,7 +76,7 @@
     const st = document.createElement('style');
     st.id = 'pmOffersCarouselCSS';
     st.textContent = `
-      .pm-oc-section { position: relative; margin: 18px 0 24px; }
+      .pm-oc-section { position: relative; margin: 8px 0 24px; padding-top: 6px; }
       .pm-oc-head {
         display: flex; align-items: center; justify-content: space-between;
         margin-bottom: 12px;
@@ -88,7 +88,7 @@
       .pm-oc-head a {
         font-size: 13px; font-weight: 600; color: #ea580c; text-decoration: none;
       }
-      .pm-oc-viewport { position: relative; overflow: hidden; border-radius: 16px; }
+      .pm-oc-viewport { position: relative; overflow: hidden; padding: 8px 4px 12px; margin: -8px -4px -12px; }
       .pm-oc-track {
         display: flex; gap: 16px; transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
       }
