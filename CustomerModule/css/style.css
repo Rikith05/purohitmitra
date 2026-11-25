@@ -929,3 +929,71 @@ header, .top {
 .loc.open .nav-caret {
   transform: rotate(180deg) !important;
 }
+
+/* ==========================================================================
+   COMPACT SINGLE-LINE HEADER FIT (PREVENTS RIGHT-EDGE SIGN OUT CLIPPING)
+   ========================================================================== */
+header .wrap.nav, .top .wrap.nav, .nav {
+  gap: 10px !important;
+  padding: 0 12px !important;
+  min-width: 0 !important;
+}
+.menu-btn, .pm-menu-btn {
+  padding: 5px 10px !important;
+  font-size: 12.5px !important;
+  margin-right: 0 !important;
+}
+.logo {
+  gap: 6px !important;
+  margin-right: 2px !important;
+}
+.logo b {
+  font-size: 18px !important;
+}
+.logo small {
+  font-size: 10.5px !important;
+}
+.nav-links, .nav ul, .topnav {
+  gap: 12px !important;
+}
+.nav-links li a, .nav ul li a, .topnav > a, .topnav .has-drop > a {
+  font-size: 13.5px !important;
+  padding: 0 2px !important;
+}
+.nav-right, .sp, .pm-header-user-area {
+  gap: 8px !important;
+}
+.loc, .loc-btn {
+  padding: 5px 10px !important;
+  font-size: 12.5px !important;
+  gap: 4px !important;
+}
+.bell, .pm-bell-link {
+  padding: 4px 6px !important;
+  font-size: 18px !important;
+}
+.user, .pm-user-pill {
+  padding: 3px 10px 3px 5px !important;
+  font-size: 12.5px !important;
+  gap: 6px !important;
+}
+.user .av, .pm-user-pill .av {
+  width: 26px !important;
+  height: 26px !important;
+}
+.pm-cm-signout {
+  padding: 5px 10px !important;
+  font-size: 12px !important;
+}
+@media (max-width: 1280px) {
+  .nav-links, .nav ul, .topnav {
+    gap: 9px !important;
+  }
+  .nav-links li a, .nav ul li a, .topnav > a, .topnav .has-drop > a {
+    font-size: 13px !important;
+  }
+  header .wrap.nav, .top .wrap.nav, .nav {
+    gap: 8px !important;
+    padding: 0 10px !important;
+  }
+}
