@@ -270,13 +270,21 @@ function handleHomeSearch() {
   const query = pujaInput ? pujaInput.value.trim() : '';
   const loc = locSelect ? locSelect.value : '';
   const date = dateInput ? dateInput.value : '';
+
+  if (query && typeof window.pmSaveRecentSearch === 'function') {
+    window.pmSaveRecentSearch(query);
+  }
+  if (loc) localStorage.setItem('pm_location', loc);
   
   const params = new URLSearchParams();
   if (query) params.set('q', query);
   if (loc) params.set('loc', loc);
   if (date) params.set('date', date);
-  
-  const target = 'pujas.html';
+
+  // Smart routing: if user searched specifically for a purohit/pandit/acharya, route to purohits.html
+  const ql = query.toLowerCase();
+  const isPurohitIntent = /\b(pandit|purohit|acharya|shastri|dikshith|somashekar|madhusudan|narayan|venkatesh|raghav|gopal)\b/.test(ql);
+  const target = isPurohitIntent ? 'purohits.html' : 'pujas.html';
   window.location.href = params.toString() ? `${target}?${params.toString()}` : target;
 }
 
@@ -616,7 +624,7 @@ function initPurohitSearchAndPagination() {
       const lang = (card.dataset.lang || '').toLowerCase();
       const meta = parseCardMeta(card);
 
-      const matchesQuery = !activeQuery || name.includes(activeQuery) || text.includes(activeQuery);
+      const matchesQuery = !activeQuery || (typeof window.pmSmartMatch === 'function' ? window.pmSmartMatch(activeQuery, `${name} ${text} ${spec} ${lang}`, name) : (name.includes(activeQuery) || text.includes(activeQuery)));
       const matchesSpec = !activeSpec || spec.includes(activeSpec);
       const matchesLang = !activeLang || lang.includes(activeLang);
       const matchesLoc = !activeLoc || meta.loc === activeLoc || text.includes(activeLoc);
