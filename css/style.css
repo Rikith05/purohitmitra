@@ -1226,9 +1226,28 @@ header *, .top *, .nav *, .topnav * {
   white-space: nowrap;
 }
 
-/* Hide separate Sign Out from header nav bar */
+/* Compact non-wrapping Sign Out button in top-right header */
 .pm-cm-signout {
-  display: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 5px 11px !important;
+  border-radius: 999px !important;
+  background: #fff1f2 !important;
+  color: #dc2626 !important;
+  border: 1px solid #fecdd3 !important;
+  font-family: 'DM Sans', -apple-system, sans-serif !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+.pm-cm-signout:hover {
+  background: #ffe4e6 !important;
+  border-color: #fda4af !important;
 }
 
 /* Responsive safeguards */

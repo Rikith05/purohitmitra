@@ -828,6 +828,7 @@
               <span class="av"><img src="${rootPrefix}images/avatar_user.jpg" alt="${user.name}"></span>
               <b>${user.name}</b>
             </a>
+            <a class="pm-cm-signout" href="javascript:void(0)" onclick="window.pmLogout()" title="Sign Out">⎋ Sign Out</a>
           `;
           topNav.appendChild(userArea);
         } else {
@@ -868,6 +869,15 @@
           }
           const bell = spArea.querySelector('.bell');
           if (bell) bell.style.display = 'inline-flex';
+          if (!spArea.querySelector('.pm-cm-signout')) {
+            const so = document.createElement('a');
+            so.className = 'pm-cm-signout';
+            so.href = 'javascript:void(0)';
+            so.title = 'Sign Out';
+            so.textContent = '⎋ Sign Out';
+            so.onclick = () => window.pmLogout();
+            spArea.appendChild(so);
+          }
         }
       }
       // Ensure menu button is present at start of CustomerModule header
