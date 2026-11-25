@@ -22,12 +22,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (pg === "favorites") {
     let tab = "purohits",
       q = "";
+    const getList = (t) => typeof window.pmGetFavorites === "function" ? window.pmGetFavorites(t) : (t === "purohits" ? PM.purohits : PM.pujas);
     const draw = () => {
+      const pList = getList("purohits");
+      const uList = getList("pujas");
       const nP = $("#nP");
-      if (nP) nP.textContent = PM.purohits.length;
+      if (nP) nP.textContent = pList.length;
       const nU = $("#nU");
-      if (nU) nU.textContent = PM.pujas.length;
-      const L = tab === "purohits" ? PM.purohits : PM.pujas;
+      if (nU) nU.textContent = uList.length;
+      const L = tab === "purohits" ? pList : uList;
       const r = L.filter((x) => x.n.toLowerCase().includes(q));
       const fList = $("#fList");
       if (!fList) return;
@@ -57,13 +60,15 @@ document.addEventListener("DOMContentLoaded", () => {
       fList.onclick = (e) => {
         const d = e.target.dataset;
         if (d.r) {
-          const L = tab === "purohits" ? PM.purohits : PM.pujas;
-          const idx = L.findIndex((x) => x.n === d.r);
-          if (idx !== -1) {
-            L.splice(idx, 1);
-            draw();
-            toast("Removed from favorites");
+          if (typeof window.pmRemoveFavorite === "function") {
+            window.pmRemoveFavorite(tab, d.r);
+          } else {
+            const L = tab === "purohits" ? PM.purohits : PM.pujas;
+            const idx = L.findIndex((x) => (x.name || x.n) === d.r);
+            if (idx !== -1) L.splice(idx, 1);
           }
+          draw();
+          toast("Removed from favorites");
         }
         if (d.b) window.location.href = tab === "purohits" ? "book-purohit.html?purohit=" + encodeURIComponent(d.b) : "book-puja.html?puja=" + encodeURIComponent(d.b);
         if (d.v) window.location.href = "purohit-details.html?purohit=" + encodeURIComponent(d.v);
