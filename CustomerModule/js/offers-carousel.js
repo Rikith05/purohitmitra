@@ -94,7 +94,7 @@
       }
       .pm-oc-card {
         flex: 0 0 calc(50% - 8px); min-height: 200px; border-radius: 16px;
-        padding: 20px 22px 14px; color: #ffffff; position: relative; overflow: hidden;
+        padding: 20px 38px 14px 44px; color: #ffffff; position: relative; overflow: hidden;
         display: flex; flex-direction: column; justify-content: space-between;
         box-sizing: border-box; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         cursor: pointer; transition: transform 0.2s ease;
@@ -142,8 +142,8 @@
         box-shadow: 0 4px 12px rgba(0,0,0,0.14); transition: all 0.15s;
       }
       .pm-oc-arrow:hover { background: #ea580c; color: #fff; border-color: #ea580c; }
-      .pm-oc-prev { left: 10px; }
-      .pm-oc-next { right: 10px; }
+      .pm-oc-prev { left: 6px; }
+      .pm-oc-next { right: 6px; }
       .pm-oc-dots {
         display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 12px;
       }
